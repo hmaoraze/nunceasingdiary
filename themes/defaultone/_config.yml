@@ -1,483 +1,484 @@
 info:
-  # Site title
-  title: Jack's Blog
-  # Site subtitle
-  subtitle: Your personal blog journey.
-  # Author name
-  author: Jack
-  # Site URL
-  url: https://your-domain.com
+  # Site title | 网站标题
+  title: hmao的日记
+  # Site subtitle | 网站副标题
+  subtitle: 写下去，就会精彩！
+  # Author name | 作者名称
+  author: hmao
+  # Site URL | 网站域名
+  url: https://blog.imce.cn
 # BASIC INFORMATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
-# IMAGE CONFIGURATION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
+# IMAGE CONFIGURATION | 图片配置 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/basic/defaults
 defaults:
-  # Favicon
+  # Favicon | 网站图标（浏览器标签页显示的小图标）
   favicon: /images/favicon.svg
-  # Site logo
+  # Site logo | 网站 Logo 图片路径
   logo: 
-  # Site avatar
-  avatar: /images/avatar-0.jpg
-# IMAGE CONFIGURATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
+  # Site avatar | 网站头像图片路径
+  avatar: /images/avatar-1.jpg
+# IMAGE CONFIGURATION | 图片配置 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
-# COLORS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
+# COLORS | 配色方案 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/basic/colors
 colors:
-  #Primary color
-  primary: "#A31F34"
-  # Secondary color (TBD)
+  # Primary color | 主题色（十六进制颜色值）
+  primary: "#009688"
+  # Secondary color | 辅助色（待定，暂未启用）
   secondary:
-  # Default theme mode initial value (will be overwritten by prefer-color-scheme)
-  default_mode: light # light, dark
-# COLORS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
+  # Default theme mode | 默认主题模式（会被系统偏好覆盖）
+  default_mode: light # light=浅色模式, dark=暗黑模式
+# COLORS | 配色方案 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
-# SITE CUSTOMIZATION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
+# SITE CUSTOMIZATION | 站点自定义设置 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/basic/global
 global:
-  # Custom global fonts
+  # Custom global fonts | 自定义全局字体
   fonts:
-    # Chinese fonts
+    # Chinese fonts | 中文字体
     chinese: 
-      enable: true # Whether to enable custom chinese fonts
-      family: "'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" # Font family
-      url: "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" # Font URL to CSS file
-    # English fonts
+      enable: true # 是否启用自定义中文字体
+      family: "'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" # 字体族（按优先级回退）
+      url: "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" # 字体 CSS 文件 URL
+    # English fonts | 英文字体
     english: 
-      enable: true # Whether to enable custom english fonts
-      family: "'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" # Font family
-      url: "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" # Font URL to CSS file
-    # Custom title fonts (navbar, sidebar)
+      enable: true # 是否启用自定义英文字体
+      family: "'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" # 字体族
+      url: "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" # 字体 CSS 文件 URL
+    # Custom title fonts | 自定义标题字体（导航栏、侧边栏）
     title:
-      enable: true # Whether to enable custom title fonts
-      family: "'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" # Font family
-      url: "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" # Font URL to CSS file
-  # Content max width
+      enable: true # 是否启用自定义标题字体
+      family: "'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" # 字体族
+      url: "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" # 字体 CSS 文件 URL
+  # Content max width | 内容区域最大宽度
   content_max_width: 1000px
-  # Sidebar width
+  # Sidebar width | 侧边栏宽度
   sidebar_width: 210px
-  # Effects on mouse hover
+  # Effects on mouse hover | 鼠标悬停效果
   hover:
-    shadow: true # shadow effect
-    scale: false # scale effect
-  # Scroll progress
+    shadow: true # 阴影效果（鼠标悬停时显示阴影）
+    scale: false # 缩放效果（鼠标悬停时放大元素）
+  # Scroll progress | 页面滚动进度显示
   scroll_progress:
-    bar: false # progress bar
-    percentage: true # percentage
-  # Website counter
+    bar: false # 进度条（页面顶部显示阅读进度条）
+    percentage: true # 百分比（显示阅读百分比数字）
+  # Website counter | 网站访问量统计
   website_counter:
-    url: https://cn.vercount.one/js # counter API URL (no need to change)
-    enable: true # enable website counter or not
-    site_pv: true # site page view
-    site_uv: true # site unique visitor
-    post_pv: true # post page view
-  # Whether to enable single page experience (using swup). See https://swup.js.org/. similar to pjax
+    url: https://cn.vercount.one/js # 统计 API 地址（一般无需修改）
+    enable: true # 是否启用网站统计
+    site_pv: true # 站点总浏览量（PV）
+    site_uv: true # 站点独立访客数（UV）
+    post_pv: true # 文章页面浏览量
+  # Whether to enable single page experience | 是否启用单页体验（使用 swup，类似 pjax，页面无刷新跳转）
   single_page: true
-  # Whether to enable Preloader.
+  # Preloader | 页面加载动画
   preloader:
-    enable: true
-    custom_message: # Custom message. If empty, the site title will be displayed
-  # Whether to enable open graph
+    enable: true # 是否启用加载动画
+    custom_message: # 自定义加载文字（留空则显示网站标题）
+  # Open Graph | 社交分享元标签（分享到社交平台时的预览信息）
   open_graph:
-    enable: true
-    image: /images/og.webp  # default og:image
-    description: This is your blog.
-  # Google Analytics
+    enable: true # 是否启用
+    image: /images/og.webp  # 默认分享图片
+    description: This is your blog. # 默认分享描述
+  # Google Analytics | 谷歌统计分析
   google_analytics:
-    enable: false # Whether to enable Google Analytics
-    id:  # Google Analytics Measurement ID
-# SITE CUSTOMIZATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
+    enable: false # 是否启用 Google Analytics
+    id:  # Google Analytics 测量 ID
+# SITE CUSTOMIZATION | 站点自定义设置 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
     
 
-# FONTAWESOME >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
+# FONTAWESOME | 图标库设置 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/basic/fontawesome
-fontawesome: # Pro v6.2.1
-  # Thin version
+fontawesome: # Font Awesome Pro v6.2.1 图标库
+  # Thin version | 细体图标
   thin: false
-  # Light version
+  # Light version | 轻量图标
   light: false
-  # Duotone version
+  # Duotone version | 双色图标
   duotone: false
-  # Sharp Solid version
+  # Sharp Solid version | 锐利实心图标
   sharp_solid: false
-# FONTAWESOME <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
+# FONTAWESOME | 图标库设置 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
-# HOME BANNER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
+# HOME BANNER | 首页横幅 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/home/home_banner
 home_banner:
-  # Whether to enable home banner
+  # Whether to enable home banner | 是否启用首页横幅
   enable: true
-  # style of home banner
-  style: fixed # static or fixed
-  # Home banner image
+  # Style of home banner | 首页横幅样式
+  style: static # static=静态, fixed=固定背景
+  # Home banner image | 首页横幅背景图片
   image: 
-    light: /images/main_bg_ligth.jpg # light mode
-    dark: /images/main_bg.jpg # dark mode
-  # Home banner title
-  title: Jack's Blog
-  # Home banner subtitle
+    light: /images/main_bg_ligth.jpg # 浅色模式图片
+    dark: /images/main_bg.jpg # 暗黑模式图片
+  # Home banner title | 首页横幅标题
+  title: hmao的日记
+  # Home banner subtitle | 首页横幅副标题（打字机效果）
   subtitle:
-    text: ['Welcome to my blog'] # subtitle text, array
-    hitokoto:  # Hitokoto Configuration
-      enable: false # Whether to enable hitokoto
-      show_author: true # Whether to show author
-      api: https://v1.hitokoto.cn # API URL, can add types, see https://developer.hitokoto.cn/sentence/#%E5%8F%A5%E5%AD%90%E7%B1%BB%E5%9E%8B-%E5%8F%82%E6%95%B0
-    typing_speed: 100 # Typing speed (ms)
-    backing_speed: 80 # Backing speed (ms)
-    starting_delay: 500 # Start delay (ms)
-    backing_delay: 1500 # Backing delay (ms)
-    loop: true # Whether to loop
-    smart_backspace: true # Whether to smart backspace
-  # Color of home banner text
+    text: ['写下去，就会精彩！'] # 副标题文字（数组，轮播打字）
+    hitokoto:  # 一言（Hitokoto）配置，随机显示一句动漫/文学语录
+      enable: false # 是否启用一言
+      show_author: true # 是否显示语录作者
+      api: https://v1.hitokoto.cn # 一言 API 地址（可添加类型参数，详见文档）
+    typing_speed: 100 # 打字速度（毫秒/字）
+    backing_speed: 80 # 删除速度（毫秒/字）
+    starting_delay: 500 # 开始延迟（毫秒）
+    backing_delay: 1500 # 删除后停顿延迟（毫秒）
+    loop: true # 是否循环播放
+    smart_backspace: true # 是否智能退格（只删除不同的字）
+  # Color of home banner text | 首页横幅文字颜色
   text_color: 
-    light: "#fff" # light mode
-    dark: "#d1d1b6" # dark mode
-  # Specific style of the text
+    light: "#fff" # 浅色模式文字颜色
+    dark: "#d1d1b6" # 暗黑模式文字颜色
+  # Specific style of the text | 文字样式细节
   text_style: 
-    # Title font size
+    # Title font size | 标题字号
     title_size: 2.8rem
-    # Subtitle font size
+    # Subtitle font size | 副标题字号
     subtitle_size: 1.5rem
-    # Line height between title and subtitle
+    # Line height between title and subtitle | 标题和副标题之间的行高
     line_height: 1.2
-  # Home banner custom font
+  # Home banner custom font | 首页横幅自定义字体
   custom_font: 
-    # Whether to enable custom font
+    # Whether to enable | 是否启用
     enable: true
-    # Font family
+    # Font family | 字体族
     family: 
-    # URL to font CSS file
+    # URL to font CSS file | 字体 CSS 文件 URL
     url:
-  # Home banner social links
+  # Home banner social links | 首页横幅社交链接
   social_links:
-    # Whether to enable
+    # Whether to enable | 是否启用
     enable: true
-    # Social links style
-    style: default # default, reverse, center
-    # Social links
+    # Social links style | 社交链接样式
+    style: default # default=默认, reverse=反转, center=居中
+    # Social links | 各平台链接
     links:
-      github:  https://github.com/EvanNotFound/hexo-theme-redefine # your GitHub URL
-      instagram: # your Instagram URL
-      zhihu:  # your ZhiHu URL
-      # twitter:  https://x.com/TencentCloudEO # your twitter URL
-      email:  # your email
-      # ...... # you can add more
-    # Social links with QRcode drawers
+      github:  https://github.com/hmaoraze/nunceasingdiary # GitHub 链接
+      instagram: # Instagram 链接
+      zhihu:  # 知乎链接
+      # twitter:  https://x.com/TencentCloudEO # Twitter/X 链接
+      email:  # 邮箱地址
+      # ...... # 可添加更多链接
+    # Social links with QRcode drawers | 带二维码弹窗的社交链接
     qrs:
-      weixin:  # your Wechat QRcode image URL
-      # ...... # you can add more
-# HOME BANNER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
+      weixin:  # 微信二维码图片 URL
+      # ...... # 可添加更多二维码
+# HOME BANNER | 首页横幅 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
-# NAVIGATION BAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
+# NAVIGATION BAR | 导航栏 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/home/navbar
 navbar:
-  # Auto hide navbar
+  # Auto hide navbar | 自动隐藏导航栏（向下滚动隐藏，向上滚动显示）
   auto_hide: true
-  # Navbar background color
+  # Navbar background color | 导航栏背景渐变色
   color:
-    left: "#f78736" #left side 
-    right: "#367df7"  #right side
-    transparency: 50 #percent (10-99)
-  # Navbar width (usually no need to modify)
+    left: "#f78736" # 左侧颜色
+    right: "#367df7"  # 右侧颜色
+    transparency: 50 # 透明度百分比（10-99）
+  # Navbar width | 导航栏宽度（通常无需修改）
   width:
-    home: 1200px #home page
-    pages: 1000px #other pages
-  # Navbar links
+    home: 1200px # 首页导航栏宽度
+    pages: 1000px # 其他页面导航栏宽度
+  # Navbar links | 导航栏菜单链接
   links:
     Home: 
-      path: / 
-      icon: fa-regular fa-house # can be empty
+      path: /  # 链接路径
+      icon: fa-regular fa-house # 图标（Font Awesome class，可留空）
     Archives: 
-      path: /archives 
-      icon: fa-regular fa-archive # can be empty
+      path: /archives  # 归档页
+      icon: fa-regular fa-archive
     Github: 
-      path: https://github.com/EvanNotFound
+      path: https://github.com/hmaoraze # 外部链接
       icon: fa-brands fa-github
-      # submenus:
+      # submenus: # 二级菜单（取消注释即可启用）
       #   Link1: /link1
       #   Link2: /link2
       #   Link3: /link3
-    Album: #
-      icon: fa-solid fa-image #icon
-      path: /masonry/ 
+    Album:
+      icon: fa-solid fa-image
+      path: /masonry/  # 相册/瀑布流页面
     # Categories: 
-    #   icon: fa-solid fa-tags #icon
-    #   path: /tags/ #Link
+    #   icon: fa-solid fa-tags
+    #   path: /tags/
     Links: 
-      path: /links/
+      path: /links/  # 友情链接页面
       icon: fa-solid fa-link
     About: 
-      path: /about
+      path: /about  # 关于页面
       icon: fa-solid fa-circle-info
       # submenus:
       #   Me: /about
       #   Github: https://github.com/EvanNotFound/hexo-theme-redefine
       #   Blog: https://ohevan.com
       #   Friends: /friends
-    # ...... # you can add more
-  # Navbar search (local search). Requires hexo-generator-searchdb (npm i hexo-generator-searchdb). See https://github.com/theme-next/hexo-generator-searchdb
+    # ...... # 可添加更多菜单
+  # Navbar search (local search) | 导航栏本地搜索（需安装 hexo-generator-searchdb）
   search:
-    # Whether to enable
+    # Whether to enable | 是否启用
     enable: false
-    # Preload search data when the page loads
+    # Preload search data | 页面加载时预加载搜索数据
     preload: true
-# NAVIGATION BAR <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
+# NAVIGATION BAR | 导航栏 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
-# HOME PAGE ARTICLE SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
+# HOME PAGE ARTICLE SETTINGS | 首页文章设置 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/home/home
 home:
-  # Sidebar settings
+  # Sidebar settings | 侧边栏设置
   sidebar:
-    enable: true # Whether to enable sidebar
-    position: left # Sidebar position. left, right
-    first_item: menu # First item in sidebar. menu, info
-    announcement: # Announcement text
-    show_on_mobile: true # Whether to show sidebar navigation on mobile sheet menu
-    links:
+    enable: true # 是否启用侧边栏
+    position: left # 侧边栏位置（left=左侧, right=右侧）
+    first_item: menu # 侧边栏首项（menu=菜单, info=个人信息）
+    announcement: # 公告文字
+    show_on_mobile: true # 移动端是否在底部弹出菜单中显示侧边栏导航
+    links: # 侧边栏链接
       Archives: 
         path: /archives 
-        icon: fa-regular fa-archive # can be empty
+        icon: fa-regular fa-archive
       # Tags: 
       #   path: /tags 
-      #   icon: fa-regular fa-tags # can be empty
+      #   icon: fa-regular fa-tags
       # Categories: 
       #   path: /categories 
-      #   icon: fa-regular fa-folder # can be empty
-      # ...... # you can add more
-  # Article date format
-  article_date_format: auto # auto, relative, YYYY-MM-DD, YYYY-MM-DD HH:mm:ss etc.
-  # Article excerpt length
-  excerpt_length: 200 # Max length of article excerpt
-  # Article categories visibility
+      #   icon: fa-regular fa-folder
+      # ...... # 可添加更多链接
+  # Article date format | 文章日期显示格式
+  article_date_format: auto # auto=自动, relative=相对时间, YYYY-MM-DD=年月日等自定义格式
+  # Article excerpt length | 文章摘要字数上限
+  excerpt_length: 200
+  # Article categories visibility | 文章分类显示设置
   categories:
-    enable: false  # Whether to enable
-    limit: 3 # Max number of categories to display
-  # Article tags visibility
+    enable: false  # 是否显示文章分类
+    limit: 3 # 最多显示几个分类
+  # Article tags visibility | 文章标签显示设置
   tags:
-    enable: false  # Whether to enable
-    limit: 3  # Max number of tags to display
-# HOME PAGE ARTICLE SETTINGS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
+    enable: false  # 是否显示文章标签
+    limit: 3  # 最多显示几个标签
+# HOME PAGE ARTICLE SETTINGS | 首页文章设置 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
-# ARTICLE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
+# ARTICLE | 文章页面设置 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/posts/articles
 articles:
-  # Set the styles of the article
+  # Set the styles of the article | 文章样式设置
   style:
-    font_size: 16px # Font size
-    line_height: 1.5 # Line height
-    image_border_radius: 14px # image border radius
-    image_alignment: center # image alignment. left, center
-    image_caption: false # Whether to display image caption
-    link_icon: true # Whether to display link icon
-    delete_mask: false # Add mask effect to <del> tags, hiding content by default and revealing on hover
-    title_alignment: left # Title alignment. left, center
-    headings_top_spacing: # Top spacing for headings from h1-h6
+    font_size: 16px # 正文字号
+    line_height: 1.5 # 正文行高
+    image_border_radius: 14px # 图片圆角
+    image_alignment: center # 图片对齐方式（left=左对齐, center=居中）
+    image_caption: false # 是否显示图片标题说明
+    link_icon: true # 是否在链接旁显示链接图标
+    delete_mask: false # 是否给删除线内容添加遮罩（hover 才显示）
+    title_alignment: left # 文章标题对齐（left=左对齐, center=居中）
+    headings_top_spacing: # 各级标题顶部间距（h1-h6）
       h1: 3.2rem
       h2: 2.4rem
       h3: 1.9rem
       h4: 1.6rem
       h5: 1.4rem
       h6: 1.3rem
-  # Word count. Requires hexo-wordcount (npm install hexo-wordcount). See https://github.com/willin/hexo-wordcount
+  # Word count | 字数统计（需安装 hexo-wordcount 插件）
   word_count:
-    enable: true # Whether to enable
-    count: true # Whether to display word count
-    min2read: true # Whether to display reading time
-  # Author label
+    enable: true # 是否启用
+    count: true # 是否显示字数
+    min2read: true # 是否显示预计阅读时间
+  # Author label | 作者标签（等级标签）
   author_label: 
-    enable: false # Whether to enable
-    auto: false # Whether to automatically add author label, e.g. Lv1, Lv2, Lv3...
-    list: []
-  # Code block settings
+    enable: false # 是否启用
+    auto: false # 是否自动生成等级（如 Lv1, Lv2, Lv3...）
+    list: [] # 手动配置的标签列表
+  # Code block settings | 代码块设置
   code_block:
-    copy: true # Whether to enable code block copy button
-    style: mac # mac | simple
-    highlight_theme: # Color scheme for highlightjs code highlighting. For preview, see https://highlightjs.org/examples
-      light: github # light mode theme, support: github, atom-one-light, default
-      dark: vs2015 # dark mode theme, support: github-dark, monokai-sublime, vs2015, night-owl, atom-one-dark, nord, tokyo-night-dark, a11y-dark, agate
-    font: # Custom font
-      enable: false # Whether to enable
-      family: # Font family
-      url: # Font URL to CSS file
-  # Table of contents settings
+    copy: true # 是否显示复制按钮
+    style: mac # 代码块样式（mac=Mac 风格圆点, simple=简洁）
+    highlight_theme: # highlight.js 代码高亮主题
+      light: github # 浅色模式主题（可选: github, atom-one-light, default）
+      dark: vs2015 # 暗黑模式主题（可选: github-dark, monokai-sublime, vs2015, night-owl, atom-one-dark, nord, tokyo-night-dark, a11y-dark, agate）
+    font: # 代码块自定义字体
+      enable: false # 是否启用
+      family: # 字体族
+      url: # 字体 CSS 文件 URL
+  # Table of contents settings | 文章目录设置
   toc:
-    enable: true # Whether to enable TOC
-    max_depth: 3 # TOC depth
-    number: false # Whether to add number to TOC automatically
-    expand: true # Whether to expand TOC
-    init_open: true # Open toc by default
-  # Whether to enable copyright notice
+    enable: true # 是否启用目录
+    max_depth: 3 # 目录最大深度（h1-h3）
+    number: false # 是否自动给目录添加序号
+    expand: true # 是否展开目录
+    init_open: true # 是否默认打开目录
+  # Whether to enable copyright notice | 文章版权声明
   copyright:
-    enable: true # Whether to enable
-    default: cc_by_nc_sa # Default license, can be cc_by_nc_sa, cc_by_nd, cc_by_nc, cc_by_sa, cc_by, all_rights_reserved, public_domain
-  # Whether to enable lazyload for images
+    enable: true # 是否启用版权声明
+    default: cc_by_nc_sa # 默认许可协议（cc_by_nc_sa=署名-非商业-相同方式共享, cc_by_nd, cc_by_nc, cc_by_sa, cc_by, all_rights_reserved=保留所有权利, public_domain=公共领域）
+  # Whether to enable lazyload for images | 图片懒加载
   lazyload: true
-  # Pangu.js (automatically add space between Chinese and English). See https://github.com/vinta/pangu.js
+  # Pangu.js | 中英文之间自动加空格（需装 pangu.js）
   pangu_js: false
-  # Article recommendation. Requires nodejieba (npm install nodejieba). Transplanted from hexo-theme-volantis.
+  # Article recommendation | 文章推荐（基于内容相似度，需安装 nodejieba 中文分词）
   recommendation:
-    # Whether to enable article recommendation
+    # Whether to enable | 是否启用
     enable: false
-    # Article recommendation title
+    # Article recommendation title | 推荐文章标题
     title: Recommended Reading
-    # Max number of articles to display
+    # Max number of articles | 最多推荐文章数
     limit: 3
-    # Max number of articles to display mobile
+    # Max number of articles on mobile | 移动端最多推荐文章数
     mobile_limit: 2
-    # Placeholder image
+    # Placeholder image | 无封面文章占位图
     placeholder: /images/wallhaven-wqery6-light.webp
-    # Skip directory
+    # Skip directory | 跳过不参与推荐的目录
     skip_dirs: []
-# ARTICLE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
+# ARTICLE | 文章页面设置 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
+# EFFECTS | 特效开关
 effects: 
-  particles: true
-  cursoreffects: true
+  particles: true       # 是否启用粒子背景特效
+  cursoreffects: false   # 是否启用鼠标点击特效
 
 
-# COMMENT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
+# COMMENT | 评论系统 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/posts/comment
 comment:
-  # Whether to enable comment
-  enable: false
-  # Comment system
+  # Whether to enable comment | 是否启用评论
+  enable: true
+  # Comment system | 评论系统选择
   system: waline # waline, gitalk, twikoo, giscus
-  # System configuration
+  # System configuration | 各系统配置
   config:
-    # Waline comment system. See https://waline.js.org/
+    # Waline 评论系统（轻量、无后端）
     waline:
-      serverUrl: https://ifpx3kuv.api.lncldglobal.com # Waline server URL. e.g. https://example.example.com
-      lang: en-US # Waline language. e.g. zh-CN, en-US. See https://waline.js.org/guide/client/i18n.html
-      emoji: [] # Waline emojis, see https://waline.js.org/guide/features/emoji.html
-      recaptchaV3Key: # Google reCAPTCHA v3 key. See https://waline.js.org/reference/client/props.html#recaptchav3key
-      turnstileKey: # Turnstile key. See https://waline.js.org/reference/client/props.html#turnstilekey
-      reaction: false # Waline reaction. See https://waline.js.org/reference/client/props.html#reaction
-    # Gitalk comment system. See https://github.com/gitalk/gitalk
+      serverUrl: https://walinecmnt.imce.cn # Waline 服务端地址
+      lang: zh-CN # 语言（zh-CN=中文, en-US=英文）
+      emoji: [] # 自定义表情包
+      recaptchaV3Key: # Google reCAPTCHA v3 密钥
+      turnstileKey: # Cloudflare Turnstile 密钥
+      reaction: false # 是否启用文章表情反应
+    # Gitalk 评论系统（基于 GitHub Issues）
     gitalk:
-      clientID: # GitHub Application Client ID
-      clientSecret: # GitHub Application Client Secret
-      repo: # GitHub repository
-      owner: # GitHub repository owner
-      proxy: # GitHub repository proxy
-    # Twikoo comment system. See https://twikoo.js.org/
+      clientID: # GitHub OAuth App Client ID
+      clientSecret: # GitHub OAuth App Client Secret
+      repo: # GitHub 仓库名
+      owner: # GitHub 仓库所有者
+      proxy: # GitHub 代理地址
+    # Twikoo 评论系统
     twikoo:
-      version: 1.6.10 # Twikoo version, do not modify if you dont know what it is
-      server_url: # Twikoo server URL. e.g. https://example.example.com
-      region: # Twikoo region. can be empty
-    # Giscus comment system. See https://giscus.app/
+      version: 1.6.10 # Twikoo 版本号
+      server_url: # Twikoo 服务端地址
+      region: # Twikoo 区域（可留空）
+    # Giscus 评论系统（基于 GitHub Discussions）
     giscus:
-      repo: # Github repository name e.g. EvanNotFound/hexo-theme-redefine
-      repo_id: # Github repository id
-      category: # Github discussion category
-      category_id: # Github discussion category id
-      mapping: pathname # Which value to use as the unique identifier for the page. e.g. pathname, url, title, og:title. DO NOT USE og:title WITH PJAX ENABLED since pjax will not update og:title when the page changes
-      strict: 0 # Whether to enable strict mode. e.g. 0, 1
-      reactions_enabled: 1 # Whether to enable reactions. e.g. 0, 1
-      emit_metadata: 0 # Whether to emit metadata. e.g. 0, 1
-      lang: en # Giscus language. e.g. en, zh-CN, zh-TW
-      input_position: bottom # Place the comment box above/below the comments. e.g. top, bottom
-      loading: lazy # Load the comments lazily
-# COMMENT <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
+      repo: # GitHub 仓库名（如 EvanNotFound/hexo-theme-redefine）
+      repo_id: # GitHub 仓库 ID
+      category: # GitHub Discussions 分类名
+      category_id: # GitHub Discussions 分类 ID
+      mapping: pathname # 页面映射方式（pathname=路径, url=完整URL, title=标题, og:title=OG标题。启用PJAX时不要用og:title）
+      strict: 0 # 严格模式（0=关闭, 1=开启）
+      reactions_enabled: 1 # 是否启用表情反应（0=关闭, 1=开启）
+      emit_metadata: 0 # 是否发送元数据（0=关闭, 1=开启）
+      lang: zh-CN # 语言
+      input_position: bottom # 评论框位置（top=上方, bottom=下方）
+      loading: lazy # 加载方式（lazy=懒加载）
+# COMMENT | 评论系统 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
-# FOOTER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
+# FOOTER | 页脚设置 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/footer
 footer:
-  # Show website running time
-  runtime: true # show website running time or not
-  # Icon in footer, write fontawesome icon code here
+  # Show website running time | 显示网站运行时间
+  runtime: true
+  # Footer icon | 页脚图标（使用 Font Awesome HTML 代码）
   icon: '<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>'
-  # The start time of the website, format: YYYY/MM/DD HH:mm:ss
-  start: 2022/8/17 11:45:14
-  # Site statistics
-  statistics: true # show site statistics or not (total articles, total words)
-  # Footer message
+  # The start time of the website | 网站起始时间（格式: YYYY/MM/DD HH:mm:ss）
+  start: 2020/12/25 20:50:18
+  # Site statistics | 站点统计（文章总数、总字数）
+  statistics: true
+  # Footer customize message | 页脚自定义文字
   customize:
-  # ICP record number. See https://beian.miit.gov.cn/
+  # ICP record number | ICP 备案号
   icp:
-    enable: false # Whether to enable
-    number: # ICP record number
-    url: # ICP record url
-# FOOTER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
+    enable: true # 是否启用
+    number: 吉ICP备2025031965号-4 # 备案号
+    url: https://beian.miit.gov.cn # 备案查询链接
+# FOOTER | 页脚设置 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
-# INJECT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
+# INJECT | 自定义代码注入 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/inject
 inject:
-  # Whether to enable inject
+  # Whether to enable inject | 是否启用代码注入
   enable: false
-  # Inject custom head html code
+  # Inject custom head html code | 注入到 <head> 标签中的自定义 HTML
   head: 
     -
     -
-  # Inject custom footer html code
+  # Inject custom footer html code | 注入到页面底部（</body> 之前）的自定义 HTML
   footer:
     -
     -
-# INJECT <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
+# INJECT | 自定义代码注入 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
-# PLUGINS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
+# PLUGINS | 插件设置 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/plugins
 plugins:
-  # RSS feed. Requires hexo-generator-feed (npm i hexo-generator-feed). See https://github.com/hexojs/hexo-generator-feed
+  # RSS feed | RSS 订阅（需安装 hexo-generator-feed）
   feed:
-    enable: false # Whether to enable
-  # Aplayer. See https://github.com/DIYgod/APlayer
+    enable: false # 是否启用
+  # Aplayer | 音乐播放器（网页音乐播放）
   aplayer:
-    enable: false # Whether to enable
-    type: fixed # fixed, mini
-    audios:
-      - name: # audio name
-        artist: # audio artist
-        url: # audio url
-        cover: # audio cover url
-        lrc: # audio cover lrc
-#      - name: # audio name
-#        artist: # audio artist
-#        url: # audio url
-#        cover: # audio cover url
-#        lrc: # audio cover lrc
-      # .... you can add more audios here
-  # Mermaid JS. Requires hexo-filter-mermaid-diagrams (npm i hexo-filter-mermaid-diagrams). See https://mermaid.js.org/
+    enable: false # 是否启用
+    type: fixed # fixed=固定悬浮, mini=迷你播放器
+    audios: # 音乐列表
+      - name: # 歌曲名称
+        artist: # 歌手
+        url: # 歌曲文件 URL
+        cover: # 封面图片 URL
+        lrc: # 歌词文件 URL
+#      - name: # 第二首歌曲
+#        artist: # 歌手
+#        url: # 歌曲 URL
+#        cover: # 封面 URL
+#        lrc: # 歌词 URL
+      # .... 可添加更多歌曲
+  # Mermaid | 流程图/图表渲染（需安装 hexo-filter-mermaid-diagrams）
   mermaid:
-    enable: false # enable mermaid or not
-    version: "11.4.1" # default v11.4.1
-# PLUGINS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
+    enable: false # 是否启用
+    version: "11.4.1" # Mermaid 版本号
+# PLUGINS | 插件设置 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
-# PAGE TEMPLATES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
+# PAGE TEMPLATES | 页面模板设置 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/page_templates
 page_templates:
-  # Friend Links page column number
+  # Friend Links page column number | 友情链接页面每行列数
   friends_column: 3
-  # Tags page style
-  tags_style: blur # blur, cloud
-# PAGE TEMPLATES <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
+  # Tags page style | 标签页面样式
+  tags_style: blur # blur=模糊标签云, cloud=经典云标签
+# PAGE TEMPLATES | 页面模板设置 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
-# CDN >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
+# CDN | 内容分发加速 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/cdn
 cdn:
-  # Whether to enable CDN
+  # Whether to enable CDN | 是否启用 CDN 加速
   enable: false
-  # CDN Provider
+  # CDN Provider | CDN 提供商
   provider: npmmirror # npmmirror, zstatic, cdnjs, jsdelivr, unpkg, custom
-  # Custom CDN URL
-  # format example: https://cdn.custom.com/hexo-theme-redefine/${version}/source/${path}
-  # The ${path} must leads to the root of the "source" folder of the theme
+  # Custom CDN URL | 自定义 CDN 地址
+  # 格式: https://cdn.custom.com/hexo-theme-redefine/${version}/source/${path}
+  # ${path} 必须指向主题 "source" 文件夹的根目录
   custom_url: 
-# CDN <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
+# CDN | 内容分发加速 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
-# DEVELOPER MODE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
+# DEVELOPER MODE | 开发者模式 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/developer
 developer:
-  # Whether to enable developer mode (only for developers who want to modify the theme source code, not for ordinary users)
+  # Whether to enable developer mode | 是否启用开发者模式（仅用于二次开发主题源码，普通用户不要开启）
   enable: false
-# DEVELOPER MODE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
+# DEVELOPER MODE | 开发者模式 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
