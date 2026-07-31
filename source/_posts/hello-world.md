@@ -5,7 +5,7 @@ cover: https://images.bauerhosting.com/empire/2024/05/01-Princess-Mononoke.jpg?a
 ---
 # 主题音乐
 
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1386604074&auto=1&height=66"></iframe>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1386604074&auto=0&height=66"></iframe>
 
 # 特别鸣谢
 

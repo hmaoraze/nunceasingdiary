@@ -353,7 +353,7 @@ comment:
   config:
     # Waline 评论系统（轻量、无后端）
     waline:
-      serverUrl: https://walinecmnt.imce.cn # Waline 服务端地址
+      serverUrl: https://walinecommentapi.imce.cn/ # Waline 服务端地址
       lang: zh-CN # 语言（zh-CN=中文, en-US=英文）
       emoji: [] # 自定义表情包
       recaptchaV3Key: # Google reCAPTCHA v3 密钥
