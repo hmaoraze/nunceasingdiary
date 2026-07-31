@@ -405,6 +405,11 @@ footer:
     enable: true # 是否启用
     number: 吉ICP备2025031965号-4 # 备案号
     url: https://beian.miit.gov.cn # 备案查询链接
+  # 公安备案号
+  policemen:
+    enable: true # 是否启用
+    number: 吉公网安备22010702000366号  # 公安备案号（如：辽公网安备21021302000111号）
+    url: http://www.beian.gov.cn/portal/registerSystemInfo # 公安备案查询链接
 # FOOTER | 页脚设置 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 

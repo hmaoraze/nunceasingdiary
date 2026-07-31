@@ -32,21 +32,21 @@
 		<% } %>
 	</ul>
 	<% } else { %>
-	<ul class="grid mb-6 gap-4 <%= theme.page_templates.friends_column === 3 ? "grid-cols-2 sm:grid-cols-3" : "grid-cols-2" %>">
+	<ul class="grid mb-6 gap-3 <%= theme.page_templates.friends_column === 3 ? "grid-cols-2 sm:grid-cols-3" : "grid-cols-2" %>">
 		<% for (const f of category.list) { %>
-		<li class="group transform scale-100 transition-transform duration-100 ease-linear active:scale-95">
-			<a href="<%= f.link %>">
-				<div class="flex flex-row items-center gap-1 sm:gap-2 overflow-hidden min-w-0 rounded-lg shadow-redefine-flat">
-					<div class="h-16 w-16 rounded-bl-lg bg-third-background-color">
+		<li class="group transform scale-100 transition-transform duration-150 ease-linear active:scale-95">
+			<a class="friends-card" href="<%= f.link %>" target="_blank" title="<%= f.description %>">
+				<div class="flex flex-row items-center gap-3 overflow-hidden min-w-0 p-3 rounded-lg transition-colors duration-200 hover:bg-second-background-color">
+					<div class="avatar flex-shrink-0 h-12 w-12 rounded-full bg-third-background-color overflow-hidden">
 						<% if (f.avatar) { %>
-						<img class="rounded-l-lg h-16 w-16 max-w-none" src="<%= f.avatar %>" onerror="this.style.display='none'">
+						<img class="h-12 w-12 max-w-none object-cover" src="<%= f.avatar %>" onerror="this.style.display='none'">
 						<% } else { %>
-						<i class="fa-solid fa-user-group"></i>
+						<i class="fa-solid fa-link text-2xl text-third-text-color"></i>
 						<% } %>
 					</div>
 					<div class="flex flex-col min-w-0">
-						<div class="text-lg text-second-text-color ellipsis group-hover:!text-primary"><%= f.name %></div>
-						<div class="text-third-text-color ellipsis"><%= f.description %></div>
+						<div class="text-base font-medium text-second-text-color ellipsis group-hover:!text-primary transition-colors duration-200"><%= f.name %></div>
+						<div class="text-sm text-third-text-color ellipsis"><%= f.description %></div>
 					</div>
 				</div>
 			</a>

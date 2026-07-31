@@ -1,6 +1,6 @@
 ---
 title: 博客的历史和博主的简介
-banner: "我的经历"
+date: 2007-08-25 20:50:00
 cover: https://images.bauerhosting.com/empire/2024/05/01-Princess-Mononoke.jpg?ar=16%3A9&fit=crop&crop=top&auto=format&w=1440&q=80
 ---
 # 主题音乐

@@ -1,27 +1,35 @@
 # 友情链接页面数据 | 对应站点的 /links/ 页面
 # 每个一级条目代表一个链接分类，可在页面上分组显示
 
-- links_category: This is the first categrory   # 分类名称（显示为该分组的标题）
-  has_thumbnail: true                              # 该分类下的链接是否显示缩略图（true=显示, false=不显示）
-  list:                                            # 该分类下的链接列表
-      - name: hmao的日记                            # 网站名称
-        link: https://blog.imce.cn                  # 网站链接
-        description: 记录我的生活和学习              # 网站描述
-        avatar: /images/avatar-1.jpg                # 头像图片路径
-        thumbnail: /images/desc-image.jpg           # 缩略图路径（仅 has_thumbnail 为 true 时才需要）
+- links_category: 友情链接       # 分类名称（显示为该分组的标题）
+  has_thumbnail: false           # 该分类下的链接是否显示缩略图（true=大卡片, false=简洁列表）
+  list:                          # 该分类下的链接列表
+      - name: 闲记旧时
+        link: https://www.linkkk.top/
+        description: 给时光以生命，给岁月以文明。
+        avatar: https://image.hsmao.cn/blog/friend_links/linkkk.jpg
 
-- links_category: This is the second categrory   # 第二个分类
-  has_thumbnail: false                             # 不显示缩略图
-  list:
-      - name: Partner Link 1                       # 网站名称
-        link: https://example.com                   # 网站链接
-        description: Example Site Imformation       # 网站描述
-        avatar: /images/avatar-1.jpg                # 头像图片路径
-      - name: Partner Link 2
-        link: https://example.com
-        description: Example Site Description
-        avatar: /images/avatar-2.png
-      - name: Partner Link 3
-        link: https://example.com
-        description: Example Site Description
-        avatar: /images/avatar-3.png
+      - name: 逐梦者
+        link: https://www.xnpu.top/
+        description: 逐梦者
+        avatar: https://image.hsmao.cn/blog/friend_links/xnpu.png
+
+      - name: 软盘君的主页
+        link: https://www.iruanp.com/
+        description: 博客的简短描述
+        avatar: https://image.hsmao.cn/blog/friend_links/iruanp.jpg
+
+      - name: 虚空终端
+        link: https://naxida.cn/
+        description: 哈喽~欢迎光临虚空终端
+        avatar: https://image.hsmao.cn/blog/friend_links/naxida.jpg
+
+      - name: 星辰日记
+        link: https://blog.xsot.cn/
+        description: 我已很久不再成为我自己
+        avatar: https://image.hsmao.cn/blog/friend_links/xsot.webp
+
+      - name: BOKEBO
+        link: https://bokebo.com/
+        description: BO的博客
+        avatar: https://image.hsmao.cn/blog/friend_links/bokebo.png
