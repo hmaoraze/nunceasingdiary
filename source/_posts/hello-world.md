@@ -1,7 +1,36 @@
 ---
-title: 博客的历史和博主的简介
-date: 2007-08-25 20:50:00
-cover: https://images.bauerhosting.com/empire/2024/05/01-Princess-Mononoke.jpg?ar=16%3A9&fit=crop&crop=top&auto=format&w=1440&q=80
+title: 博客的历史和博主的简介         # 【必需】文章标题
+date: 2007-08-25 20:50:00          # 【必需】文章创建日期（作为博客的"原点"纪念时间）
+updated: 2026-07-30 12:00:00       # 【可选】最近一次大更新（换成Hexo架构的时间）
+tags:                              # 【标签】横向关联检索
+  - "博客历史"
+  - "关于我"
+  - "自我介绍"
+  - "Hexo迁站"
+  - "站点公告"
+categories:                        # 【分类】纵向层级归档
+  - "本站公告"
+  - "关于本站"
+keywords:                          # 【关键词】SEO 优化
+  - "博客历史"
+  - "hmao"
+  - "博主简介"
+  - "自我介绍"
+  - "Hexo迁站"
+  - "关于本站"
+description: "本站hmao的日记发展简史：2020年本地搭建 → 2021年上云运营 → 2022年更换服务器 → 2026年迁入Hexo架构。并附上博主hmao的个人介绍。"
+thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
+top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
+sticky: 500                        # 适当置顶（500 低于最高级别的重要公告，高于一般文章）
+aside: true                        # 保留侧边栏
+toc: true                          # 保留文章目录
+toc_number: true                   # 目录显示层级编号
+comments: true                     # 开启评论区
+copyright: true                    # 保留版权声明
+mathjax: false                     # 不需要数学公式
+katex: false                       # 不需要 KaTeX
+aplayer: false                     # 文章使用的是 iframe 方式的网易云音乐，非主题内建APlayer，保持关闭
+highlight_shrink: false            # 代码块默认不折叠（鸣谢列表中有表格，无代码块）
 ---
 # 主题音乐
 
