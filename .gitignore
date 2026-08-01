@@ -1,1 +1,17 @@
+# ====== Hexo 构建产物与缓存 ======
+public/
+db.json
+
+# ====== 依赖包 ======
 node_modules/
+
+# ====== Hexo 部署临时目录 ======
+.deploy_git/
+.deploy_gitee/
+
+# ====== 系统/编辑器垃圾 ======
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/
