@@ -275,7 +275,7 @@ articles:
     image_alignment: center # 图片对齐方式（left=左对齐, center=居中）
     image_caption: false # 是否显示图片标题说明
     link_icon: true # 是否在链接旁显示链接图标
-    delete_mask: false # 是否给删除线内容添加遮罩（hover 才显示）
+    delete_mask: true # 是否给删除线内容添加遮罩（hover 才显示）
     title_alignment: left # 文章标题对齐（left=左对齐, center=居中）
     headings_top_spacing: # 各级标题顶部间距（h1-h6）
       h1: 3.2rem
