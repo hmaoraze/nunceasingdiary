@@ -20,7 +20,7 @@ keywords:                          # 【关键词】SEO 优化
 description: "本站hmao的日记发展简史：2020年本地搭建 → 2021年上云运营 → 2022年更换服务器 → 2026年迁入Hexo架构。并附上博主hmao的个人介绍。"
 thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
 top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-sticky: 500                        # 适当置顶（500 低于最高级别的重要公告，高于一般文章）
+#sticky: 500                        # 适当置顶（500 低于最高级别的重要公告，高于一般文章）
 aside: true                        # 保留侧边栏
 toc: true                          # 保留文章目录
 toc_number: true                   # 目录显示层级编号
