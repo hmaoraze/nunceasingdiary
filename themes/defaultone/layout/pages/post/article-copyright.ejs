@@ -50,7 +50,7 @@
             };
 
             let licenseType = 'cc_by_nc_sa'; // Default license type
-            if (page.copyright && page.copyright !== "") {
+            if (typeof page.copyright === 'string' && page.copyright !== "") {
                 licenseType = 'custom';
             } else if (page.license && licenseMap[page.license]) {
                 licenseType = page.license;

@@ -326,9 +326,10 @@ export default function initUtils() {
             const postDate = new Date(
               v.dataset.date.split(" GMT")[0],
             ).getTime();
-            v.innerHTML = this.getHowLongAgo(
-              Math.floor((nowDate - postDate) / 1000),
-            );
+            const deltaSeconds = Math.floor((nowDate - postDate) / 1000);
+            if (deltaSeconds >= 0) {
+              v.innerHTML = this.getHowLongAgo(deltaSeconds);
+            }
           });
       } else if (df === "auto") {
         post &&
@@ -340,7 +341,7 @@ export default function initUtils() {
             const finalDays = Math.floor(
               (nowDate - postDate) / (60 * 60 * 24 * 1000),
             );
-            if (finalDays < 7) {
+            if (finalDays >= 0 && finalDays < 7) {
               v.innerHTML = this.getHowLongAgo(
                 Math.floor((nowDate - postDate) / 1000),
               );
