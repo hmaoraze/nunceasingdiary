@@ -167,7 +167,7 @@ home_banner:
       # ...... # 可添加更多链接
     # Social links with QRcode drawers | 带二维码弹窗的社交链接
     qrs:
-      weixin:  # 微信二维码图片 URL
+      weixin: https://cdn.timens.cn/img/article/qrcode_for_gh_0ae2679e9701_860.jpg!/format/webp  # 微信二维码图片 URL
       # ...... # 可添加更多二维码
 # HOME BANNER | 首页横幅 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
