@@ -20,8 +20,8 @@ keywords:                          # 【关键词】SEO 优化
   - "SpaceSniffer"
   - "Geek Uninstaller"
 description: "从磁盘分区、软件安装规范到搜索/空间分析/压缩工具部署，再到图吧工具箱按需进阶，提供一套标准化的新电脑开荒四层方法论，从源头避免 C 盘无序膨胀、捆绑软件增多与开机自启项过多。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
+thumbnail: https://cdn.timens.cn/img/article/fa130d1a2d8bfc21e976f0ceec757b9fb8ccde03.jpg!/format/webp
+top_img: https://cdn.timens.cn/img/article/fa130d1a2d8bfc21e976f0ceec757b9fb8ccde03.jpg!/format/webp
 #sticky: 500                        # 适当置顶（500 低于最高级别的重要公告，高于一般文章）
 aside: true                        # 保留侧边栏
 toc: true                          # 保留文章目录
