@@ -6,35 +6,6 @@ date: 2025-04-09 16:23:59
 
 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1386604074&auto=0&height=66"></iframe>
 
-# 特别鸣谢
-
-| 个人或组织（以首字母为序） | 相关网站 |
-| :---: | :--- |
-| 背字根 | https://www.beizigen.com |
-| 钉钉 | https://www.dingtalk.com |
-| hades | https://blog.mayuko.cn |
-| HTML5 UP | https://html5up.net |
-| 聚合图床 | https://www.superbed.cn |
-| LitePress | https://litepress.cn |
-| MotoPress | https://motopress.com |
-| Object Cache Pro | https://objectcache.pro |
-| VAPTCHA | https://www.vaptcha.com |
-| VeronaLabs | https://veronalabs.com |
-| 无垠 | https://flyhigher.top |
-| WordPress智库 | https://www.wpzhiku.com |
-| wpforms | https://wpforms.com |
-| WordPress | https://cn.wordpress.org |
-| WPSERVEUR | https://www.wpserveur.net |
-| 织音博客 | https://www.itzhiyin.cn |
-
-**感谢以上的个人或组织提供的相关支持**
-
----
-
-# 自带的问候语
-
-欢迎使用WordPress。这是您的第一篇文章。编辑或删除它，然后开始写作吧！
-
 ---
 
 # 博客简介
@@ -51,9 +22,6 @@ date: 2025-04-09 16:23:59
   ~~摆脱传统的框架，拥抱了Hexo，这样我就能更灵活的控制和使用最强大的功能。~~ 
   实际上就是服务器续费太贵了hh，而且仅用于搭建博客的话，还有一点暴殄天物。
 - **还未发生...** (时间未知...)
-
-
-
 
 ---
 
