@@ -98,6 +98,13 @@ ignore:                              # 忽略的文件
 ## Themes: https://hexo.io/themes/
 theme: defaultone                    # 使用的主题名称
 
+# Search | 本地搜索设置
+## Docs: https://github.com/papertiger/hexo-generator-searchdb
+search:
+  path: search.xml                  # 搜索索引文件路径
+  field: post                       # 搜索范围（post=文章, page=页面, all=全部）
+  content: true                     # 是否索引文章全文
+
 # Deployment | 部署设置
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:

@@ -222,7 +222,7 @@ navbar:
   # Navbar search (local search) | 导航栏本地搜索（需安装 hexo-generator-searchdb）
   search:
     # Whether to enable | 是否启用
-    enable: false
+    enable: true
     # Preload search data | 页面加载时预加载搜索数据
     preload: true
 # NAVIGATION BAR | 导航栏 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
