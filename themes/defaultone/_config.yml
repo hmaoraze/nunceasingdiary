@@ -68,7 +68,7 @@ global:
     percentage: true # 百分比（显示阅读百分比数字）
   # Website counter | 网站访问量统计
   website_counter:
-    url: https://cn.vercount.one/js # 统计 API 地址（一般无需修改）
+    url: https://events.vercount.one/js # 统计 API 地址（一般无需修改）
     enable: true # 是否启用网站统计
     site_pv: true # 站点总浏览量（PV）
     site_uv: true # 站点独立访客数（UV）
