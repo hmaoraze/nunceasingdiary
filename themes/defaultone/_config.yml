@@ -194,9 +194,9 @@ navbar:
     Archives: 
       path: /archives  # 归档页
       icon: fa-regular fa-archive
-    Github: 
-      path: https://github.com/hmaoraze # 外部链接
-      icon: fa-brands fa-github
+    开往: 
+      path: https://www.travellings.cn/go.html  # 开往-友链接力（随机访问）
+      icon: fa-solid fa-train-subway
       # submenus: # 二级菜单（取消注释即可启用）
       #   Link1: /link1
       #   Link2: /link2
