@@ -90,6 +90,7 @@ pagination_dir: page                 # 分页目录名
 # Include / Exclude file(s) | 包含 / 排除文件
 ## include:/exclude: options only apply to the 'source/' folder
 include:                             # 强制包含的文件
+  - .well-known/*                    # 包含隐藏目录中的验证文件（如 Vercount 域名验证）
 exclude:                             # 强制排除的文件
 ignore:                              # 忽略的文件
 
@@ -104,6 +105,31 @@ search:
   path: search.xml                  # 搜索索引文件路径
   field: post                       # 搜索范围（post=文章, page=页面, all=全部）
   content: true                     # 是否索引文章全文
+
+# Sitemap | 站点地图设置（供 Google、Bing 等搜索引擎抓取）
+## Docs: https://github.com/hexojs/hexo-generator-sitemap
+sitemap:
+  path: sitemap.xml                 # 站点地图文件路径
+  rel: false                        # 是否在页头插入 rel-sitemap
+  tags: true                        # 是否包含标签页
+  categories: true                  # 是否包含分类页
+
+# Baidu Sitemap | 百度站点地图设置（百度专用）
+## Docs: https://github.com/coneycode/hexo-generator-baidu-sitemap
+baidusitemap:
+  path: baidusitemap.xml            # 百度站点地图文件路径
+
+# Feed | RSS 订阅设置（帮助搜索引擎发现新内容）
+## Docs: https://github.com/hexojs/hexo-generator-feed
+feed:
+  enable: true                      # 是否启用 RSS 订阅
+  type: atom                        # 订阅格式（atom 或 rss2）
+  path: atom.xml                    # 订阅文件路径
+  limit: 20                         # 订阅中最多包含的文章数（0=全部）
+  content: true                     # 是否在订阅中包含文章全文
+  content_limit: 140                # 摘要字数（content 为 false 时生效）
+  order_by: -date                   # 排序方式（-date=按日期倒序）
+  autodiscovery: true               # 是否在页面插入自动发现标签
 
 # Deployment | 部署设置
 ## Docs: https://hexo.io/docs/one-command-deployment
@@ -128,4 +154,4 @@ live2d:
   mobile:
     show: true                       # 移动端是否显示
   react:
-    opacity: 0.7                     # 看板娘透明度（0-1）
+    opacity: 0.6                     # 看板娘透明度（0-1）

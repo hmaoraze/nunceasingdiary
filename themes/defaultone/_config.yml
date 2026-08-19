@@ -41,19 +41,19 @@ global:
   fonts:
     # Chinese fonts | 中文字体
     chinese: 
-      enable: true # 是否启用自定义中文字体
-      family: "'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" # 字体族（按优先级回退）
-      url: "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" # 字体 CSS 文件 URL
+      enable: false # 是否启用自定义中文字体（本地化：改用系统字体栈）
+      family: "-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Heiti SC', 'WenQuanYi Micro Hei', sans-serif" # 字体族（按优先级回退）
+      url: "" # 字体 CSS 文件 URL
     # English fonts | 英文字体
     english: 
-      enable: true # 是否启用自定义英文字体
-      family: "'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" # 字体族
-      url: "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" # 字体 CSS 文件 URL
+      enable: false # 是否启用自定义英文字体（本地化：使用主题本地 Geist 字体）
+      family: "'Geist Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" # 字体族
+      url: "" # 字体 CSS 文件 URL
     # Custom title fonts | 自定义标题字体（导航栏、侧边栏）
     title:
-      enable: true # 是否启用自定义标题字体
-      family: "'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" # 字体族
-      url: "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" # 字体 CSS 文件 URL
+      enable: false # 是否启用自定义标题字体（本地化：使用本地字体）
+      family: "'Chillax-Variable', 'Geist Variable', -apple-system, BlinkMacSystemFont, sans-serif" # 字体族
+      url: "" # 字体 CSS 文件 URL
   # Content max width | 内容区域最大宽度
   content_max_width: 1000px
   # Sidebar width | 侧边栏宽度

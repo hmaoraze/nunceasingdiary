@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Google、Bing
+Sitemap: https://blog.imce.cn/sitemap.xml
+# BaiduSitemap
+Sitemap: https://blog.imce.cn/baidusitemap.xml
