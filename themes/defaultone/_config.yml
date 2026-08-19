@@ -417,10 +417,10 @@ footer:
 # Docs: https://redefine-docs.ohevan.com/inject
 inject:
   # Whether to enable inject | 是否启用代码注入
-  enable: false
+  enable: true
   # Inject custom head html code | 注入到 <head> 标签中的自定义 HTML
   head: 
-    -
+    - '<meta name="google-site-verification" content="JArnHByKrqwt-sC_WEZHn71anyBXCmGPAwz3MObHNrs" />'
     -
   # Inject custom footer html code | 注入到页面底部（</body> 之前）的自定义 HTML
   footer:
