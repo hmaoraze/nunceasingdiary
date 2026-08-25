@@ -24,5 +24,6 @@ mathjax: false
 katex: false
 aplayer: false
 highlight_shrink: false
+sticky: 999                        # 适当置顶（500 低于最高级别的重要公告，高于一般文章）
 ---
 嗨！你好，今天才刚开始，后续内容将在今晚20:50之前完成。开头我先吐槽一下我自己，这张图片我都用了四年了。
