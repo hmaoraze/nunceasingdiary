@@ -429,6 +429,21 @@ inject:
 # INJECT | 自定义代码注入 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
+# MERMAID | 流程图/图表 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
+# Docs: https://redefine-docs.ohevan.com/plugins
+mermaid:
+  enable: true # 是否启用
+  # Theme for mermaid diagrams | 流程图主题（浅色/暗黑）
+  theme:
+    light: default # 浅色模式主题（default, neutral, dark, forest）
+    dark: dark # 暗黑模式主题
+  # Style for mermaid diagrams | 流程图样式（浅色/暗黑）
+  style:
+    light: default # 浅色模式样式
+    dark: dark # 暗黑模式样式
+# MERMAID | 流程图/图表 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
+
+
 # PLUGINS | 插件设置 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/plugins
 plugins:
@@ -438,7 +453,7 @@ plugins:
   # Aplayer | 音乐播放器（网页音乐播放）
   aplayer:
     enable: true # 是否启用
-    type: mini # fixed=固定悬浮, mini=迷你播放器
+    type: fixed # fixed=固定悬浮, mini=迷你播放器
     audios: # 音乐列表
       - name: 没关系 # 歌曲名称
         artist: 周深 # 歌手
@@ -453,7 +468,7 @@ plugins:
       # .... 可添加更多歌曲
   # Mermaid | 流程图/图表渲染（需安装 hexo-filter-mermaid-diagrams）
   mermaid:
-    enable: false # 是否启用
+    enable: true # 是否启用
     version: "11.4.1" # Mermaid 版本号
 # PLUGINS | 插件设置 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
