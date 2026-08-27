@@ -434,17 +434,17 @@ inject:
 plugins:
   # RSS feed | RSS 订阅（需安装 hexo-generator-feed）
   feed:
-    enable: false # 是否启用
+    enable: true # 是否启用
   # Aplayer | 音乐播放器（网页音乐播放）
   aplayer:
-    enable: false # 是否启用
-    type: fixed # fixed=固定悬浮, mini=迷你播放器
+    enable: true # 是否启用
+    type: mini # fixed=固定悬浮, mini=迷你播放器
     audios: # 音乐列表
-      - name: # 歌曲名称
-        artist: # 歌手
-        url: # 歌曲文件 URL
-        cover: # 封面图片 URL
-        lrc: # 歌词文件 URL
+      - name: 没关系 # 歌曲名称
+        artist: 周深 # 歌手
+        url:  https://cdn.timens.cn/blog/hmdrj/CustomizedSongList/audio/Life-is-Like-a-Box-of-Chocolates.mp3 # 歌曲文件 URL
+        cover: https://cdn.timens.cn/blog/hmdrj/CustomizedSongList/img/109951169597952494.jpg!/format/webp # 封面图片 URL
+        lrc: https://cdn.timens.cn/blog/hmdrj/CustomizedSongList/audio/Life-is-Like-a-Box-of-Chocolates.lrc # 歌词文件 URL
 #      - name: # 第二首歌曲
 #        artist: # 歌手
 #        url: # 歌曲 URL

@@ -28,4 +28,3 @@ sticky: 999                        # 适当置顶（500 低于最高级别的重
 ---
 嗨！你好，今天才刚开始，后续内容将在今晚20:50之前完成。开头我先吐槽一下我自己，这张图片我都用了四年了。
 先来个主题音乐吧
-<iframe src="https://iis.hsmao.cn/player.php?hash=d89947e932badb2faa7db8a88c3e9261" width="407" scrolling="no"frameborder="0"height="70"></iframe>
