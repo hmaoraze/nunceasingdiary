@@ -27,3 +27,5 @@ highlight_shrink: false
 sticky: 999                        # 适当置顶（500 低于最高级别的重要公告，高于一般文章）
 ---
 嗨！你好，今天才刚开始，后续内容将在今晚20:50之前完成。开头我先吐槽一下我自己，这张图片我都用了四年了。
+先来个主题音乐吧
+<iframe src="https://player.imce.cn/?type=audio&url=https://iis.hsmao.cn/view.php/d89947e932badb2faa7db8a88c3e9261.mp3&title=%E5%85%89%E4%BA%AE&cover=https://iis.hsmao.cn/view.php/dd0e6db6cda1b286b23c855edeee4fde.jpg" width="407" scrolling="no"frameborder="0"height="70"></iframe>
