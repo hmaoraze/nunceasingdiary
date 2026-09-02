@@ -4,6 +4,8 @@ db.json
 
 # ====== 依赖包 ======
 node_modules/
+# 云端统一使用 npm + package-lock.json，本地 yarn 生成的锁文件不入库
+yarn.lock
 
 # ====== Hexo 部署临时目录 ======
 .deploy_git/
