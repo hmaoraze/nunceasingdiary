@@ -368,7 +368,7 @@ comment:
       proxy: # GitHub 代理地址
     # Twikoo 评论系统
     twikoo:
-      version: 1.7.22 # Twikoo 版本号
+      version: 1.7.21 # Twikoo 版本号
       server_url: https://twikoo.imce.cn/ # Twikoo 服务端地址
       region: # Twikoo 区域（可留空）
     # Giscus 评论系统（基于 GitHub Discussions）
