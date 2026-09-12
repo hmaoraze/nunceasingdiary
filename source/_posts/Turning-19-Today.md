@@ -40,3 +40,5 @@ sticky: 999                        # 适当置顶（500 低于最高级别的重
 ![生日午饭4](https://image.hsmao.cn/bfs/archive/2026/11/b50b8f5a.jpg!/format/webp)
 
 ![生日午饭5](https://image.hsmao.cn/bfs/archive/2026/11/f725e394.jpg!/format/webp)
+---
+注：照片中的“𝑽𝒐𝒊𝒅𝑺𝒑𝒊𝒏”字样是hmao的网名，意为“指针空转”。
