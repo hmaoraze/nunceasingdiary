@@ -120,7 +120,7 @@ home_banner:
   title: hmao的日记
   # Home banner subtitle | 首页横幅副标题（打字机效果）
   subtitle:
-    text: ['写下去，就会精彩！'] # 副标题文字（数组，轮播打字）
+    text: ['缅怀先烈，铭记历史！'] # 副标题文字（数组，轮播打字）
     hitokoto:  # 一言（Hitokoto）配置，随机显示一句动漫/文学语录
       enable: false # 是否启用一言
       show_author: true # 是否显示语录作者
