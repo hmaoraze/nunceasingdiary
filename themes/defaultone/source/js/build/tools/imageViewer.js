@@ -112,7 +112,7 @@ export default function imageViewer() {
   });
 
   const imgDoms = document.querySelectorAll(
-    ".markdown-body img, .masonry-item img, #shuoshuo-content img",
+    ".markdown-body img, .masonry-item img, #shuoshuo-content img, .shuoshuo-content .shuoshuo-img-item img",
   );
 
   const escapeKeyListener = (event) => {
@@ -129,12 +129,14 @@ export default function imageViewer() {
   };
 
   if (imgDoms.length > 0) {
+    const getFullSrc = (img) => img.hasAttribute("data-full") ? img.getAttribute("data-full") : img.src;
+
     imgDoms.forEach((img, index) => {
       img.addEventListener("click", () => {
         currentImgIndex = index;
         isBigImage = true;
         showHandle(isBigImage);
-        targetImg.src = img.src;
+        targetImg.src = getFullSrc(img);
         document.addEventListener("keydown", escapeKeyListener);
       });
     });
@@ -152,7 +154,7 @@ export default function imageViewer() {
       }
 
       const currentImg = imgDoms[currentImgIndex];
-      let newSrc = currentImg.src;
+      let newSrc = getFullSrc(currentImg);
 
       if (currentImg.hasAttribute("lazyload")) {
         newSrc = currentImg.getAttribute("data-src");

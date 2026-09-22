@@ -15,23 +15,25 @@
 				<div class="essay-date px-4 py-1.5 text-sm border-b border-border-color bg-zinc-50 dark:bg-zinc-800 text-third-text-color" data-date="<%= moment(e.date).tz(timezone).utc().format() %>">Loading Date...</div>
 				<div class="shuoshuo-content px-4 py-2"><%- markdown(e.content) %></div>
 				<% if (e.images && e.images.length) { %>
-				<div class="grid grid-cols-3 gap-2 px-4 pb-3">
+				<div class="px-4 pb-3 <%= e.images.length > 1 ? 'grid grid-cols-3 gap-2' : '' %>">
+					<% const single = e.images.length === 1; %>
 					<% for (const img of e.images) { %>
-					<a href="<%= img.full || img.url %>" class="shuoshuo-img-link <%= img.video ? 'has-video' : '' %>" <% if (img.full && img.full !== img.url) { %>target="_blank" rel="noopener"<% } %>>
-						<img src="<%= img.url %>" alt="" loading="lazy" class="w-full aspect-square object-cover rounded-lg">
-					</a>
+					<div class="shuoshuo-img-item rounded-lg overflow-hidden <%= single ? 'w-full' : 'aspect-square' %>">
+						<img src="<%= img.url %>" data-full="<%= img.full || img.url %>" alt="" loading="lazy" class="w-full rounded-lg cursor-zoom-in <%= single ? 'h-auto object-contain' : 'h-full object-cover' %>">
+					</div>
 					<% } %>
 				</div>
 				<% } %>
 				<% if (e.livephotos && e.livephotos.length) { %>
-				<div class="grid grid-cols-3 gap-2 px-4 pb-3">
+				<div class="px-4 pb-3 <%= e.livephotos.length > 1 ? 'grid grid-cols-3 gap-2' : '' %>">
+					<% const singleLp = e.livephotos.length === 1; %>
 					<% for (const lp of e.livephotos) { %>
 					<% if (lp.photo && lp.video) { %>
-					<div data-live-photo data-photo-src="<%= lp.photo %>" data-video-src="<%= lp.video %>" data-lazy-load-video="true" class="aspect-square rounded-lg overflow-hidden" style="width:100%; height:100%;"></div>
+					<div data-live-photo data-photo-src="<%= lp.photo %>" data-video-src="<%= lp.video %>" data-lazy-load-video="true" class="rounded-lg overflow-hidden <%= singleLp ? '' : 'aspect-square' %>" style="width:100%; <%= singleLp ? '' : 'height:100%;' %>"></div>
 					<% } else if (lp.photo) { %>
-					<a href="<%= lp.photo %>" target="_blank" rel="noopener">
-						<img src="<%= lp.photo %>" alt="" loading="lazy" class="w-full aspect-square object-cover rounded-lg">
-					</a>
+					<div class="shuoshuo-img-item rounded-lg overflow-hidden <%= singleLp ? 'w-full' : 'aspect-square' %>">
+						<img src="<%= lp.photo %>" data-full="<%= lp.photo %>" alt="" loading="lazy" class="w-full rounded-lg cursor-zoom-in <%= singleLp ? 'h-auto object-contain' : 'h-full object-cover' %>">
+					</div>
 					<% } %>
 					<% } %>
 				</div>
