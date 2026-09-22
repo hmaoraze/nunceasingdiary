@@ -1,0 +1,23 @@
+# 我的动态（朋友圈/说说）
+# 每条动态包含：
+#   date     发布时间（ISO 8601 格式，+08:00 为北京时间）
+#   content  内容（支持 Markdown）
+#   images   可选：普通图片列表，每项 url（必填）+ full（可选，点击查看原图）
+#   livephotos 可选：实况图列表，每项 photo（封面图）+ video（视频）
+# 页面会按 date 倒序展示，最新的在前
+
+- date: 2026-09-22T20:00:00+08:00
+  content: 欢迎来到我的动态！这里是记录我日常的小天地，像朋友圈一样。
+
+- date: 2026-09-19T12:00:00+08:00
+  content: 今天满 19 岁啦，生日午饭很丰盛，拍了些照片纪念一下。
+  images:
+    - url: https://image.hsmao.cn/bfs/archive/2026/11/2f113938.jpg!/format/webp
+      full: https://image.hsmao.cn/bfs/archive/2026/11/2f113938.jpg
+    - url: https://image.hsmao.cn/bfs/archive/2026/11/4f452428.jpg!/format/webp
+
+- date: 2026-09-01T09:30:00+08:00
+  content: 新的一月，新的开始。下面这条演示实况图（Live Photo）播放。
+  livephotos:
+    - photo: https://image.hsmao.cn/bfs/archive/2026/11/2f113938.jpg!/format/webp
+      video: https://example.com/your-video.mp4

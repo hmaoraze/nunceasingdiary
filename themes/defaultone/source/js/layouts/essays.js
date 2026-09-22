@@ -15,11 +15,25 @@ function formatEssayDates() {
   });
 }
 
+// Initialize Live Photo (实况图) elements that are not yet initialized.
+// Works both on first load and after Swup page transitions.
+function initLivePhotos() {
+  if (window.LivePhotoViewer && window.LivePhotoViewer.autoInit) {
+    window.LivePhotoViewer.autoInit(document);
+  }
+}
+
 try {
-  swup.hooks.on("page:view", formatEssayDates);
+  swup.hooks.on("page:view", function () {
+    formatEssayDates();
+    initLivePhotos();
+  });
 } catch (e) {
   console.error(e);
 }
 
 // Initial call for the first page load
-document.addEventListener("DOMContentLoaded", formatEssayDates);
+document.addEventListener("DOMContentLoaded", function () {
+  formatEssayDates();
+  initLivePhotos();
+});
