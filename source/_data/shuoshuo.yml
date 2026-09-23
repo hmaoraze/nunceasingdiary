@@ -11,13 +11,13 @@
 - date: 2026-09-22 20:00
   content: 欢迎来到我的动态！这里是记录我日常的小天地，像朋友圈一样。
 
-- date: 2026-09-19T12:00:00+08:00
+- date: 2026-08-25 20:50:00
   content: 今天满 19 岁啦，生日午饭很丰盛，拍了些照片纪念一下。
   livephotos:
     - photo: https://image.hsmao.cn/content/uploads/2026/09/live/compressed_1790173051162.jpg!/format/webp
       video: https://image.hsmao.cn/content/uploads/2026/09/live/VID_20260923_221751.mp4.nbhd
     - photo: https://image.hsmao.cn/content/uploads/2026/09/live/compressed_1790173050655.jpg!/format/webp
-      video: https://image.hsmao.cn/content/uploads/2026/09/live/VID_20260923_220344.mp4.nbhd
+      video: https://image.hsmao.cn/content/uploads/2026/09/live/VID_20260923_221743.mp4
 
 - date: 2026-09-01T09:30:00+08:00
   content: 新的一月，新的开始。写下去，就会精彩！
