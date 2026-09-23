@@ -9,19 +9,31 @@
 	<% } %>
 	<h1 class="page-title-header"><%= page.title %></h1>
 	<ul class="flex flex-col mb-4 gap-6">
-		<%
+			<%
         const timezone = config.timezone || 'Asia/Shanghai';
-        const newessays = theme.essays.sort((a, b) => moment(b.date).diff(a.date));
+        // 归一化日期的辅助函数：兼容各种自然写法，统一转成 moment 可解析的字符串
+        function normalizeDate(v) {
+          if (v == null || v === '') return null;
+          // 已是 Date 对象（js-yaml 将纯日期 ISO 自动转换）或可直接解析的值
+          if (v instanceof Date) return v;
+          let s = String(v).trim();
+          // "2026年9月22日" → "2026-09-22"
+          s = s.replace(/(\d{4})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日?/, '$1-$2-$3');
+          // "2026/09/22" → "2026-09-22"
+          s = s.replace(/(\d{4})\/(\d{1,2})\/(\d{1,2})/, '$1-$2-$3');
+          return s;
+        }
+        const newessays = theme.essays.map((e) => ({ ...e, _date: moment(normalizeDate(e.date), 'YYYY-MM-DD HH:mm:ss', true).isValid() ? moment(normalizeDate(e.date), 'YYYY-MM-DD HH:mm:ss').format() : normalizeDate(e.date) })).sort((a, b) => moment(b._date).diff(a._date));
         %>
-		<% for (const e of newessays) { %>
-		<li class="w-full flex flex-row relative">
-			<div class="w-10 h-10 mr-4 rounded-lg overflow-hidden border border-border-color p-[1px] flex-shrink-0">
-				<%- image_tag(theme.defaults.avatar, {class: "w-full h-full rounded-[6.2px]"}) %>
-			</div>
-			<div class="w-full border-border-color rounded-xl rounded-tl-none shadow-redefine-flat overflow-hidden">
-				<!-- Pass the raw date here in a data attribute -->
-				<div class="essay-date px-4 py-1.5 text-sm border-b border-border-color bg-zinc-50 dark:bg-zinc-800 text-third-text-color" data-date="<%= moment(e.date).tz(timezone).utc().format() %>">Loading Date...</div>
-				<div class="shuoshuo-content px-4 py-2"><%- markdown(e.content) %></div>
+			<% for (const e of newessays) { %>
+			<li class="w-full flex flex-row relative">
+				<div class="w-10 h-10 mr-4 rounded-lg overflow-hidden border border-border-color p-[1px] flex-shrink-0">
+					<%- image_tag(theme.defaults.avatar, {class: "w-full h-full rounded-[6.2px]"}) %>
+				</div>
+				<div class="w-full border-border-color rounded-xl rounded-tl-none shadow-redefine-flat overflow-hidden">
+					<!-- Pass the raw date here in a data attribute -->
+					<div class="essay-date px-4 py-1.5 text-sm border-b border-border-color bg-zinc-50 dark:bg-zinc-800 text-third-text-color" data-date="<%= e._date %>">Loading Date...</div>
+					<div class="shuoshuo-content px-4 py-2"><%- markdown(e.content) %></div>
 				<% if (e.images && e.images.length) { %>
 				<div class="px-4 pb-3 <%= e.images.length > 1 ? 'grid grid-cols-3 gap-2' : '' %>">
 					<% const single = e.images.length === 1; %>
