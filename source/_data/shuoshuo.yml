@@ -6,6 +6,8 @@
 #   livephotos 可选：实况图列表，每项 photo（封面图）+ video（视频）
 # 页面会按 date 倒序展示，最新的在前
 
+
+
 - date: 2026-09-22T20:00:00+08:00
   content: 欢迎来到我的动态！这里是记录我日常的小天地，像朋友圈一样。
 
@@ -21,3 +23,9 @@
   livephotos:
     - photo: https://image.hsmao.cn/bfs/archive/2026/11/2f113938.jpg!/format/webp
       video: https://example.com/your-video.mp4
+
+- date: 2026-09-22T22:40:05+08:00
+  content: 测试一下
+  livephotos:
+    - photo: https://image.hsmao.cn/content/uploads/2026/09/live/IMG20260913112828.jpg!/format/webp
+      video: https://image.hsmao.cn/content/uploads/2026/09/live/IMG20260913112828.mp4
