@@ -192,13 +192,13 @@ navbar:
       path: /  # 链接路径
       icon: fa-regular fa-house # 图标（Font Awesome class，可留空）
 
-  动态: 
-      path: /moments  # 开往-友链接力（随机访问）
+    动态: 
+      path: /moments  # 动态页面
       icon: fa-solid fa-clipboard-list
     Archives: 
       path: /archives  # 归档页
       icon: fa-regular fa-archive
-  开往: 
+    开往: 
       path: https://www.travellings.cn/go.html  # 开往-友链接力（随机访问）
       icon: fa-solid fa-train-subway
       # submenus: # 二级菜单（取消注释即可启用）
