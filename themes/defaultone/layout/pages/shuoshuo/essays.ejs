@@ -1,4 +1,12 @@
 <div class="mb-4">
+	<% if (config.livephoto && config.livephoto.enable) { %>
+	<style>
+		.live-photo-container{position:relative;border-radius:12px;margin:10px 0;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.1);transition:transform .3s ease,box-shadow .3s ease;max-width:100%}.live-photo-container:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.12)}.live-photo-static{width:100%;display:block;border-radius:8px;transition:opacity .3s}.live-photo-video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0;border-radius:8px;transition:opacity .3s}.live-photo-video.playing{opacity:1}.live-badge{position:absolute;background:rgba(0,0,0,.7);color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;display:flex;align-items:center;gap:4px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);z-index:10}.live-badge::before{content:'';width:8px;height:8px;background:#ff2e4d;border-radius:50%;display:inline-block}.live-badge.bottom-left{bottom:12px;left:12px}.live-badge.bottom-right{bottom:12px;right:12px}.live-badge.top-left{top:12px;left:12px}.live-badge.top-right{top:12px;right:12px}.live-loading{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;border:3px solid rgba(255,255,255,.3);border-radius:50%;border-top-color:#ff2e4d;animation:livephoto-spin 1s ease-in-out infinite;display:none;z-index:1}@keyframes livephoto-spin{to{transform:translate(-50%,-50%) rotate(360deg)}}.live-caption{text-align:center;margin-top:8px;font-size:14px;color:#666}.image-grid-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}.grid-item{position:relative;min-width:0}.image-grid-grid .live-photo-container{margin:0;border-radius:8px}@media (max-width:768px){.live-photo-container{border-radius:8px;margin:8px 0}.live-badge{font-size:11px;padding:3px 6px}.live-badge.bottom-left,.live-badge.bottom-right{bottom:8px}.live-badge.bottom-left,.live-badge.top-left{left:8px}.live-badge.bottom-right,.live-badge.top-right{right:8px}.live-badge.top-left,.live-badge.top-right{top:8px}}
+	</style>
+	<script>
+		window.LivePhotoConfig = <%- JSON.stringify(config.livephoto) %>;
+	</script>
+	<% } %>
 	<h1 class="page-title-header"><%= page.title %></h1>
 	<ul class="flex flex-col mb-4 gap-6">
 		<%
@@ -25,16 +33,19 @@
 				</div>
 				<% } %>
 				<% if (e.livephotos && e.livephotos.length) { %>
-				<div class="px-4 pb-3 <%= e.livephotos.length > 1 ? 'grid grid-cols-3 gap-2' : '' %>">
-					<% const singleLp = e.livephotos.length === 1; %>
+				<% const singleLp = e.livephotos.length === 1; %>
+				<div class="px-4 pb-3 <%= !singleLp ? 'image-grid-grid' : '' %>">
 					<% for (const lp of e.livephotos) { %>
-					<% if (lp.photo && lp.video) { %>
-					<div data-live-photo data-photo-src="<%= lp.photo %>" data-video-src="<%= lp.video %>" data-lazy-load-video="true" class="rounded-lg overflow-hidden <%= singleLp ? '' : 'aspect-square' %>" style="width:100%; <%= singleLp ? '' : 'height:100%;' %>"></div>
-					<% } else if (lp.photo) { %>
-					<div class="shuoshuo-img-item rounded-lg overflow-hidden <%= singleLp ? 'w-full' : 'aspect-square' %>">
-						<img src="<%= lp.photo %>" data-full="<%= lp.photo %>" alt="" loading="lazy" class="w-full rounded-lg cursor-zoom-in <%= singleLp ? 'h-auto object-contain' : 'h-full object-cover' %>">
+					<div class="grid-item">
+						<div class="live-photo-container">
+							<img src="<%= lp.photo %>" alt="Live Photo" class="live-photo-static">
+							<video muted playsinline preload="auto" class="live-photo-video">
+								<source src="<%= lp.video %>" type="video/mp4">
+							</video>
+							<div class="live-badge bottom-left">Live</div>
+							<div class="live-loading"></div>
+						</div>
 					</div>
-					<% } %>
 					<% } %>
 				</div>
 				<% } %>
@@ -43,4 +54,157 @@
 		</li>
 		<% } %>
 	</ul>
+			<% if (config.livephoto && config.livephoto.enable) { %>
+			<script>
+				class LivePhoto {
+					constructor(container, config) {
+						this.container = container;
+						this.staticImage = container.querySelector(".live-photo-static");
+						this.video = container.querySelector(".live-photo-video");
+						this.config = config;
+						this.hasAutoPlayed = false;
+						this.isPlaying = false;
+						this.hoverTimeout = null;
+						this.isWeixin = this.detectWeixinBrowser();
+						if (this.isWeixin && this.config.weixin_disable_autoplay) {
+							this.config.autoplay = false;
+							this.modifyWeixinBadge();
+						}
+						this.bindEvents();
+					}
+					detectWeixinBrowser() {
+						return navigator.userAgent.toLowerCase().includes("micromessenger");
+					}
+					modifyWeixinBadge() {
+						let badge = this.container.querySelector(".live-badge");
+						if (!badge && this.config.badge) {
+							badge = document.createElement("div");
+							badge.className = `live-badge ${this.config.badge_position || "bottom-left"}`;
+							this.container.appendChild(badge);
+						}
+						if (badge) {
+							badge.innerHTML = this.config.badge_text ? this.config.badge_text + " | 点击播放" : "点击播放";
+						}
+					}
+					bindEvents() {
+						if (this.config.hover_to_play) {
+							this.container.addEventListener("mouseenter", () => this.handleHoverStart());
+							this.container.addEventListener("mouseleave", () => this.handleHoverEnd());
+						}
+						if (this.config.click_to_play) {
+							this.container.addEventListener("click", (e) => {
+								if (e.target === this.video) return;
+								this.play();
+							});
+						}
+						this.video.addEventListener("ended", () => this.stop());
+						this.video.addEventListener("loadstart", () => this.showLoading());
+						this.video.addEventListener("canplay", () => this.hideLoading());
+						this.video.addEventListener("error", () => this.hideLoading());
+					}
+					handleHoverStart() {
+						if (this.hoverTimeout) clearTimeout(this.hoverTimeout);
+						this.hoverTimeout = setTimeout(() => this.play(), this.config.hover_delay || 300);
+					}
+					handleHoverEnd() {
+						if (this.hoverTimeout) {
+							clearTimeout(this.hoverTimeout);
+							this.hoverTimeout = null;
+						}
+					}
+					showLoading() {
+						let loadingEl = this.container.querySelector(".live-loading");
+						if (!loadingEl && this.config.loading_animation) {
+							loadingEl = document.createElement("div");
+							loadingEl.className = "live-loading";
+							this.container.appendChild(loadingEl);
+						}
+						if (loadingEl) loadingEl.style.display = "block";
+					}
+					hideLoading() {
+						const loadingEl = this.container.querySelector(".live-loading");
+						if (loadingEl) loadingEl.style.display = "none";
+					}
+					play() {
+						if (this.isPlaying) return;
+						this.isPlaying = true;
+						this.staticImage.style.opacity = 0;
+						this.video.classList.add("playing");
+						if (this.video.readyState < 3) this.showLoading();
+						const playPromise = this.video.play();
+						if (playPromise !== undefined) {
+							playPromise.catch((error) => {
+								console.error("视频播放失败:", error);
+								this.hideLoading();
+								this.isPlaying = false;
+							});
+						}
+					}
+					stop() {
+						this.video.classList.remove("playing");
+						this.staticImage.style.opacity = 1;
+						this.isPlaying = false;
+						this.hideLoading();
+					}
+					autoPlay() {
+						if (!this.hasAutoPlayed && this.config.autoplay) {
+							this.hasAutoPlayed = true;
+							this.play();
+						}
+					}
+				}
+				class LivePhotoPage {
+					constructor(config) {
+						this.config = config;
+						this.livePhotos = [];
+						this.observer = null;
+						this.init();
+					}
+					init() {
+						this.detectLivePhotos();
+						const isWeixin = navigator.userAgent.toLowerCase().includes("micromessenger");
+						if (isWeixin && this.config.weixin_disable_autoplay) return;
+						if (this.config.lazy_load) {
+							this.setupIntersectionObserver();
+						} else if (this.config.autoplay) {
+							this.livePhotos.forEach((lp) => lp.autoPlay());
+						}
+					}
+					detectLivePhotos() {
+						const containers = document.querySelectorAll(".live-photo-container");
+						containers.forEach((container) => {
+							if (!container.dataset.initialized) {
+								const livePhoto = new LivePhoto(container, this.config);
+								this.livePhotos.push(livePhoto);
+								container.dataset.initialized = "true";
+							}
+						});
+					}
+					setupIntersectionObserver() {
+						if (this.observer) this.observer.disconnect();
+						this.observer = new IntersectionObserver((entries) => {
+							entries.forEach((entry) => {
+								if (entry.isIntersecting) {
+									const container = entry.target;
+									const lp = this.livePhotos.find((x) => x.container === container);
+									if (lp) {
+										lp.autoPlay();
+										if (!this.config.keep_observing) this.observer.unobserve(container);
+									}
+								}
+							});
+						}, { threshold: this.config.threshold, rootMargin: "0px 0px 10% 0px" });
+						this.livePhotos.forEach((lp) => this.observer.observe(lp.container));
+					}
+				}
+				(function () {
+					if (!window.LivePhotoConfig || !window.LivePhotoConfig.enable) return;
+					if (!window.livePhotoPage) {
+						window.livePhotoPage = new LivePhotoPage(window.LivePhotoConfig);
+					} else {
+						window.livePhotoPage.detectLivePhotos();
+					}
+				})();
+			</script>
+			<% } %>
 </div>

@@ -19,10 +19,7 @@
     - url: https://image.hsmao.cn/bfs/archive/2026/11/4f452428.jpg!/format/webp
 
 - date: 2026-09-01T09:30:00+08:00
-  content: 新的一月，新的开始。下面这条演示实况图（Live Photo）播放。
-  livephotos:
-    - photo: https://image.hsmao.cn/bfs/archive/2026/11/2f113938.jpg!/format/webp
-      video: https://example.com/your-video.mp4
+  content: 新的一月，新的开始。写下去，就会精彩！
 
 - date: 2026-09-22T22:40:05+08:00
   content: 测试一下

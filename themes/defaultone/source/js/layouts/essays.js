@@ -15,11 +15,12 @@ function formatEssayDates() {
   });
 }
 
-// Initialize Live Photo (实况图) elements that are not yet initialized.
-// Works both on first load and after Swup page transitions.
+// Initialize Live Photo (实况图) elements handled by hexo-live-photo plugin.
+// The plugin binds events once on DOMContentLoaded; with Swup's PJAX navigation
+// new containers are inserted without re-binding, so we re-detect after page view.
 function initLivePhotos() {
-  if (window.LivePhotoViewer && window.LivePhotoViewer.autoInit) {
-    window.LivePhotoViewer.autoInit(document);
+  if (window.livePhotoPage && window.livePhotoPage.detectLivePhotos) {
+    window.livePhotoPage.detectLivePhotos();
   }
 }
 
