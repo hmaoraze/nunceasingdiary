@@ -1,3 +1,35 @@
+---
+title: 回答9个问题                     # 【必需】文章标题
+date: 2026-10-03 20:51:00          # 【必需】文章创建日期（故事发生的时间节点）
+updated: 22026-10-03 20:51:00       # 【可选】文末手写的写作日期                    
+tags:                              # 【标签】横向关联检索
+  - "博客"
+  - "问答"
+  - "创作"
+  - "写作"
+  - "随笔"
+categories:                        # 【分类】纵向层级归档
+  - "流年随笔"
+keywords:                          # 【关键词】SEO 优化
+  - "博客作者访谈"
+  - "回答9个问题"
+  - "博客创作"
+  - "写博客的意义"
+  - "独立博客"
+description: 一篇博客作者访谈问答，回答 Dayu 提出的 9 个问题，聊聊我的博客经历、创作方式、运营投入，以及坚持写博客的理由。
+thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
+top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
+sticky: 0                          # 取消置顶（999 仅用于 Demo）
+aside: true                        # 保留侧边栏
+toc: true                          # 保留文章目录
+toc_number: true                   # 目录显示层级编号
+comments: true                     # 开启评论区（如不想让人评论可改为 false）
+copyright: false                    # 保留版权声明
+mathjax: false                     # 不需要数学公式
+katex: false                       # 不需要 KaTeX
+aplayer: false                     # 不需要音乐播放器
+highlight_shrink: false            # 代码块默认不折叠（本篇无代码，不影响）
+---
 # 来自 Dayu 的 9 个问题
 
 我把这个问卷做成了问答式。这样既能保证单个话题篇幅的精简，又能向读者更清晰地展示。
