@@ -96,7 +96,7 @@ ignore:                              # 忽略的文件
 # Extensions | 插件 & 主题
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: defaultone-2.9.0            # 使用的主题名称
+theme: defaultone            # 使用的主题名称
 
 # Search | 本地搜索设置
 ## Docs: https://github.com/papertiger/hexo-generator-searchdb
