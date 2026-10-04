@@ -1,0 +1,2 @@
+export default function initEssays(){const t=document.querySelectorAll(".essay-date");t.length&&(t.forEach(t=>{const e=t.getAttribute("data-date"),o=config.language||"en",n=moment(e).locale(o).calendar();t.textContent=n}),function initLivePhotos(){window.livePhotoPage&&window.livePhotoPage.detectLivePhotos&&window.livePhotoPage.detectLivePhotos()}())}
+//# sourceMappingURL=essays.js.map

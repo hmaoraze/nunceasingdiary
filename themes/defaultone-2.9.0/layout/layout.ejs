@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="<%= config.language %>">
+<%- partial('components/header/head') %>
+
+<body>
+	<%- body %>
+	<%- partial('components/scripts') %>
+	<% if (theme.plugins.aplayer.enable) { %>
+	<%- partial('components/plugins/aplayer') %>
+	<% } %>
+	<% if (theme.effects && theme.effects.particles) { %>
+	<div id="particles-js" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; background: transparent;"></div>
+	<% } %>
+</body>
+
+</html>
