@@ -110,8 +110,8 @@
     
     <% if (openGraphEnabled) { %>
         <% 
-        let ogImage = page.og_image || openGraphConfig?.image;
-        let ogDescription = page.og_description || openGraphConfig?.description || page.description || config.description;
+        let ogImage = page.og_image || page.thumbnail || page.top_img || openGraphConfig?.image;
+        let ogDescription = page.og_description || page.description || openGraphConfig?.description || config.description;
         let author = page.author || config.author || 'Redefine Team';
         %>
         <%- open_graph({
