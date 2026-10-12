@@ -1,7 +1,53 @@
+# robots.txt for https://blog.imce.cn
+# 最后更新：2026-10-12
+
+# 默认：允许所有爬虫抓取
 User-agent: *
 Allow: /
 
-# Google、Bing
+# ---- 国内主流爬虫显式放行（避免误判）----
+# 百度
+User-agent: Baiduspider
+Allow: /
+
+# 百度移动搜索
+User-agent: Baiduspider-render
+Allow: /
+
+# 搜狗（含微信搜一搜）
+User-agent: Sogou web spider
+Allow: /
+
+# 360 好搜
+User-agent: 360Spider
+Allow: /
+User-agent: HaosouSpider
+Allow: /
+
+# 神马搜索（UC/夸克，阿里移动搜索）
+User-agent: YisouSpider
+Allow: /
+
+# 头条搜索（字节）
+User-agent: Bytespider
+Allow: /
+
+# 必应（国际+中国版）
+User-agent: bingbot
+Allow: /
+
+# Google
+User-agent: Googlebot
+Allow: /
+
+# 社交媒体抓取（微信/QQ/Twitter/Facebook 分享卡片）
+User-agent: Twitterbot
+Allow: /
+User-agent: facebookexternalhit
+Allow: /
+
+# ---- Sitemaps ----
+# 通用站点地图（Google/Bing/360/Sogou/头条/神马等）
 Sitemap: https://blog.imce.cn/sitemap.xml
-# BaiduSitemap
+# 百度专用站点地图
 Sitemap: https://blog.imce.cn/baidusitemap.xml

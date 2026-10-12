@@ -118,10 +118,94 @@
             image: ogImage,
             author: author,
             description: ogDescription,
-            twitter_card: 'summary',
+            twitter_card: 'summary_large_image',
             twitter_image: ogImage,
         }) %>
     <% } %>
+
+    <!--- 移动端/应用 meta（神马/夸克/Safari 全屏） --->
+    <meta name="application-name" content="<%= config.title %>">
+    <meta name="apple-mobile-web-app-title" content="<%= config.title %>">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <%
+      // ---- 文章页专属 OG meta（article:published_time 等，供 Google/Bing/微信抓取）----
+      if (is_post()) {
+        const pubTime = page.date ? page.date.toISOString() : null;
+        const modTime = page.updated ? page.updated.toISOString() : pubTime;
+    %>
+        <% if (pubTime) { %><meta property="article:published_time" content="<%= pubTime %>"><% } %>
+        <% if (modTime) { %><meta property="article:modified_time" content="<%= modTime %>"><% } %>
+        <meta property="article:author" content="<%= page.author || config.author %>">
+    <% } %>
+
+    <%
+      // ---- JSON-LD 结构化数据（WebSite / BlogPosting，富摘要依据）----
+      const _siteUrl = config.url.replace(/\/$/, '');
+      const _siteName = config.title;
+      const _siteDesc = config.description;
+      const _authorName = config.author;
+      const _defaultLogo = url_for(theme.defaults.avatar || '/images/avatar-1.jpg');
+      const _absLogo = _defaultLogo.startsWith('http') ? _defaultLogo : _siteUrl + _defaultLogo;
+      const _esc = (s) => String(s || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\r?\n/g, ' ');
+    %>
+
+    <% if (is_home()) { %>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "<%= _esc(_siteName) %>",
+      "url": "<%= _siteUrl %>/",
+      "description": "<%= _esc(_siteDesc) %>",
+      "inLanguage": "zh-CN",
+      "author": {
+        "@type": "Person",
+        "name": "<%= _esc(_authorName) %>",
+        "url": "<%= _siteUrl %>/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "<%= _esc(_siteName) %>",
+        "logo": { "@type": "ImageObject", "url": "<%= _absLogo %>" }
+      }
+    }
+    </script>
+    <% } %>
+
+    <% if (is_post()) {
+        const _postUrl = _siteUrl + page.canonical_path.replace('index.html', '');
+        const _headline = page.title || _siteName;
+        let _desc = page.description || (page.excerpt ? String(page.excerpt).replace(/<[^>]+>/g, '').trim().slice(0, 220) : _siteDesc);
+        const _pubTime = page.date ? page.date.toISOString() : null;
+        const _modTime = page.updated ? page.updated.toISOString() : _pubTime;
+        let _img = page.thumbnail || page.top_img || (openGraphConfig?.image ? url_for(openGraphConfig.image) : null);
+        if (_img && !/^https?:\/\//.test(_img)) _img = _siteUrl + url_for(_img);
+    %>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "<%= _postUrl %>" },
+      "headline": "<%= _esc(_headline) %>",
+      "description": "<%= _esc(_desc) %>",
+      "url": "<%= _postUrl %>",
+      <% if (_img) { %>"image": "<%= _img %>",<% } %>
+      "datePublished": "<%= _pubTime %>",
+      "dateModified": "<%= _modTime %>",
+      "inLanguage": "zh-CN",
+      "author": { "@type": "Person", "name": "<%= _esc(_authorName) %>", "url": "<%= _siteUrl %>/" },
+      "publisher": {
+        "@type": "Organization",
+        "name": "<%= _esc(_siteName) %>",
+        "logo": { "@type": "ImageObject", "url": "<%= _absLogo %>" }
+      }
+    }
+    </script>
+    <% } %>
+
     <% if (theme.global.google_analytics.enable) { %>
         <!-- Google tag (gtag.js) -->
         <script src="https://www.googletagmanager.com/gtag/js?id=<%= theme.global.google_analytics.id %>"></script>

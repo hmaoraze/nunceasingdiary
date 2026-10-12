@@ -5,8 +5,8 @@
 # Site | 站点设置
 title: hmao的日记                         # 网站标题
 subtitle: '写下去，就会精彩！'                         # 网站副标题
-description: '记录我的生活和学习'                         # 网站描述（用于SEO）
-keywords: '记录, 生活, 学习, 日记'                         # 网站关键词（用于SEO）
+description: 'hmao（睿泽）的个人博客，记录 2019 年至今的生活、学习与思考：成长日记、编程与建站笔记、年度总结与日常随想。'  # 网站描述（用于SEO，搜索结果摘要）
+keywords: 'hmao, hmaoraze, imce.cn, 个人博客, 日记, 学习笔记, 生活记录, 年度总结, 建站笔记, Python'  # 网站关键词（用于SEO）
 author: hmao                     # 作者名称
 language: zh-CN                         # 网站语言（中文改为 zh-CN）
 timezone: 'Asia/Shanghai'                         # 时区（留空使用系统默认）
@@ -29,6 +29,7 @@ public_dir: public                   # 生成静态文件输出目录
 code_dir: downloads/code             # 代码下载目录
 i18n_dir: :lang                      # 国际化目录
 skip_render:                         # 跳过渲染的文件列表
+  - baidu_verify_codeva-*.html       # 百度站长验证文件需原样输出，不套主题模板
 
 # Writing | 文章设置
 new_post_name: :title.md             # 新文章文件名格式
