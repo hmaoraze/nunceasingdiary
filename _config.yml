@@ -5,8 +5,8 @@
 # Site | 站点设置
 title: hmao的日记                         # 网站标题
 subtitle: '写下去，就会精彩！'                         # 网站副标题
-description: 'hmao（睿泽）的个人博客，记录 2019 年至今的生活、学习与思考：成长日记、编程与建站笔记、年度总结与日常随想。'  # 网站描述（用于SEO，搜索结果摘要）
-keywords: 'hmao, hmaoraze, imce.cn, 个人博客, 日记, 学习笔记, 生活记录, 年度总结, 建站笔记, Python'  # 网站关键词（用于SEO）
+description: 'hmao的个人日记，记录 2019 年至今的生活、学习与思考：成长记录、编程与建站笔记、年度总结与日常随想。'  # 网站描述（用于SEO，搜索结果摘要）
+keywords: 'hmao, hmaoraze, imce.cn, 个人日记, 日记, 学习笔记, 生活记录, 年度总结, 建站笔记, Python'  # 网站关键词（用于SEO）
 author: hmao                     # 作者名称
 language: zh-CN                         # 网站语言（中文改为 zh-CN）
 timezone: 'Asia/Shanghai'                         # 时区（留空使用系统默认）
@@ -118,6 +118,13 @@ sitemap:
 ## Docs: https://github.com/coneycode/hexo-generator-baidu-sitemap
 baidusitemap:
   path: baidusitemap.xml            # 百度站点地图文件路径
+
+# Baidu Push | 百度主动推送（构建后自动通知百度爬虫）
+## 文档：https://ziyuan.baidu.com/linksubmit/index
+baidu_push:
+  enable: true                        # 是否启用构建后自动推送
+  site: https://blog.imce.cn          # 在百度站长平台验证的站点
+  token: kxCZGoRzVHa8hMtb              # 百度站长平台申请的推送准入密钥
 
 # Feed | RSS 订阅设置（帮助搜索引擎发现新内容）
 ## Docs: https://github.com/hexojs/hexo-generator-feed

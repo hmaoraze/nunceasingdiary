@@ -100,7 +100,7 @@ global:
   open_graph:
     enable: true
     image: /images/main_bg_ligth.jpg  # default og:image（站点 banner，分享卡片默认图）
-    description: hmao的个人博客，记录生活、学习与思考。
+    description: hmao的个人日记，记录生活、学习与思考。
   # Google Analytics
   google_analytics:
     enable: false # Whether to enable Google Analytics
