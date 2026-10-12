@@ -14,9 +14,10 @@ hexo.on('generateAfter', async function () {
   if (cfg.enable === false) return;
 
   const site = (cfg.site || hexo.config.url || '').replace(/\/$/, '');
-  const token = cfg.token;
+  // token 优先读环境变量（EdgeOne Makers 控制台配置），其次读本地配置
+  const token = process.env.BAIDU_PUSH_TOKEN || cfg.token;
   if (!site || !token) {
-    console.log('[百度推送] 未配置 site/token，跳过');
+    console.log('[百度推送] 未配置 BAIDU_PUSH_TOKEN 环境变量，跳过');
     return;
   }
 

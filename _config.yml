@@ -121,10 +121,11 @@ baidusitemap:
 
 # Baidu Push | 百度主动推送（构建后自动通知百度爬虫）
 ## 文档：https://ziyuan.baidu.com/linksubmit/index
+## token 等敏感信息请放在 _config.local.yml（已 gitignore），不要写在这里
 baidu_push:
   enable: true                        # 是否启用构建后自动推送
   site: https://blog.imce.cn          # 在百度站长平台验证的站点
-  token: kxCZGoRzVHa8hMtb              # 百度站长平台申请的推送准入密钥
+  # token: 在 _config.local.yml 里配置
 
 # Feed | RSS 订阅设置（帮助搜索引擎发现新内容）
 ## Docs: https://github.com/hexojs/hexo-generator-feed
