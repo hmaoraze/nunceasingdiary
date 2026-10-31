@@ -120,6 +120,8 @@ article:
   listing:
     show_tags: false
     excerpt_length: 120
+    # 置顶文章默认用 carousel 大卡，需要封面图；本站文章没有统一封面，改用紧凑排列
+    pinned_layout: flat
 
 # 浏览器功能
 features:
@@ -136,6 +138,12 @@ inject:
   head_end: |
     <link rel="icon" href="/images/favicon.svg" type="image/svg+xml" />
     <meta name="google-site-verification" content="JArnHByKrqwt-sC_WEZHn71anyBXCmGPAwz3MObHNrs" />
+    <style>
+    /* 看板娘在窄屏隐藏：手机上既挡内容又耗电 */
+    @media (max-width: 768px) {
+      #live2d-widget, #live2dcanvas, .live2d-widget-container { display: none !important; }
+    }
+    </style>
     <script>
     (function () {
       var md = (new Date().getMonth() + 1) + '-' + new Date().getDate();
