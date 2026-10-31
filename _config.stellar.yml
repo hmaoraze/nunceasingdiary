@@ -127,10 +127,14 @@ features:
     enabled: true
   lightbox:
     enabled: true
+  # 列表页预取会在首屏把多篇文章一起拉下来（实测多出约 100 KB），关掉
+  link_prefetch:
+    enabled: false
 
 # 注入：站点验证 + 纪念日全站灰度
 inject:
   head_end: |
+    <link rel="icon" href="/images/favicon.svg" type="image/svg+xml" />
     <meta name="google-site-verification" content="JArnHByKrqwt-sC_WEZHn71anyBXCmGPAwz3MObHNrs" />
     <script>
     (function () {
