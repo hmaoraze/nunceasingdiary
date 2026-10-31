@@ -18,7 +18,10 @@
   <%- renderJS('libs/Typed.min.js') %>
 <% } %>
 
-<% if (theme.plugins.mermaid.enable) { %>
+<%# mermaid 单文件 gzip 就有 700KB+，只在当前页确实画图时才引入 %>
+<% var needMermaid = page.mermaid === true
+     || /class="[^"]*\bmermaid\b/.test(page.content || ""); %>
+<% if (theme.plugins.mermaid.enable && needMermaid) { %>
     <% if (theme.plugins.mermaid.version === '11.4.1') { %>
         <%- renderJS('libs/mermaid.min.js') %>
     <% } else { %>

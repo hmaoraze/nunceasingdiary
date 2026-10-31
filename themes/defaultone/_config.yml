@@ -486,6 +486,9 @@ plugins:
 #        lrc: # audio cover lrc
       # .... you can add more audios here
   # Mermaid JS. Requires hexo-filter-mermaid-diagrams (npm i hexo-filter-mermaid-diagrams). See https://mermaid.js.org/
+  # 注意：enable 只是"允许使用"，并不会每页都加载 —— 只有文章 front-matter 写了 `mermaid: true`
+  #（或正文里出现 class="mermaid" 的容器）时，才会在那一页引入 mermaid.min.js（gzip 约 700KB）。
+  # 没有图表的页面不会产生该请求。
   mermaid:
     enable: true # enable mermaid or not
     version: "11.4.1" # default v11.4.1
