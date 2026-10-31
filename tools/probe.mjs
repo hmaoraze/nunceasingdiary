@@ -125,7 +125,12 @@ const INIT_SCRIPT = `
   const timer = setInterval(() => {
     const el = document.querySelector('.preloader');
     if (el) seen = true;
-    const gone = !el || el.style.display === 'none' || getComputedStyle(el).display === 'none';
+    // "内容可见"= 遮罩已经淡到看不见，而不是等 200ms 后 DOM 节点被移除
+    const gone =
+      !el ||
+      el.style.display === 'none' ||
+      getComputedStyle(el).display === 'none' ||
+      parseFloat(getComputedStyle(el).opacity) <= 0.05;
     if (seen && gone) {
       if (window.__perf.preloaderGone === null) window.__perf.preloaderGone = performance.now();
       clearInterval(timer);
