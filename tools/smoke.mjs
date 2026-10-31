@@ -186,11 +186,16 @@ async function main() {
   });
   const mpage = await mctx.newPage();
   const mErrors = [];
+  const mHeroReqs = [];
+  mpage.on('request', (r) => {
+    if (/\/images\/hero\//.test(r.url())) mHeroReqs.push(new URL(r.url()).pathname.split('/').pop());
+  });
   mpage.on('pageerror', (e) => mErrors.push(e.message));
   await mpage.goto(`http://127.0.0.1:${PORT}${startPath}`, { waitUntil: 'load', timeout: 60000 });
   await mpage.waitForTimeout(2500);
 
   check('移动端遮罩已收尾', await mpage.evaluate(PRELOADER_GONE));
+  check('移动端只请求 1 张 hero', mHeroReqs.length === 1, mHeroReqs.join(', '));
   check('移动端无横向溢出', await mpage.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 2));
   check('移动端无 JS 错误', mErrors.length === 0, mErrors.slice(0, 2).join(' | '));
 
