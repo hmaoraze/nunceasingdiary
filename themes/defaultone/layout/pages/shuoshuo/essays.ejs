@@ -39,7 +39,7 @@
 				<% const single = e.images.length === 1; %>
 				<% for (const img of e.images) { %>
 				<div class="shuoshuo-img-item rounded-lg overflow-hidden <%= single ? 'w-full' : 'aspect-square' %>">
-					<img src="<%= img.url %>" data-full="<%= img.full || img.url %>" alt="" loading="lazy" class="w-full rounded-lg cursor-zoom-in <%= single ? 'h-auto object-contain' : 'h-full object-cover' %>">
+					<img src="<%- cdn_img(img.url, single ? 'content' : 'thumb') %>" data-full="<%= img.full || img.url %>" alt="" loading="lazy" class="w-full rounded-lg cursor-zoom-in <%= single ? 'h-auto object-contain' : 'h-full object-cover' %>">
 				</div>
 				<% } %>
 			</div>
@@ -50,7 +50,7 @@
 				<% for (const lp of e.livephotos) { %>
 				<div class="grid-item">
 					<div class="live-photo-container">
-						<img src="<%= lp.photo %>" alt="Live Photo" class="live-photo-static">
+						<img src="<%- cdn_img(lp.photo, 'thumb') %>" alt="Live Photo" class="live-photo-static">
 						<video muted playsinline preload="auto" class="live-photo-video">
 							<source src="<%= lp.video %>" type="video/mp4">
 						</video>

@@ -482,7 +482,7 @@ plugins:
       - name: 没关系 # audio name
         artist: 周深 # audio artist
         url: https://cdn.timens.cn/blog/hmdrj/CustomizedSongList/audio/Life-is-Like-a-Box-of-Chocolates.mp3 # audio url
-        cover: https://cdn.timens.cn/blog/hmdrj/CustomizedSongList/img/109951169597952494.jpg!/format/webp # audio cover url
+        cover: https://cdn.timens.cn/blog/hmdrj/CustomizedSongList/img/109951169597952494.jpg!/fw/256/fh/256/format/webp # audio cover url
         lrc: https://cdn.timens.cn/blog/hmdrj/CustomizedSongList/audio/Life-is-Like-a-Box-of-Chocolates.lrc # audio cover lrc
 #      - name: # audio name
 #        artist: # audio artist

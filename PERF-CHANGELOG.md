@@ -254,3 +254,61 @@ npm run perf:audit -- index.html    # 静态资源体积审计
 
 > `perf:probe` / `perf:smoke` 使用本机已安装的 Chrome/Edge，不需要下载 Chromium。
 > 在 Git Bash 下传路径参数时要加 `MSYS_NO_PATHCONV=1`，否则 `/` 会被转成 Windows 路径。
+
+---
+
+# 二期：又拍云图床按需 WebP（2026-10-31 下午）
+
+## 背景
+
+图床 image.hsmao.cn / cdn.timens.cn 是又拍云 CDN，支持 URL 后追加处理参数
+（`!/fw/800/format/webp` 等），但站内引用大多是裸原图。实测全站外链图 55 张
+合计 9.5 MB，其中友链头像 64×64 却下 512×512 原图（232 KB）、页脚 icp 图标
+20×20 却下 819×772 PNG（106 KB，且每页都加载）。
+
+## 实测结论（又拍云图像处理）
+
+- `fw` 只缩不放；`format/webp` 对 jpg/png 生效；**不支持 AVIF（400）**
+- 质量参数影响远小于宽度：同样 1280 宽下 quality 75→60 只降 16%，宽度
+  1280→1024 直接降 28%，所以宁降宽度、保质量
+- **GIF 加 fw 会变 PNG 丢动画** → 一律跳过；SVG 本身是矢量 → 跳过
+- URL 已有 `!样式` 段（`!compress` 或 `!/format/webp`）时整段替换安全；
+  双 `!` 叠加会得到 404 占位图，禁止
+- 又拍云处理失败/源失效时返回 200 + 800×600 的"404 插画"，状态码正常，
+  极易漏检 → 新增 tools/verify-cdn-images.mjs 逐个校验（42 个改写 URL 全部通过）
+- 短时间大量不同参数变体的请求会触发 CDN 临时 302 风控，等待即恢复
+
+## 实现
+
+- `themes/defaultone/scripts/utils/cdn-image.js`：纯函数 `cdnImg(url, preset)`，
+  四个档位 icon（仅转 WebP）/ avatar（192×192）/ thumb（fw 800）/ content（fw 1024 + quality 70）；
+  白名单精确限定 image.hsmao.cn、cdn.timens.cn（blog.hsmao.cn 源站不处理）
+- `scripts/helpers/cdn-image.js` 注册 `cdn_img` 模板 helper（hexo 是注入式加载，
+  被 require 的模块拿不到，故注册层与实现层分开）
+- `scripts/filters/cdn-image-handle.js`：正文 `<img src/data-src>` 在懒加载
+  之前改写为 content 档
+- 模板接入：首页缩略图（thumb）、文章封面（content）、友链头像与缩略卡
+  （avatar/thumb）、说说图（单图 content、九宫格 thumb、LivePhoto 封面 thumb）、
+  书签图标（avatar）、页脚 icp（avatar）
+- og:image / twitter:image / JSON-LD **故意不改**：社交平台对 WebP 缩略图
+  兼容性参差，抓取仍用原图
+- APlayer 封面在 _config.yml 直接改为 `!/fw/256/fh/256/format/webp`
+
+## 结果（390×844 / 1.6Mbps / RTT150 / CPU 4×，外链图合计，等待全部加载完成）
+
+| 页面 | 改造前 | 改造后 | 降幅 |
+|---|---|---|---|
+| 首页 `/` | 302.4 KB | 119.7 KB | −60% |
+| 友链 `/links/` | 618.5 KB | 71.0 KB | −89% |
+| 文章 `/Turning-19-Today/`（13 图） | 958.4 KB | 635.1 KB | −34% |
+| 文章 `/zaijian-wode-18sui-shengri/` | 231.6 KB | 86.5 KB | −63% |
+
+回归：tools/smoke.mjs 22/22 通过；友链页 13 张外链图全部正常解码渲染，
+头像解码尺寸恰为 192×192（DPR3 下的 64px 显示）。
+
+## 遗留
+
+- blog.hsmao.cn 域下的 2021 年老图源文件已 404（非本次引入），页面显示裂图，
+  需修复源或替换图片
+- 正文 [LivePhoto photo="..."] 自定义标签渲染不正常（URL 被当成 Markdown
+  链接输出），属既有问题，其图片参数未改写
