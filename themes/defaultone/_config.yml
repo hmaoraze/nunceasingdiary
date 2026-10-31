@@ -161,9 +161,12 @@ home_banner:
     # Line height between title and subtitle
     line_height: 1.2
   # Home banner custom font
+  # enable 打开但 url/family 为空时，会输出 <link href="" rel="stylesheet"> 和
+  # 非法的 `font-family: '', sans-serif; !important;`。默认关闭；
+  # 真要换字体就把 family 与 url 都填上再开启。
   custom_font: 
     # Whether to enable custom font
-    enable: true
+    enable: false
     # Font family
     family: 
     # URL to font CSS file
@@ -343,7 +346,9 @@ articles:
 # EFFECTS | 特效开关 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 effects:
   particles: true       # 是否启用粒子背景特效
-  cursoreffects: false   # 是否启用鼠标点击特效
+  # 鼠标点击特效：模板里对应的 libs/cursor-effects.js 从未随主题提供，
+  # 开启只会产生 404，因此默认关闭且暂不支持。详见 AGENTS.md 的遗留问题一节。
+  cursoreffects: false
 # EFFECTS | 特效开关 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 

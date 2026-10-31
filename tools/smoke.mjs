@@ -129,6 +129,13 @@ async function main() {
   });
   check('图标字形完整（无缺字/方块）', iconReport.broken.length === 0, iconReport.broken.join(' | ') || `${iconReport.total} 个图标`);
 
+  // 运行时间（odometer 依赖 defer 的 odometer.min.js，是 defer 改造的回归点）
+  const runtime = await page.evaluate(() => {
+    const d = document.getElementById('runtime_days');
+    return d ? d.textContent.trim() : null;
+  });
+  check('运行时间已填充', runtime !== null && /\d/.test(runtime), runtime || '未找到 #runtime_days');
+
   // 深浅色切换
   const darkBefore = await page.evaluate(() => document.documentElement.classList.contains('dark'));
   await page.evaluate(() => {

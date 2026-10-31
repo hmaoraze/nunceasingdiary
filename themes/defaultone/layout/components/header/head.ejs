@@ -239,13 +239,7 @@
         title = __(page.title);
     }
     %>
-    <title>
-        <% if (title) { %>
-            <%= title %> | <%= theme.info.title || config.title || 'Redefine Theme' %>
-        <% } else { %>
-            <%= theme.info.title || config.title || 'Redefine Theme' %> - <%= theme.info.subtitle || config.subtitle || 'Redefine Your Hexo Journey.' %>
-        <% } %>
-    </title>
+    <title><% if (title) { %><%= title %> | <%= theme.info.title || config.title || 'Redefine Theme' %><% } else { %><%= theme.info.title || config.title || 'Redefine Theme' %> - <%= theme.info.subtitle || config.subtitle || 'Redefine Your Hexo Journey.' %><% } %></title>
 
     <%#
       字体走拉丁子集（tools/subset-fonts.mjs 生成）：

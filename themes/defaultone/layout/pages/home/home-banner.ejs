@@ -41,8 +41,10 @@
     <% } %>
     <div class="content mt-8 flex flex-col justify-center items-center transition-fade-down">
         <div class="description flex flex-col justify-center items-center w-screen font-medium text-center"
-        <% if (theme.home_banner.custom_font.enable) { %>
-             style="font-family: '<%- theme.home_banner.custom_font.family %>', sans-serif; !important;"
+        <%# 原来无条件输出 `font-family: '', sans-serif; !important;`：
+            !important 位置非法、family 为空，整条声明会被浏览器丢弃 %>
+        <% if (theme.home_banner.custom_font.enable && theme.home_banner.custom_font.family) { %>
+             style="font-family: '<%- theme.home_banner.custom_font.family %>', sans-serif !important;"
                 <% } %>
         >
             <%- theme.home_banner.title || theme.style.first_screen.description || config.description %>
