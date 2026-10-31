@@ -43,6 +43,11 @@
         transition: opacity 0.2s ease-in-out;
     }
 
+    /* 命中跳过规则时，遮罩在解析阶段就不参与渲染，避免首帧闪一下再消失 */
+    html[data-preloader-skip] .preloader {
+        display: none !important;
+    }
+
     .ml13 {
         font-size: 3.2rem;
         /* text-transform: uppercase; */
@@ -65,6 +70,66 @@
     }
 </style>
 
+<script>
+    /*
+     * 开屏动画的「判定 + 兜底」层。必须放在遮罩 div 之前、脚本一执行就开始计时：
+     *   1. 兜底定时器不依赖 anime，也不依赖 window.load（本页 load 会被大资源拖到十几秒后）
+     *   2. 命中跳过规则时直接给 <html> 打标记，遮罩不会参与首帧渲染
+     *   3. 动画本体在 DOMContentLoaded 后启动，anime 以 defer 方式先行执行
+     */
+    (function () {
+        var STORAGE_KEY = 'redefine:preloaded';
+        var MAX_MS = 1200; // 约 900 ms 动画 + 兜底余量，上限 1400
+        var done = false;
+
+        var hidePreloader = function () {
+            if (done) return;
+            done = true;
+            var el = document.querySelector('.preloader');
+            if (!el) return;
+            el.style.opacity = '0';
+            el.style.pointerEvents = 'none';
+            setTimeout(function () {
+                if (el.parentNode) el.remove();
+            }, 200);
+        };
+
+        window.__redefinePreloader = {
+            hide: hidePreloader,
+            isDone: function () {
+                return done;
+            },
+        };
+
+        // ---- 跳过规则 ----
+        var shouldSkip = false;
+        try {
+            shouldSkip = sessionStorage.getItem(STORAGE_KEY) === '1';
+        } catch (e) {
+            // 隐私模式下 sessionStorage 可能抛错，按"不跳过"处理
+        }
+        if (!shouldSkip && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            shouldSkip = true;
+        }
+        if (!shouldSkip && document.visibilityState === 'hidden') {
+            shouldSkip = true;
+        }
+
+        if (shouldSkip) {
+            document.documentElement.setAttribute('data-preloader-skip', '1');
+            hidePreloader();
+            return;
+        }
+
+        try {
+            sessionStorage.setItem(STORAGE_KEY, '1');
+        } catch (e) {}
+
+        // ---- 兜底：第一件事就绑上 ----
+        setTimeout(hidePreloader, MAX_MS);
+    })();
+</script>
+
 <div class="preloader">
     <h2 class="ml13">
         <%=
@@ -72,77 +137,101 @@
          %>
     </h2>
     <script>
-        var textWrapper = document.querySelector('.ml13');
-        // Split text into words
-        var words = textWrapper.textContent.trim().split(' ');
+        (function () {
+            var pre = window.__redefinePreloader;
+            if (!pre || pre.isDone()) return;
 
-        // Clear the existing content
-        textWrapper.innerHTML = '';
-
-        // Wrap each word and its letters in spans
-        words.forEach(function(word) {
-            var wordSpan = document.createElement('span');
-            wordSpan.classList.add('word');
-            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
-            textWrapper.appendChild(wordSpan);
-            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
-        });
-
-        var animation = anime.timeline({ loop: true })
-            .add({
-                targets: '.ml13 .letter',
-                translateY: [20, 0],
-                translateZ: 0,
-                opacity: [0, 1],
-                filter: ['blur(5px)', 'blur(0px)'],
-                easing: "easeOutExpo",
-                duration: 1200,
-                delay: (el, i) => 300 + 20 * i,
-            })
-            .add({
-                targets: '.ml13 .letter',
-                translateY: [0, -20],
-                opacity: [1, 0],
-                filter: ['blur(0px)', 'blur(5px)'],
-                easing: "easeInExpo",
-                duration: 1000,
-                delay: (el, i) => 15 * i,
-                complete: function() {
-                    hidePreloader();
-                }
-            }, '-=700');
-
-
-        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
-
-        // If the theme status is not found in local storage, check the preferred color scheme
-        if (themeStatus === undefined || themeStatus === null) {
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                themeStatus = 'dark';
-            } else {
-                themeStatus = 'light';
+            var textWrapper = document.querySelector('.ml13');
+            if (!textWrapper) {
+                pre.hide();
+                return;
             }
-        }
 
-        // Now you can use the themeStatus variable in your code
-        if (themeStatus) {
-            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
-            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
-        } else {
-            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
-            document.documentElement.style.setProperty('--preloader-text-color', '#000');
-        }
+            // 主题色适配（localStorage 内容可能被写坏，JSON.parse 必须兜住）
+            var themeStatus;
+            try {
+                themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+            } catch (e) {
+                themeStatus = undefined;
+            }
+            if (themeStatus === undefined || themeStatus === null) {
+                themeStatus =
+                    window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            }
+            document.documentElement.style.setProperty(
+                '--preloader-background-color',
+                themeStatus ? '#202124' : '#fff'
+            );
+            document.documentElement.style.setProperty(
+                '--preloader-text-color',
+                themeStatus ? '#fff' : '#000'
+            );
 
-        window.addEventListener('load', function () {
-            setTimeout(hidePreloader, 5000); // Call hidePreloader after 5000 milliseconds if not already called by animation
-        });
+            // 解析阶段就拆字母，避免先闪一整行完整标题再进入动画
+            var words = textWrapper.textContent.trim().split(' ');
+            textWrapper.innerHTML = '';
+            words.forEach(function (word) {
+                var wordSpan = document.createElement('span');
+                wordSpan.classList.add('word');
+                wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+                textWrapper.appendChild(wordSpan);
+                textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+            });
 
-        function hidePreloader() {
-            var preloader = document.querySelector('.preloader');
-            preloader.style.opacity = '0';
-            setTimeout(function () {
-                preloader.style.display = 'none';
-            }, 200);
-        }
+            // 用户可随时跳过
+            ['click', 'keydown', 'touchstart'].forEach(function (type) {
+                window.addEventListener(type, pre.hide, { once: true, passive: true });
+            });
+
+            var play = function () {
+                if (typeof anime === 'undefined') {
+                    pre.hide();
+                    return;
+                }
+                try {
+                    anime
+                        .timeline({ loop: false })
+                        .add({
+                            targets: '.ml13 .letter',
+                            translateY: [20, 0],
+                            translateZ: 0,
+                            opacity: [0, 1],
+                            filter: ['blur(5px)', 'blur(0px)'],
+                            easing: 'easeOutExpo',
+                            duration: 500,
+                            delay: function (el, i) {
+                                return 120 + 12 * i;
+                            },
+                        })
+                        .add(
+                            {
+                                targets: '.ml13 .letter',
+                                translateY: [0, -20],
+                                opacity: [1, 0],
+                                filter: ['blur(0px)', 'blur(5px)'],
+                                easing: 'easeInExpo',
+                                duration: 400,
+                                delay: function (el, i) {
+                                    return 15 * i;
+                                },
+                                complete: function () {
+                                    pre.hide();
+                                },
+                            },
+                            '-=300'
+                        );
+                } catch (error) {
+                    // anime 加载到了但初始化失败，也不能让遮罩卡住
+                    console.warn('[preloader] animation failed:', error);
+                    pre.hide();
+                }
+            };
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', play);
+            } else {
+                play();
+            }
+        })();
     </script>
 </div>

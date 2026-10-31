@@ -288,7 +288,11 @@
         <link href="<%- theme.global.fonts.title.url %>" rel="stylesheet">
     <% } %>
     <% if (theme.global.preloader === true || theme.global.preloader.enable === true) { %>
-        <%- renderJS('libs/anime.min.js')%>
+        <%# anime 只在开屏动画用一次，提前预热但以 defer 执行，避免阻塞首屏解析 %>
+        <% if (!theme.cdn.enable) { %>
+            <link rel="preload" as="script" href="<%- url_for((theme.developer && theme.developer.enable ? 'js/' : 'js/build/') + 'libs/anime.min.js') %>">
+        <% } %>
+        <%- renderJS('libs/anime.min.js', { defer: true })%>
     <% } %>
 
     <%- export_config() %>

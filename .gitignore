@@ -17,3 +17,6 @@ Thumbs.db
 *.log
 .idea/
 .vscode/
+
+# ====== 性能实测临时数据 ======
+.perf/

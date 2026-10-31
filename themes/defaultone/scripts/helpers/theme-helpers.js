@@ -101,7 +101,8 @@ hexo.extend.helper.register("getPostUrl", function (rootUrl, path) {
 
 hexo.extend.helper.register("renderJS", function (path, options = {}) {
   const _js = hexo.extend.helper.get("js").bind(hexo);
-  const { module = false, async = false, swupReload = false } = options;
+  // defer 目前按需开启；T3 会把它改为全局默认，届时所有 renderJS 产物都不再阻塞解析
+  const { module = false, async = false, defer = false, swupReload = false } = options;
 
   const isDeveloperMode = this.theme.developer?.enable === true;
 
@@ -132,7 +133,9 @@ hexo.extend.helper.register("renderJS", function (path, options = {}) {
     let scriptTag;
 
     const typeAttr = module ? 'type="module"' : "";
-    // const asyncAttr = async ? "async" : "";
+    // module 脚本天然 defer，避免重复输出；显式 async 时优先保留 async 语义
+    const deferAttr = module || async || !defer ? "" : "defer";
+    const asyncAttr = !module && async ? "async" : "";
     const swupAttr = swupReload ? "data-swup-reload-script" : "";
 
     if (this.theme.cdn.enable) {
@@ -140,11 +143,11 @@ hexo.extend.helper.register("renderJS", function (path, options = {}) {
         const customUrl = cdnBase
           .replace(":version", themeVersion)
           .replace(":path", path);
-        scriptTag = `<script ${typeAttr} src="${
+        scriptTag = `<script ${typeAttr} ${deferAttr} ${asyncAttr} src="${
           this.theme.cdn.enable ? customUrl : _js({ src: path })
         }" ${swupAttr}></script>`;
       } else {
-        scriptTag = `<script ${typeAttr} src="${cdnBase
+        scriptTag = `<script ${typeAttr} ${deferAttr} ${asyncAttr} src="${cdnBase
           .replace(":version", themeVersion)
           .replace(":path", path)}" ${swupAttr}></script>`;
       }
@@ -152,8 +155,9 @@ hexo.extend.helper.register("renderJS", function (path, options = {}) {
       scriptTag = _js({
         src: path,
         type: module ? "module" : undefined,
+        defer: module || async || !defer ? undefined : true,
+        async: !module && async ? true : undefined,
         "data-swup-reload-script": swupReload ? "" : undefined,
-        // async: async,
       });
     }
 
