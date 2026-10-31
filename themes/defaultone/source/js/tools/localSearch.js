@@ -399,6 +399,12 @@ export const initLocalSearchPage = () => {
   closePopup();
 
   if (theme.navbar?.search?.preload) {
-    fetchData();
+    // 搜索索引 (search.xml) 约 67 KB，原先在页面加载时立刻拉取，会和首屏资源抢带宽。
+    // 改成浏览器空闲时再预取（最多等 3 秒兜底），用户点开搜索框时通常已就绪。
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(() => fetchData(), { timeout: 3000 });
+    } else {
+      window.setTimeout(() => fetchData(), 2500);
+    }
   }
 };

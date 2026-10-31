@@ -93,7 +93,64 @@ async function main() {
   await fsp.mkdir(OUT_DIR, { recursive: true });
   const sources = await readSources();
   for (const s of sources) await buildOne(s);
-  console.log('\n✓ 派生图输出到 themes/defaultone/source/images/hero/');
+  await buildAvatar();
+  console.log('\n✓ 派生图输出到 themes/defaultone/source/images/');
+}
+
+/**
+ * 头像派生：侧边栏头像 CSS 显示 80×80，原图却有 135 KB。
+ * 生成 80/160/240 三档（对应 DPR 1/2/3）的 AVIF 与 WebP，
+ * 模板用 <picture> + srcset 取用，最多省 90% 字节。
+ */
+const AVATAR_WIDTHS = [80, 160, 240];
+
+const exists = async (p) => {
+  try {
+    await fsp.stat(p);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+async function buildAvatar() {
+  const raw = await fsp.readFile(path.join(THEME_ROOT, '_config.yml'), 'utf8');
+  const theme = yaml.load(raw) || {};
+  const configured = (theme.defaults?.avatar || '/images/avatar-1.jpg').trim();
+
+  // 外链头像或已派生过的图不动，交给 CDN 那套逻辑
+  if (!configured.startsWith('/images/')) {
+    console.log(`\n跳过头像派生：${configured} 不是本地图`);
+    return;
+  }
+
+  const file = path.basename(configured.split('?')[0]);
+  const input = path.join(THEME_IMAGES, file);
+  if (!(await exists(input))) {
+    console.log(`\n跳过头像派生：找不到 ${file}`);
+    return;
+  }
+
+  const base = file.replace(/\.[^.]+$/, '');
+  const meta = await sharp(input).metadata();
+  console.log(`\n${file}  ${meta.width}×${meta.height} → 头像派生`);
+
+  for (const width of AVATAR_WIDTHS) {
+    const pipeline = () =>
+      sharp(input).resize(width, width, { fit: 'cover', position: 'centre' });
+
+    const outputs = [
+      [`${base}-${width}.avif`, pipeline().avif({ quality: 55, effort: 6 })],
+      [`${base}-${width}.webp`, pipeline().webp({ quality: 82, effort: 5 })],
+    ];
+
+    for (const [name, pipelineInstance] of outputs) {
+      const outfile = path.join(THEME_IMAGES, name);
+      await pipelineInstance.toFile(outfile);
+      const size = (await fsp.stat(outfile)).size;
+      console.log(`  ${name.padEnd(24)} ${width}×${width}  ${kb(size)}`);
+    }
+  }
 }
 
 main().catch((e) => {

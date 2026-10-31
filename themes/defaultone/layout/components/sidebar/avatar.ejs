@@ -1,3 +1,22 @@
+<%
+  // 侧边栏头像 CSS 显示 80×80，原图 135 KB。本地图走构建期派生（build:images 生成
+  // <name>-80/160/240 三档 AVIF+WebP），外链头像仍交给原来的 image_tag。
+  const avatarSrc = theme.defaults.avatar || '/images/avatar-1.jpg';
+  const avatarBase = /^\/images\//.test(avatarSrc) ? avatarSrc.replace(/\.[^.]+$/, '') : null;
+  const avatarW = [80, 160, 240];
+  const avatarSrcset = (ext) =>
+    avatarW.map((w) => `${url_for(`${avatarBase}-${w}.${ext}`)} ${w}w`).join(', ');
+%>
 <div class="avatar flex justify-center">
-    <%- image_tag(theme.defaults.avatar) %>
+  <% if (avatarBase) { %>
+    <picture>
+      <source type="image/avif" srcset="<%= avatarSrcset('avif') %>" sizes="80px">
+      <source type="image/webp" srcset="<%= avatarSrcset('webp') %>" sizes="80px">
+      <img src="<%= url_for(avatarSrc) %>" width="80" height="80"
+           loading="lazy" decoding="async"
+           alt="<%= theme.defaults.author || config.author || 'avatar' %>">
+    </picture>
+  <% } else { %>
+    <%- image_tag(avatarSrc) %>
+  <% } %>
 </div>

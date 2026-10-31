@@ -9,6 +9,7 @@
  *   node tools/probe.mjs                      # 首页，mobile
  *   node tools/probe.mjs / mobile             # 指定路径
  *   node tools/probe.mjs / desktop 3          # 桌面端，跑 3 次
+ *   node tools/probe.mjs / mobile 3 --url=https://blog.imce.cn   # 直接测线上（带随机串破缓存）
  */
 import http from 'node:http';
 import zlib from 'node:zlib';
@@ -141,7 +142,7 @@ const INIT_SCRIPT = `
 })();
 `;
 
-async function runOnce({ pathname, profile, chromePath }) {
+async function runOnce({ pathname, profile, chromePath, baseUrl }) {
   const browser = await chromium.launch({
     executablePath: chromePath,
     headless: true,
@@ -197,7 +198,11 @@ async function runOnce({ pathname, profile, chromePath }) {
 
   await page.addInitScript(INIT_SCRIPT);
   const navStart = Date.now();
-  await page.goto(`http://127.0.0.1:${PORT}${pathname}`, {
+  // baseUrl 存在时直连线上，并加随机串绕过 CDN 对 HTML 的缓存，保证每轮都是冷 HTML
+  const target = baseUrl
+    ? `${baseUrl}${pathname}${pathname.includes('?') ? '&' : '?'}_p=${navStart}`
+    : `http://127.0.0.1:${PORT}${pathname}`;
+  await page.goto(target, {
     waitUntil: 'load',
     timeout: 60000,
   });
@@ -259,9 +264,12 @@ const normalizePath = (raw) => {
 };
 
 async function main() {
-  const pathname = normalizePath(process.argv[2]);
-  const mode = process.argv[3] || 'mobile';
-  const rounds = Number(process.argv[4] || 3);
+  const urlArg = process.argv.find((a) => a.startsWith('--url='));
+  const baseUrl = urlArg ? urlArg.slice('--url='.length).replace(/\/+$/, '') : null;
+  const posArgs = process.argv.slice(2).filter((a) => !a.startsWith('--'));
+  const pathname = normalizePath(posArgs[0]);
+  const mode = posArgs[1] || 'mobile';
+  const rounds = Number(posArgs[2] || 3);
   const profile = PROFILES[mode] || PROFILES.mobile;
   const chromePath = findChrome();
 
@@ -270,12 +278,16 @@ async function main() {
     process.exit(1);
   }
 
-  await new Promise((r) => server.listen(PORT, '127.0.0.1', r));
-  console.log(`静态服务: http://127.0.0.1:${PORT}  配置: ${mode}  轮次: ${rounds}\n`);
+  if (baseUrl) {
+    console.log(`目标: ${baseUrl}（线上）  配置: ${mode}  轮次: ${rounds}\n`);
+  } else {
+    await new Promise((r) => server.listen(PORT, '127.0.0.1', r));
+    console.log(`静态服务: http://127.0.0.1:${PORT}  配置: ${mode}  轮次: ${rounds}\n`);
+  }
 
   const runs = [];
   for (let i = 1; i <= rounds; i++) {
-    const r = await runOnce({ pathname, profile, chromePath });
+    const r = await runOnce({ pathname, profile, chromePath, baseUrl });
     runs.push(r);
     console.log(
       `第 ${i} 次  FCP ${fmtMs(r.fcp)}  LCP ${fmtMs(r.lcp)}  DCL ${fmtMs(r.dcl)}  ` +
@@ -317,11 +329,11 @@ async function main() {
   console.log(`\n最大资源（第 1 轮）:`);
   for (const a of top) console.log(`  ${String(a.kb).padStart(8)} KB  ${a.url}`);
 
-  server.close();
+  if (server.listening) server.close();
 }
 
 main().catch((e) => {
   console.error(e);
-  server.close();
+  if (server.listening) server.close();
   process.exit(1);
 });
