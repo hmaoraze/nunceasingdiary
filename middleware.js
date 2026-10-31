@@ -9,9 +9,9 @@
 // 为什么把缓存交出去：
 //   边缘中间件里 response.headers.set('Cache-Control', ...) 会覆盖 edgeone.json，
 //   两边打架的结果很难排查。现在统一由 edgeone.json 声明：
-//     HTML            → max-age=0, must-revalidate
-//     /static/<id>/*  → max-age=31536000, immutable（文件名带构建指纹）
-//     /images/*       → 7 天 + stale-while-revalidate
+//     HTML      → max-age=0, must-revalidate
+//     /css /js  → 1 天 + stale-while-revalidate（换 Stellar 后无版本目录）
+//     /images/* → 7 天 + stale-while-revalidate
 
 function isHtml(pathname) {
   // 带扩展名的通常不是 HTML（.css/.js/.jpg...）；其余视为 HTML 路由

@@ -15,17 +15,8 @@ keywords:
   - "英语"
   - "单词"
 description: "英语单词与Python pygame游戏开发的笔记。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 笔记

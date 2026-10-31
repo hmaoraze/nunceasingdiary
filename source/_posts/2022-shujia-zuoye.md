@@ -13,17 +13,8 @@ keywords:
   - "语文"
   - "英语"
 description: "2022 年暑假各科作业清单，涵盖数学、语文、英语、政治、历史、物理等科目。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 2022暑假作业

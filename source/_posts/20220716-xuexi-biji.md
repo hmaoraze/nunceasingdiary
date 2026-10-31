@@ -13,17 +13,8 @@ keywords:
   - "init"
   - "display"
 description: "Python pygame 学习笔记，记录 init、display、caption 等常用单词与概念。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 20220716学习笔记

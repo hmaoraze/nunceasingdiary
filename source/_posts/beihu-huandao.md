@@ -14,17 +14,8 @@ keywords:
   - "风景"
   - "日常"
 description: "北湖环岛的风景记录。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 北湖环岛

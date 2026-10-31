@@ -12,18 +12,9 @@ keywords:
   - "WordPress"
   - "安装问题"
 description: "记录MDx主题在中国大陆服务器无法通过常规手段安装的问题排查。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
 #sticky: 500
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 一些问题

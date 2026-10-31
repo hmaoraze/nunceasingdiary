@@ -12,18 +12,9 @@ keywords:
   - "作业"
   - "校园"
 description: "打印加描边和涂色的手抄报，单纯糊弄一下。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
 #sticky: 500
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 打印加描边的手抄报

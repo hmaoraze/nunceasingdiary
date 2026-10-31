@@ -15,18 +15,9 @@ keywords:
   - "苏州园林"
   - "文化"
 description: "通过《苏州园林》的删减片段，探讨语文背后的文化深度与历史厚度。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
 #sticky: 500
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 什么是语文？

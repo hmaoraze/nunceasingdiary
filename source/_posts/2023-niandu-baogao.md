@@ -13,17 +13,8 @@ keywords:
   - "2023"
   - "总结"
 description: "2023 年度博客报告，回顾一年来的博客数据、成长经历与新年展望。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 2023年度报告

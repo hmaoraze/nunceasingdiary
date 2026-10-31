@@ -13,18 +13,9 @@ keywords:
   - "垃圾信息"
   - "博客"
 description: "吐槽博客收到大量垃圾评论，表达不满情绪。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
 #sticky: 500
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 垃圾评论

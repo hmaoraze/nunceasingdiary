@@ -14,18 +14,9 @@ keywords:
   - "垃圾评论"
   - "博客"
 description: "为应对大量垃圾评论，本站评论已加装验证码并调至最高难度。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
 #sticky: 500
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 评论已加装验证码

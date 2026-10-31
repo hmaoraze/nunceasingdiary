@@ -15,18 +15,9 @@ keywords:                          # 【关键词】SEO 优化
   - "资源分享网站"
   - "成长"
 description: "告别摸鱼，开始认真学习Python，并开设资源分享网站，与大家一同加油。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
 #sticky: 500                        # 适当置顶
-aside: true                        # 保留侧边栏
-toc: true                          # 保留文章目录
-toc_number: true                   # 目录显示层级编号
-comments: true                     # 开启评论区
-copyright: true                    # 保留版权声明
-mathjax: false                     # 不需要数学公式
-katex: false                       # 不需要 KaTeX
-aplayer: false                     # 不需要音乐播放器
-highlight_shrink: false            # 代码块默认不折叠
+comments:
+  enabled: true
 ---
 
 # 分割篇

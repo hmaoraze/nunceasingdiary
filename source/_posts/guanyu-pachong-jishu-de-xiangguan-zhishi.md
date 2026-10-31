@@ -14,18 +14,9 @@ keywords:                          # 【关键词】SEO 优化
   - "BeautifulSoup"
   - "网页抓取"
 description: "介绍Python爬虫相关知识，涵盖requests库、BeautifulSoup库及抓取豆瓣网页的实例。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
 #sticky: 500                        # 适当置顶
-aside: true                        # 保留侧边栏
-toc: true                          # 保留文章目录
-toc_number: true                   # 目录显示层级编号
-comments: true                     # 开启评论区
-copyright: true                    # 保留版权声明
-mathjax: false                     # 不需要数学公式
-katex: false                       # 不需要 KaTeX
-aplayer: false                     # 不需要音乐播放器
-highlight_shrink: false            # 代码块默认不折叠
+comments:
+  enabled: true
 ---
 
 # 关于爬虫技术的相关知识
@@ -54,8 +45,8 @@ highlight_shrink: false            # 代码块默认不折叠
 
 # 查看响应数据的三种方法
 [code] 
-    response.json() 键值对形式
-    response.text 字符串数据-获取文本
+    response.json() 键值对形式
+    response.text 字符串数据-获取文本
     response.content 二进制数据-获取图片
 [/code]
 
@@ -83,43 +74,43 @@ highlight_shrink: false            # 代码块默认不折叠
 > 
 > requests,bs4,lxml
 [code] 
-    '''
-    邮箱:hamo#return2017.cn(用@替换#)
-    如果有问题我很乐意让您联系!
-    您的设备可能需要装有Python3.6或更高版本
-    '''
-    
-    #导入requests库和bs4库等(非Python自带)
-    import requests
-    from bs4 import BeautifulSoup
-    
-    #HTTP请求头(以系统Windows10，Edge浏览器为例)
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.56'}
-    
-    #把豆瓣相关网址赋值到url
-    url='https://music.douban.com/tag/民谣'
-    
-    #使用requests模块获取网页源代码
-    response=requests.get(url,headers=headers)
-    
-    #使用print函数显示豆瓣网页的源代码
-    print(response.text)
-    
-    #创建BeautifulSoup对象，使用'lxml'解析方法
-    soup=BeautifulSoup(response.text,'lxml')
-    listResult=soup.select('tr.item')
-    
-    #使用print函数显示含有'tr'标签的名为'item'的class的值
-    print(listResult)
-    
-    #定义音乐名列表
-    musicNames=[]
-    
-    #遍历listResult列表，使用for in 循环，获取所有'a'标签里含有'title'的值
-    for result in listResult:
-        musicNames.append(result.select('a')[0]['title'])
-    
-    #完成上述内容，并以列表的形式显示出爬虫获取到的内容
+    '''
+    邮箱:hamo#return2017.cn(用@替换#)
+    如果有问题我很乐意让您联系!
+    您的设备可能需要装有Python3.6或更高版本
+    '''
+    
+    #导入requests库和bs4库等(非Python自带)
+    import requests
+    from bs4 import BeautifulSoup
+    
+    #HTTP请求头(以系统Windows10，Edge浏览器为例)
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.56'}
+    
+    #把豆瓣相关网址赋值到url
+    url='https://music.douban.com/tag/民谣'
+    
+    #使用requests模块获取网页源代码
+    response=requests.get(url,headers=headers)
+    
+    #使用print函数显示豆瓣网页的源代码
+    print(response.text)
+    
+    #创建BeautifulSoup对象，使用'lxml'解析方法
+    soup=BeautifulSoup(response.text,'lxml')
+    listResult=soup.select('tr.item')
+    
+    #使用print函数显示含有'tr'标签的名为'item'的class的值
+    print(listResult)
+    
+    #定义音乐名列表
+    musicNames=[]
+    
+    #遍历listResult列表，使用for in 循环，获取所有'a'标签里含有'title'的值
+    for result in listResult:
+        musicNames.append(result.select('a')[0]['title'])
+    
+    #完成上述内容，并以列表的形式显示出爬虫获取到的内容
     print(musicNames)
 [/code]
 
@@ -127,13 +118,13 @@ highlight_shrink: false            # 代码块默认不折叠
 
 最后，送你一个练习题，可以试试看。
 [code] 
-    import requests
-    
-    headers1 = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.56'}
-    
-    
-    #题目：使用requests发送get请求,获取url为' http://www.baidu.com '的数据，
-    #并将响应数据的文本内容打印在控制台上哦
+    import requests
+    
+    headers1 = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.56'}
+    
+    
+    #题目：使用requests发送get请求,获取url为' http://www.baidu.com '的数据，
+    #并将响应数据的文本内容打印在控制台上哦
     
 [/code]
 

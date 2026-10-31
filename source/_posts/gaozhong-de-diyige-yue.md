@@ -14,18 +14,9 @@ keywords:
   - "月考"
   - "学习"
 description: "记录高中第一个月的学习生活，分享对生物学的热爱与月考年级第一的喜悦。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
 #sticky: 500
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 高中的第一个月

@@ -13,17 +13,8 @@ keywords:
   - "年夜饭"
   - "美食"
 description: "2022 年新年菜谱，记录年夜饭的十道家常菜。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 2022新年菜谱

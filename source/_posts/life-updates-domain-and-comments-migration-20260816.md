@@ -13,10 +13,6 @@ keywords:
   - "Hexo"
   - "毕业"
 description: "记录博客再次更换域名、老评论以文章形式迁移展示的折中方案，以及高中毕业后的去向。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-aside: true
-toc: true
 ---
 
 ## 换域名

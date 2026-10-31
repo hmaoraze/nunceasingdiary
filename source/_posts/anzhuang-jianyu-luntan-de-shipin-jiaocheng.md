@@ -15,17 +15,8 @@ keywords:
   - "宝塔面板"
   - "Linux"
 description: "关于安装剑鱼论坛的视频教程（未完成）。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 安装剑鱼论坛的视频教程

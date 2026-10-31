@@ -14,18 +14,9 @@ keywords:
   - "学习平衡"
   - "教育"
 description: "探讨如何在兴趣与学业之间找到平衡，分享自己的思考与感悟。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
 #sticky: 500
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 如何掌握兴趣和学业

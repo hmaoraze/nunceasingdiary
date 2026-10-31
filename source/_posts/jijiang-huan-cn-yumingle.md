@@ -13,18 +13,9 @@ keywords:
   - "域名更换"
   - "博客"
 description: "本站成功买回 .cn 域名，未来博客将全面替换为 .cn 域名。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
 #sticky: 500
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 即将换.cn域名了

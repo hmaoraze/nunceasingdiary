@@ -13,17 +13,8 @@ keywords:
   - "面向对象"
   - "Flower"
 description: "Python 面向对象编程练习，通过 Flower 类演示类的定义与实例化。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 笔记

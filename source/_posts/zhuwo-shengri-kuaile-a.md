@@ -12,18 +12,9 @@ keywords:
   - "生日"
   - "愿望"
 description: "今天过生日，记录生日当天的照片与实现愿望的感动瞬间。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
 #sticky: 500
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 祝我生日快乐啊

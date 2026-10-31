@@ -1,5 +1,5 @@
 {
-  "$comment": "EdgeOne Makers 缓存与响应头。静态资源走 /static/<buildId>/ 版本目录，可长缓存；HTML 必须即时校验。",
+  "$comment": "EdgeOne Makers 缓存与响应头。换 Stellar 后不再有 /static/<buildId>/ 版本目录，CSS/JS 用带 SWR 的中等缓存；HTML 必须即时校验。",
   "headers": [
     {
       "source": "/*",
@@ -15,9 +15,21 @@
       ]
     },
     {
-      "source": "/static/*",
+      "source": "/css/*",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/js/*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
       ]
     },
     {
@@ -53,7 +65,8 @@
     }
   ],
   "caches": [
-    { "source": "/static/*", "cacheTtl": 31536000 },
+    { "source": "/css/*", "cacheTtl": 86400 },
+    { "source": "/js/*", "cacheTtl": 86400 },
     { "source": "/images/*", "cacheTtl": 604800 },
     { "source": "/live2dw/*", "cacheTtl": 2592000 }
   ]

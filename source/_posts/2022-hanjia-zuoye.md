@@ -13,17 +13,8 @@ keywords:
   - "数学"
   - "英语"
 description: "2022 年寒假各科作业清单，涵盖语文、数学、英语、历史、地理等科目。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 2022年寒假作业

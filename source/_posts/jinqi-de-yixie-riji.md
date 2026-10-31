@@ -17,17 +17,8 @@ keywords:
   - "CDN"
   - "主题"
 description: "记录从WordPress迁移到Typecho的过程、CDN故障及主题优化等近期日记。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 近期的一些日记

@@ -16,18 +16,9 @@ keywords:
   - "学业"
   - "成长"
 description: "2024年度报告：回顾学业成长、博客发展、写作心路与互动温暖，展望2025新起点。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
 #sticky: 500
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 2024年度报告

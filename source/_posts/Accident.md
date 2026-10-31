@@ -18,18 +18,8 @@ keywords:                          # 【关键词】SEO 优化
   - "家庭变故"
   - "意外事件"
 description: "一篇写于2022年的回忆记录。回到2017年那个夏天，小学四年级的我经历了一场突如其来的家庭变故。谨以此文，纪念那段小有遗憾的童年时光，也纪念我的父亲。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-sticky: 0                          # 取消置顶（999 仅用于 Demo）
-aside: true                        # 保留侧边栏
-toc: true                          # 保留文章目录
-toc_number: true                   # 目录显示层级编号
-comments: true                     # 开启评论区（如不想让人评论可改为 false）
-copyright: true                    # 保留版权声明
-mathjax: false                     # 不需要数学公式
-katex: false                       # 不需要 KaTeX
-aplayer: false                     # 不需要音乐播放器
-highlight_shrink: false            # 代码块默认不折叠（本篇无代码，不影响）
+comments:
+  enabled: true
 ---
 # 记忆中的2017
 

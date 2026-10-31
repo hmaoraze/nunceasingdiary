@@ -1,108 +1,28 @@
 #!/usr/bin/env node
 /**
- * 首页横幅图派生（跑在 hexo generate 之前，或单独执行）
+ * 站点图片派生（跑在 hexo generate 之前）
  *
- * 背景：原实现每个访客都要下两张 1920×1280 的 JPEG（490KB + 425KB），
- * display:none 并不会阻止 <img> 下载。这里把两张原图各裁成三档尺寸，
- * 输出 AVIF / WebP / JPEG，模板用 <picture> + srcset 让浏览器只取需要的那一档。
+ * 目前只做头像：侧边栏 CSS 显示 80×80，源图却有 135 KB。
+ * 生成 80/160/240 三档（对应 DPR 1/2/3）的 AVIF 与 WebP，
+ * 模板用 <picture> + srcset 取用，最多省 90% 字节。
  *
- * 关于裁切：原模板用 CSS `scale-125` 把图放大 25%，等于只露出画面中心 80%。
- * 这里在构建期直接做 80% 中心裁切，运行时就不必再缩放位图（省掉一次 2.5 倍面积的
- * 重采样），观感与原实现一致。
+ * 换成 Stellar 后不再需要首页横幅派生图（主题没有整屏 banner），
+ * 因此原来的 hero 三档生成逻辑已移除。
  *
  * 用法：node tools/build-images.mjs
  */
 import path from 'node:path';
 import fsp from 'node:fs/promises';
 import sharp from 'sharp';
-import yaml from 'js-yaml';
+import { load as loadYaml } from 'js-yaml';
 
-const THEME_ROOT = path.resolve('themes/defaultone');
-const THEME_IMAGES = path.join(THEME_ROOT, 'source/images');
-const OUT_DIR = path.join(THEME_IMAGES, 'hero');
+/** 站点级图片目录（换主题后图片已从主题目录迁到这里） */
+const SITE_IMAGES = path.resolve('source/images');
+const THEME_CONFIG = path.resolve('_config.stellar.yml');
 
-/** 与 CSS scale-125 等价：只保留画面中心 80% */
-const CROP_RATIO = 0.8;
-
-// 源图 1920×1280，裁掉 20% 后只剩 1536 宽。最大档就取 1536：
-// 再生成 1920 只是把位图放大，与改造前"1920 位图被 scale-125 拉到 2400 渲染"
-// 的实际清晰度完全一致，却白白多传字节。
-const WIDTHS = [640, 1280, 1536];
-
-/** 亮/暗两张源图从主题配置读，换图后重跑本脚本即可 */
-async function readSources() {
-  const raw = await fsp.readFile(path.join(THEME_ROOT, '_config.yml'), 'utf8');
-  const theme = yaml.load(raw) || {};
-  const image = theme.home_banner?.image || {};
-  const toRel = (p, fallback) => {
-    const v = (p || fallback || '').trim();
-    // 去掉 /images/ 前缀与查询串，只留文件名
-    return path.basename(v.split('?')[0]);
-  };
-  return [
-    { src: toRel(image.light, '/images/main_bg_ligth.jpg'), prefix: 'hero' },
-    { src: toRel(image.dark, '/images/main_bg.jpg'), prefix: 'hero-dark' },
-  ];
-}
-
-const QUALITY = {
-  avif: { 640: 45, 1280: 45, 1536: 42 },
-  webp: { 640: 72, 1280: 72, 1536: 70 },
-  jpeg: { 640: 78, 1280: 78, 1536: 76 },
-};
+const AVATAR_WIDTHS = [80, 160, 240];
 
 const kb = (n) => `${(n / 1024).toFixed(1)} KB`;
-
-async function buildOne({ src, prefix }) {
-  const input = path.join(THEME_IMAGES, src);
-  const meta = await sharp(input).metadata();
-
-  const cropW = Math.round(meta.width * CROP_RATIO);
-  const cropH = Math.round(meta.height * CROP_RATIO);
-  const left = Math.round((meta.width - cropW) / 2);
-  const top = Math.round((meta.height - cropH) / 2);
-
-  // 先做一次中心裁切，后续每档都从这张裁好的图上缩，避免重复解码
-  const cropped = await sharp(input)
-    .extract({ left, top, width: cropW, height: cropH })
-    .toBuffer();
-
-  console.log(`\n${src}  ${meta.width}×${meta.height} → 中心裁切 ${cropW}×${cropH}`);
-
-  for (const width of WIDTHS) {
-    const height = Math.round((cropH / cropW) * width);
-    const base = sharp(cropped).resize(width, height, { fit: 'cover' });
-
-    for (const format of ['avif', 'webp', 'jpeg']) {
-      const outfile = path.join(OUT_DIR, `${prefix}-${width}.${format === 'jpeg' ? 'jpg' : format}`);
-      const pipeline =
-        format === 'avif'
-          ? base.clone().avif({ quality: QUALITY.avif[width], effort: 6 })
-          : format === 'webp'
-            ? base.clone().webp({ quality: QUALITY.webp[width], effort: 5 })
-            : base.clone().jpeg({ quality: QUALITY.jpeg[width], mozjpeg: true, progressive: true });
-
-      await pipeline.toFile(outfile);
-      const size = (await fsp.stat(outfile)).size;
-      console.log(`  ${path.basename(outfile).padEnd(24)} ${width}×${height}  ${kb(size)}`);
-    }
-  }
-}
-
-async function main() {
-  await fsp.mkdir(OUT_DIR, { recursive: true });
-  const sources = await readSources();
-  for (const s of sources) await buildOne(s);
-  await buildAvatar();
-  console.log('\n✓ 派生图输出到 themes/defaultone/source/images/');
-}
-
-/**
- * 头像派生：侧边栏头像 CSS 显示 80×80，原图却有 135 KB。
- * 生成 80/160/240 三档（对应 DPR 1/2/3）的 AVIF 与 WebP，
- * 模板用 <picture> + srcset 取用，最多省 90% 字节。
- */
-const AVATAR_WIDTHS = [80, 160, 240];
 
 const exists = async (p) => {
   try {
@@ -113,28 +33,48 @@ const exists = async (p) => {
   }
 };
 
-async function buildAvatar() {
-  const raw = await fsp.readFile(path.join(THEME_ROOT, '_config.yml'), 'utf8');
-  const theme = yaml.load(raw) || {};
-  const configured = (theme.defaults?.avatar || '/images/avatar-1.jpg').trim();
+/** 从头像配置里取文件名：支持 leftbar.brand.image.src 与本主题旧字段 */
+async function resolveAvatar() {
+  const raw = await fsp.readFile(THEME_CONFIG, 'utf8');
+  const cfg = loadYaml(raw) || {};
+  const configured = (cfg.leftbar?.brand?.image?.src || '').trim();
+  if (!configured) return null;
 
-  // 外链头像或已派生过的图不动，交给 CDN 那套逻辑
+  // 外链头像不动，交给 CDN
   if (!configured.startsWith('/images/')) {
-    console.log(`\n跳过头像派生：${configured} 不是本地图`);
-    return;
+    console.log(`跳过头像派生：${configured} 不是本地图`);
+    return null;
+  }
+
+  // 配置已指向派生图（如 avatar-1-240.webp）时无需再派生，Stellar 的 brand 只吃单个 src
+  if (/-\d+\.(avif|webp)$/i.test(configured)) {
+    const size = (await fsp.stat(path.join(SITE_IMAGES, path.basename(configured))).catch(() => null))?.size;
+    console.log(
+      `跳过头像派生：配置已指向优化后的派生图 ${path.basename(configured)}` +
+        (size ? `（${kb(size)}）` : ''),
+    );
+    return null;
   }
 
   const file = path.basename(configured.split('?')[0]);
-  const input = path.join(THEME_IMAGES, file);
+  const input = path.join(SITE_IMAGES, file);
   if (!(await exists(input))) {
-    console.log(`\n跳过头像派生：找不到 ${file}`);
-    return;
+    console.log(`跳过头像派生：找不到 ${file}`);
+    return null;
   }
+  return { file, input };
+}
 
+async function buildAvatar() {
+  const found = await resolveAvatar();
+  if (!found) return;
+
+  const { file, input } = found;
   const base = file.replace(/\.[^.]+$/, '');
   const meta = await sharp(input).metadata();
-  console.log(`\n${file}  ${meta.width}×${meta.height} → 头像派生`);
+  console.log(`${file}  ${meta.width}×${meta.height} → 头像派生`);
 
+  const written = [];
   for (const width of AVATAR_WIDTHS) {
     const pipeline = () =>
       sharp(input).resize(width, width, { fit: 'cover', position: 'centre' });
@@ -144,13 +84,31 @@ async function buildAvatar() {
       [`${base}-${width}.webp`, pipeline().webp({ quality: 82, effort: 5 })],
     ];
 
-    for (const [name, pipelineInstance] of outputs) {
-      const outfile = path.join(THEME_IMAGES, name);
-      await pipelineInstance.toFile(outfile);
+    for (const [name, instance] of outputs) {
+      const outfile = path.join(SITE_IMAGES, name);
+      await instance.toFile(outfile);
       const size = (await fsp.stat(outfile)).size;
+      written.push({ name, size, width });
       console.log(`  ${name.padEnd(24)} ${width}×${width}  ${kb(size)}`);
     }
   }
+
+  const sourceSize = (await fsp.stat(input)).size;
+  const largest = written
+    .filter((w) => w.width === AVATAR_WIDTHS[AVATAR_WIDTHS.length - 1] && w.name.endsWith('.avif'))
+    .pop();
+  if (largest) {
+    console.log(
+      `  → 原图 ${kb(sourceSize)}，最大档 AVIF ${kb(largest.size)}，` +
+        `节省 ${Math.round((1 - largest.size / sourceSize) * 100)}%`,
+    );
+  }
+}
+
+async function main() {
+  await fsp.mkdir(SITE_IMAGES, { recursive: true });
+  await buildAvatar();
+  console.log('\n✓ 派生图输出到 source/images/');
 }
 
 main().catch((e) => {

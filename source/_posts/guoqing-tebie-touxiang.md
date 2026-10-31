@@ -14,18 +14,9 @@ keywords:
   - "友链头像"
   - "博客"
 description: "本站友链头像已更换为国庆特别头像，新版链接为固定可更换链接。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
 #sticky: 500
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 国庆特别头像

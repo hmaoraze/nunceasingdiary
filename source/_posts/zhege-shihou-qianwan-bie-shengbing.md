@@ -12,18 +12,9 @@ keywords:
   - "核酸"
   - "疫情"
 description: "记录疫情期间核酸过期需要重做的小插曲，这个时候千万别生病。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
 #sticky: 500
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 这个时候千万别生病

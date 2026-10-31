@@ -14,18 +14,9 @@ keywords:
   - "番剧"
   - "B站"
 description: "开学前发现的一部宝藏国漫《时光代理人》，分享其剧情与观后感。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
 #sticky: 500
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 时光代理人

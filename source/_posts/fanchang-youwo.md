@@ -14,18 +14,9 @@ keywords:
   - "五四青年节"
   - "共青团"
 description: "五四青年节翻唱周深《有我》，致敬共青团百年征程与一代代不负时代重托的中国青年。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
 #sticky: 500
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 翻唱：《有我》庆祝中国共青团成立100周年主题宣传片《共青春》主题曲

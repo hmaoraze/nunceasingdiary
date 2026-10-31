@@ -1,0 +1,127 @@
+# Stellar 2.0.0 发布核查
+
+> 核查日期：2026-09-30
+> 发布基线：`1.44.0`
+> 目标版本：`2.0.0`
+
+## 净变化与文档覆盖
+
+比较最近公开稳定版 1.44.0 与最终候选树，核对配置、Schema、模型、模板、样式与客户端消费链；迁移范围以最终树中的行为为准。
+
+| 领域 | 最终行为与事实来源 | 文档出口 |
+| --- | --- | --- |
+| 配置与内容模型 | 声明式 Schema、默认配置生成、content-config 与 Doctor；Collection/PageViewModel 管线与 listed/searchable 分离 | 配置、内容 Schema 与内容系统知识库；CHANGELOG 升级注意 |
+| 页面外壳 | Region、Brand、Menu、Widget、Footer 与 13 个 Profile 的覆盖语义，含 Leftbar 列数与折叠状态 | 布局系统、导航与侧栏知识库；CHANGELOG |
+| 外观与设置页 | 外观预设、设置页分区、单选框与标题装饰样式 | 样式系统知识库与 CHANGELOG；视觉参数不新增持久断言 |
+| 浏览器运行时 | Runtime Manifest、Extension 生命周期、搜索 provider 与浮层转场、图片元数据采集范围 | 前端交互、搜索、懒加载知识库与 CHANGELOG |
+| 内容呈现 | 横幅 cover 与 `article.banner.background`、Wiki Hero 背景与效果、笔记本总索引卡片复用 Wiki 卡片 | 内容 Schema、文章列表卡片与 Wiki 知识库；CHANGELOG |
+| 工程与发布 | Node 22+/Hexo 8+、独立门禁、Runtime ESM 保真、原子版本同步与工作区门禁 | 安装与性能知识库；CHANGELOG |
+
+## 验证
+
+执行 `npm run knowledge:check`、`npm run release:dry -- 2.0.0` 与 `npm run release -- 2.0.0 --yes`。预演与正式发布在目标版本状态运行 lint、单元测试、复用、Contribution、四场景 npm 包集成、性能与知识库门禁。发布后核实 Actions、npm latest、纯版本 tag 与 GitHub Release，实际结果在发布对话报告。
+
+---
+
+# Stellar 2.0.0-rc.6 发布候选核查
+
+> 核查日期：2026-09-18
+> 发布基线：`2.0.0-rc.5`
+> 候选版本：`2.0.0-rc.6`
+
+## 净变化与文档覆盖
+
+起始工作区干净，fetch 后 main 与 origin/main 一致。比较公开 rc.5 与最终候选树，核对配置、Schema、模型、模板与客户端消费链。
+
+| 领域 | 最终行为与事实来源 | 文档出口 |
+| --- | --- | --- |
+| Wiki Hero | 内容 Schema、Wiki 模型、wiki_cover、hero-parallax、效果注册表：视频优先、默认 0.2 视差、Strands 参数与按需 ESM | Wiki 知识库、CHANGELOG |
+| 左栏菜单 | 配置与内容 Schema、Region、navigation/menu：1–5 列与层级覆盖 | 导航知识库、CHANGELOG |
+| 访客头像 | 默认配置、client-assets、profile：共享 Gravatar base URL | 配置知识库、CHANGELOG |
+| 导航与目录 | partial-navigation 的延迟反馈与生命周期清理；TOC 使用压缩后保留的高度表达式 | 页面导航知识库、CHANGELOG；视觉实现不新增长期断言 |
+| 安装与许可 | README 中英文 PowerShell 命令、THIRD-PARTY-NOTICES 的效果归属 | 当前 README 与 NOTICE；无额外运行时迁移 |
+
+## 验证
+
+执行 `npm run knowledge:check`、`npm run release:dry -- 2.0.0-rc.6` 与 `npm run release -- 2.0.0-rc.6 --yes`。预演与正式发布在目标版本状态运行 lint、单元测试、复用、Contribution、四场景 npm 包集成、性能与知识库门禁。发布后核实 Actions、npm rc/latest、纯版本 tag 与 GitHub prerelease，实际结果在发布对话报告。
+
+---
+
+# Stellar 2.0.0-rc.5 发布候选核查
+
+> 核查日期：2026-09-12
+> 发布基线：`2.0.0-rc.4`
+> 候选版本：`2.0.0-rc.5`
+
+## 净变化与文档覆盖
+
+核对公开 rc.4 tag 到最终候选树；起始工作区干净，fetch 后 main 比 origin/main 领先 10 个已提交改动，无远端新增提交。知识库已在发布前集中同步，以当前配置、Schema、模型、模板和运行时为事实来源。
+
+| 领域 | 最终行为与事实来源 | 文档出口 |
+| --- | --- | --- |
+| Brand 与侧栏 | 配置与内容 Schema、brand.ejs、Widget registry、main.js：Brand 搜索、显式 ghrepo 优先、折叠栏与紧凑目录 | 配置、导航、侧栏、目录、搜索知识库与 CHANGELOG |
+| 横幅与分享 | 内容 Schema、共享模型、article_banner.ejs、SEO、share-services.js：cover 单一图片来源、页面 banner 表现参数、六项分享服务 | 内容 Schema、文章页脚知识库与 CHANGELOG 升级注意 |
+| 资源与生命周期 | client-assets.js、runtime-minify.js、image-fallback.js、pin-slider/comments/reveal：共享外部资源、ESM 排除压缩、评论非阻塞、入场参数 | 前端总览、页面导航、图片、评论、Extension 知识库与 CHANGELOG |
+| 服务与样式 | 默认配置、服务规则、Stylus：可选 endpoint 留空、标题装饰和 mark 默认色、媒体与导航修复 | 配置、数据服务知识库与 CHANGELOG；视觉参数不新增持久断言 |
+
+## 验证
+
+发布使用 `npm run release:dry -- 2.0.0-rc.5` 和 `npm run release -- 2.0.0-rc.5 --yes`，分别在目标版本状态执行 lint、单元测试、复用、Contribution、四场景 npm 包集成、性能和知识库门禁。预演恢复受管版本文件，正式流程提交并推送 main 与 npm；外部结果核对 Actions、npm rc/latest、纯版本 tag 与 GitHub prerelease。实际执行结果在发布对话中报告。
+
+---
+
+# Stellar 2.0.0-rc.4 发布候选核查
+
+> 核查日期：2026-09-10
+> 发布基线：`2.0.0-rc.3`
+> 候选版本：`2.0.0-rc.4`
+
+## 净变化与文档覆盖
+
+已核对公开 rc.3 tag 到最终候选的树差异；开始发布时 main 与 origin/main 一致，工作区仅有 CHANGELOG 的 rc.1 比较链接修正，随发布保留。
+
+| 领域 | 当前事实来源与最终行为 | 文档出口 |
+| --- | --- | --- |
+| Brand | 默认配置、配置与内容 Schema、模型、brand.ejs：站点统计显式使用 leftbar.brand.ghuser，不再推断 Widget 用户名 | 配置知识库、CHANGELOG 升级注意 |
+| 导航 | listing_nav/blog.ejs 使用 topicIndex.items 判断专栏入口 | CHANGELOG |
+| 请求失败 | siteinfo.js 保留链接原图标，loading.styl 隐藏错误状态加载指示器 | 数据服务知识库、CHANGELOG |
+| 布局 | minimal、collection、sidebar、okr、list 与根字号样式：卡片边框、控件字体、前缀、移动列表和标签布局修复 | CHANGELOG；具体视觉值不新增长期契约 |
+| 依赖 | package.json/lock：glob 转开发依赖，声明 ESLint 配置依赖 | 安装与高级主题知识库已有同步、CHANGELOG |
+
+## 验证
+
+执行 `npm run release:dry -- 2.0.0-rc.4`，在目标版本状态运行完整 release:check，包含 lint、单元测试、复用、贡献描述符、四场景包集成、性能与知识库核查；预演恢复受管文件后正式发布再次执行同一门禁。正式推送后核实 Actions、npm rc dist-tag、tag 和 GitHub Release。
+
+---
+
+# Stellar 2.0.0-rc.3 发布候选核查
+
+> 核查日期：2026-09-10
+> 发布基线：`2.0.0-rc.2`
+> 候选版本：`2.0.0-rc.3`
+
+## 基线与审计方法
+
+以公开 rc.2 tag 到 main 最终树的差异为准，沿默认配置、Schema、模型、模板、浏览器消费者和直接测试核对；不把已被最终树替换的中间方案写成兼容契约。开始发布准备时工作区干净，main 与 origin/main 一致。
+
+## 净变化与文档覆盖
+
+| 领域 | 最终行为与事实源 | 文档出口 |
+| --- | --- | --- |
+| 配置与资源 | `_config.yml`、配置 Schema、资源投影：sitemap、独立悬停开关、字体设置、第三方地址覆盖与 Artalk 配套资源 | 配置、排版、Extension、评论知识库及 CHANGELOG |
+| 导航与生命周期 | `partial-navigation.js`、ExtensionRegistry：同集合签名匹配、页面卸载／挂载、历史恢复与整页回退 | 页面导航、Extension 知识库及 CHANGELOG |
+| 图片 | `image-metadata.js`、CLI、图片过滤器与 runtime：增量持久缓存、尺寸与颜色、懒加载及错误占位 | 图片处理、性能知识库及 CHANGELOG |
+| 内容与构建 | Collection Pipeline、models、PageViewModel registry：共享模型、构建隔离、Topic 分享、作者聚合、上下篇 | 内容 Schema、文章页脚、性能知识库及 CHANGELOG |
+| 链接与搜索 | md_link、siteinfo、mdrender、comments、local-search：图标增强与分批结果 | 数据服务、搜索知识库及 CHANGELOG |
+| 样式与媒体 | Stylus、模板、TOC、Reveal：外观、移动布局、图片比例及入场恢复 | CHANGELOG；具体视觉值不作为长期文档契约 |
+| 工程 | package.json、包集成与性能检查：Sharp 依赖、资源统计与维护门禁收敛 | 安装、性能知识库；工程规范以 AGENTS.md 与 CI 为准 |
+
+## 升级边界
+
+rc.2 的页脚 sections 迁移为 sitemap，条目对象转为 Markdown 字符串；卡片悬停 enabled 迁移为 spotlight/tilt 两个开关。旧输入不双读、不自动转换，升级方法在 CHANGELOG 给出。新增导航与图片预处理默认启用，可分别关闭。Topic 分享继承全局，Wiki 与 Notebook 保持关闭默认。
+
+## 验证
+
+发布预演执行 `npm run release:dry -- 2.0.0-rc.3`，在目标版本文件写入后运行完整 `release:check`：lint、单元测试、复用、贡献描述符、四场景 npm tarball 安装与 Doctor／生成／压缩／Runtime ESM 保真、同运行时性能比较及知识库核查。预演完成后恢复受管版本文件；正式发布再次基于最终文件运行同一门禁。
+
+本轮发布预演已通过：236 项单元测试、23 项 Contribution descriptor、四场景 npm tarball 安装与 Doctor／生成／HTTP 200／压缩／ESM 保真，以及性能资源对比和知识库检查。首次预演因本地缺少已声明的 Sharp 依赖中断，执行 npm ci 后原 7 项图片测试及完整预演均通过，无源码修补。性能报告为 comparisonOnly，不使用百分比降幅硬阈值。正式发布由 `npm run release -- 2.0.0-rc.3 --yes` 推送 main 与 npm，再核对 Actions、npm rc dist-tag、tag 与 GitHub Release。

@@ -1,0 +1,32 @@
+# 友情链接 | 由 {% friends friends %} 渲染
+# 字段：title（必填）、url（必填）、avatar、description
+
+- title: 闲记旧时
+  url: https://www.linkkk.top/
+  avatar: https://image.hsmao.cn/blog/friend_links/linkkk.jpg
+  description: 给时光以生命，给岁月以文明。
+
+- title: 逐梦者
+  url: https://www.xnpu.top/
+  avatar: https://image.hsmao.cn/blog/friend_links/xnpu.png
+  description: 逐梦者
+
+- title: 软盘君的主页
+  url: https://www.iruanp.com/
+  avatar: https://image.hsmao.cn/blog/friend_links/iruanp.jpg
+  description: 博客的简短描述
+
+- title: 虚空终端
+  url: https://naxida.cn/
+  avatar: https://image.hsmao.cn/blog/friend_links/naxida.jpg
+  description: 哈喽~欢迎光临虚空终端
+
+- title: 星辰日记
+  url: https://blog.xsot.cn/
+  avatar: https://image.hsmao.cn/blog/friend_links/xsot.webp
+  description: 我已很久不再成为我自己
+
+- title: BOKEBO
+  url: https://bokebo.com/
+  avatar: https://image.hsmao.cn/blog/friend_links/bokebo.png
+  description: BO的博客

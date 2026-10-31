@@ -14,18 +14,9 @@ keywords:
   - "摄影展示页"
   - "网站"
 description: "在菜单更新了照片功能，发现与主题作者用了同一个html5up模板，真的很巧。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
 #sticky: 500
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 真的很巧

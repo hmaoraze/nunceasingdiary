@@ -14,18 +14,9 @@ keywords:
   - "音轨对齐"
   - "视频制作"
 description: "第一次尝试制作10轨对齐视频，将周深《花开忘忧》多个现场版本音画同步。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
 #sticky: 500
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 【周深】10轨对齐《花开忘忧》

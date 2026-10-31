@@ -13,18 +13,10 @@ keywords:
   - "青春"
   - "纪念"
 description: 
-thumbnail: https://image.hsmao.cn/bfs/archive/2022/08/2022082609445946-scaled-1.jpeg!/format/webp
-top_img: https://image.hsmao.cn/bfs/archive/2022/08/2022082609445946-scaled-1.jpeg!/format/webp
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
-sticky: 999                        # 适当置顶（500 低于最高级别的重要公告，高于一般文章）
+comments:
+  enabled: true
+listing:
+  priority: 999                    # 正整数即置顶，数值越大越靠前
 ---
 ~~嗨！你好，今天才刚开始，后续内容将在今晚20:50之前完成。开头我先吐槽一下我自己，这张图片我都用了四年了。
 先来个主题音乐吧~~

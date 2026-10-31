@@ -14,17 +14,8 @@ keywords:
   - "tkinter"
   - "寻找嫌疑人"
 description: "使用 pygame 和 tkinter 开发寻找嫌疑人小游戏，涵盖事件处理与界面布局。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 笔记

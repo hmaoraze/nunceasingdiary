@@ -16,17 +16,8 @@ keywords:
   - "VS Code"
   - "环境配置"
 description: "通过MSYS2安装配置C编译器GCC并安装VS Code的教程。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # C语言环境设置与编译器和VS Code的安装

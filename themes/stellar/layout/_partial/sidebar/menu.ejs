@@ -1,0 +1,36 @@
+<%
+function layoutDiv() {
+  var menuItems = Array.isArray(menu) ? menu : []
+  var pageConfig = content_config(page)
+  var currentMenu = typeof activeMenu !== 'undefined'
+    ? activeMenu
+    : pageConfig.activeMenu ?? page.navigation?.menu
+  if (pageConfig.activeMenu == null) {
+    var pathMenu = menu_active_by_path(page.path, menuItems)
+    if (pathMenu != null) currentMenu = pathMenu
+  }
+  var iconLayout = where === 'leftbar' && typeof menuColumns !== 'undefined' && menuColumns > 2
+  var entries = []
+  for (var menuItem of menuItems) {
+    if (menuItem == null || menuItem.id == null || menuItem.url == null || menuItem.title == null) {
+      continue
+    }
+    entries.push({
+      href: pretty_url(menuItem.url),
+      title: __(menuItem.title),
+      icon: menuItem.icon,
+      attrs: iconLayout ? {'aria-label': __(menuItem.title)} : {},
+      theme: menuItem.accent,
+      active: menuItem.id == currentMenu,
+      className: menuItem.accent?.length > 0 ? 'is-themed' : ''
+    })
+  }
+  return partial('_partial/primitives/navigation', {
+    placement: ['main', 'topbar', 'rightbar'].includes(where) ? where : 'leftbar',
+    columns: where === 'leftbar' && typeof menuColumns !== 'undefined' ? menuColumns : 1,
+    entries: entries
+  })
+}
+%>
+
+<%- layoutDiv() %>

@@ -12,18 +12,9 @@ keywords:                          # 【关键词】SEO 优化
   - "考试提醒"
   - "高考第一天"
 description: "高考第一天，提醒考生带齐证件文具，放平心态认真考试。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
 #sticky: 500                        # 适当置顶
-aside: true                        # 保留侧边栏
-toc: true                          # 保留文章目录
-toc_number: true                   # 目录显示层级编号
-comments: true                     # 开启评论区
-copyright: true                    # 保留版权声明
-mathjax: false                     # 不需要数学公式
-katex: false                       # 不需要 KaTeX
-aplayer: false                     # 不需要音乐播放器
-highlight_shrink: false            # 代码块默认不折叠
+comments:
+  enabled: true
 ---
 
 # 关于高考

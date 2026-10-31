@@ -13,17 +13,8 @@ keywords:
   - "2022"
   - "总结"
 description: "2022 年度博客报告，回顾一年来的博客数据、生活感悟与新年展望。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 2022年度报告

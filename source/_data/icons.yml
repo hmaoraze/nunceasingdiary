@@ -1,0 +1,8 @@
+# 站点级图标补充 / 覆盖（主题同名键会被这里覆盖）
+# 键名格式 namespace:name，值可以是内联 SVG、URL 或 data URI
+
+# 动态（气泡）
+default:moments: <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2m0 14H5.17L4 17.17V4h16z" opacity=".5"/><path fill="currentColor" d="M7 7h10v2H7zm0 4h7v2H7z"/></svg>
+
+# 相册（图片库）
+default:album: <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M22 16V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2m-11-4l2.03 2.71L16 11l4 5H8z" opacity=".5"/><path fill="currentColor" d="M2 6v14a2 2 0 0 0 2 2h14v-2H4V6z"/></svg>

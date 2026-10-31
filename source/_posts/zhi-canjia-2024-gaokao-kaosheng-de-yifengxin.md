@@ -13,18 +13,9 @@ keywords:
   - "考生"
   - "祝福"
 description: "致2024年高考考生的一封信，分享考前准备、考试注意事项与美好祝愿。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
 #sticky: 500
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 致参加2024年高考考生的一封信

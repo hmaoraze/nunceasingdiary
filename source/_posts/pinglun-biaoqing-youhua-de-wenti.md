@@ -14,18 +14,9 @@ keywords:
   - "表情优化"
   - "WordPress插件"
 description: "记录在 WordPress 中优化评论表情时遇到的问题与排查过程。"
-thumbnail: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
-top_img: https://image.hsmao.cn/BEIMIAN/2026horseyear.jpg!/format/webp
 #sticky: 500
-aside: true
-toc: true
-toc_number: true
-comments: true
-copyright: true
-mathjax: false
-katex: false
-aplayer: false
-highlight_shrink: false
+comments:
+  enabled: true
 ---
 
 # 评论表情优化的问题
