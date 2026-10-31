@@ -11,14 +11,8 @@
     <% }%>
     <meta name="author" content="<%= theme.info.author || config.author || 'Redefine Team' %>">
 
-    <!-- Local particles.js (粒子背景) -->
-    <% if (theme.effects && theme.effects.particles) { %>
-        <%- renderJS('libs/particles.js') %>
-    <% } %>
-    <!-- Local cursor-effects (鼠标特效) -->
-    <% if (theme.effects && theme.effects.cursoreffects) { %>
-        <%- renderJS('libs/cursor-effects.js') %>
-    <% } %>
+    <%# particles.js 与 cursor-effects 挪到 </body> 前引入：
+        任何 <script src> 都不该出现在第一个 <link rel="stylesheet"> 之前 %>
 
     <!-- Completely eliminate flash of wrong theme -->
     <script>

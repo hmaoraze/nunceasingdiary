@@ -1,3 +1,4 @@
+<%# 6 个 Swup 脚本走 renderJS 默认的 defer；初始化必须等它们执行完，否则 Swup is not defined %>
 <%- renderJS([
     'libs/Swup.min.js',
     'libs/SwupSlideTheme.min.js',
@@ -7,29 +8,39 @@
     'libs/SwupPreloadPlugin.min.js']
 ) %>
 <script>
-    window.swup = new Swup({
-        plugins: [
-            new SwupScriptsPlugin({
-                optin: true,
-            }),
-            new SwupProgressPlugin(),
-            new SwupScrollPlugin({
-                offset: 80,
-            }),
-            new SwupSlideTheme({
-                mainElement: ".main-content-body",
-            }),
-            new SwupPreloadPlugin(),
-        ],
-        containers: ["#swup"],
-    });
+    (function () {
+        var initSwup = function () {
+            window.swup = new Swup({
+                plugins: [
+                    new SwupScriptsPlugin({
+                        optin: true,
+                    }),
+                    new SwupProgressPlugin(),
+                    new SwupScrollPlugin({
+                        offset: 80,
+                    }),
+                    new SwupSlideTheme({
+                        mainElement: ".main-content-body",
+                    }),
+                    new SwupPreloadPlugin(),
+                ],
+                containers: ["#swup"],
+            });
 
-    window.dispatchEvent(
-        new CustomEvent("redefine:swup:ready", {
-            detail: {
-                swup: window.swup,
-            },
-        }),
-    );
+            window.dispatchEvent(
+                new CustomEvent("redefine:swup:ready", {
+                    detail: {
+                        swup: window.swup,
+                    },
+                }),
+            );
+        };
+
+        // defer 脚本在 DOMContentLoaded 之前按序执行，这里等它们就位再实例化
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", initSwup, { once: true });
+        } else {
+            initSwup();
+        }
+    })();
 </script>
-

@@ -101,8 +101,8 @@ hexo.extend.helper.register("getPostUrl", function (rootUrl, path) {
 
 hexo.extend.helper.register("renderJS", function (path, options = {}) {
   const _js = hexo.extend.helper.get("js").bind(hexo);
-  // defer 目前按需开启；T3 会把它改为全局默认，届时所有 renderJS 产物都不再阻塞解析
-  const { module = false, async = false, defer = false, swupReload = false } = options;
+  // 默认 defer：产物里不再出现解析阻塞的 <script src>；确需同步执行时传 { defer: false }
+  const { module = false, async = false, defer = true, swupReload = false } = options;
 
   const isDeveloperMode = this.theme.developer?.enable === true;
 

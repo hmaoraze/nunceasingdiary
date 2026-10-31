@@ -124,7 +124,7 @@
 
         <!-- ====== 网站统计（新版 website_counter） ====== -->
         <% if (theme.global.website_counter.enable === true) { %>
-            <script <%= theme.global.single_page === true && 'data-swup-reload-script' %> src="<%= theme.global.website_counter.url ? theme.global.website_counter.url : "https://vercount.one/js" %>"></script>
+            <script <%= theme.global.single_page === true && 'data-swup-reload-script' %> defer src="<%= theme.global.website_counter.url ? theme.global.website_counter.url : "https://vercount.one/js" %>"></script>
             <div class="my-1" style="font-size: 0.8rem; opacity: 0.6;">
                 <% if (theme.global.website_counter.site_uv) { %>
                     <span id="busuanzi_container_site_uv">
@@ -151,19 +151,27 @@
                 <span class="odometer" id="runtime_seconds"></span> 秒
             </div>
             <script <%= theme.global.single_page === true && 'data-swup-reload-script' %>>
-                try {
-                    function odometer_init() {
-                        const elements = document.querySelectorAll('.odometer');
-                        elements.forEach(el => {
-                            new Odometer({
-                                el,
-                                format: '( ddd).dd',
-                                duration: 200
+                // odometer.min.js 现在是 defer，这段内联脚本必须等它执行完；
+                // Swup 导航后本脚本会重跑，那时 DOMContentLoaded 早已过去，所以要判 readyState
+                (function () {
+                    var run = function () {
+                        try {
+                            if (typeof Odometer === 'undefined') return;
+                            document.querySelectorAll('.odometer').forEach(function (el) {
+                                new Odometer({
+                                    el: el,
+                                    format: '( ddd).dd',
+                                    duration: 200
+                                });
                             });
-                        });
+                        } catch (error) {}
+                    };
+                    if (document.readyState === 'loading') {
+                        document.addEventListener('DOMContentLoaded', run, { once: true });
+                    } else {
+                        run();
                     }
-                    odometer_init();
-                } catch (error) {}
+                })();
             </script>
         <% } %>
 

@@ -1,6 +1,9 @@
-<%- renderJS('main.js', {
-    module: true
-}) %>
+<%#
+  顺序约定：所有 vendor 库（defer）必须排在 main.js（module）之前。
+  module 与 defer 都按文档顺序在 DOMContentLoaded 前执行，main.js 在模块求值时
+  就会调用 initPage()，此时 Typed / Odometer / moment / MiniMasonry 必须已就绪，
+  否则会抛 ReferenceError。
+%>
 
 <% if (theme.footer.runtime) { %>
     <%- renderJS('libs/odometer.min.js') %>
@@ -25,7 +28,7 @@
     <% if (theme.plugins.mermaid.version === '11.4.1') { %>
         <%- renderJS('libs/mermaid.min.js') %>
     <% } else { %>
-        <script src="https://cdn.jsdelivr.net/npm/mermaid@<%= theme.plugins.mermaid.version %>/dist/mermaid.min.js"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/mermaid@<%= theme.plugins.mermaid.version %>/dist/mermaid.min.js"></script>
     <% } %>
 <% } %>
 
@@ -39,3 +42,8 @@
 <% if (theme.articles.pangu_js) { %>
     <%- renderJS('libs/pangu.min.js') %>
 <% } %>
+
+<%# 应用入口放最后，确保上面这些全局变量在它求值前就已存在 %>
+<%- renderJS('main.js', {
+    module: true
+}) %>

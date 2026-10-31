@@ -36,5 +36,9 @@
     "live2d-widget-model-gf": "^1.0.5",
     "live2d-widget-model-wanko": "^1.0.5",
     "particles.js": "^2.0.0"
+  },
+  "devDependencies": {
+    "glob-promise": "^6.0.7",
+    "terser": "^5.51.2"
   }
 }

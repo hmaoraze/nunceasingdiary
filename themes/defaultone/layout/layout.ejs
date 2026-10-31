@@ -4,6 +4,10 @@
 
 <body>
 	<%- body %>
+	<%# 粒子库挪出 <head>：它只影响首屏背景，没必要占住解析关键路径 %>
+	<% if (theme.effects && theme.effects.particles) { %>
+	<%- renderJS('libs/particles.js') %>
+	<% } %>
 	<%- partial('components/scripts') %>
 	<% if (theme.plugins.aplayer.enable) { %>
 	<%- partial('components/plugins/aplayer') %>
