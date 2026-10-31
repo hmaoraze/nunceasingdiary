@@ -1,24 +1,17 @@
 // EdgeOne Makers 边缘中间件 —— 不改 Hexo 产物，只在边缘注入优化
 // 文档：https://github.com/TencentEdgeOne/edgeone-makers-tools
 //
-// 优化项：
-//   1. 注入安全响应头（X-Content-Type-Options / X-Frame-Options / Referrer-Policy / Permissions-Policy）
-//   2. 修正静态资源缓存策略：浏览器 5 分钟 + 边缘 1 小时（现状边缘已缓存 43 小时，发版太慢）
-//   3. HTML 保持 max-age=0，确保新发文章立刻可见
-//   4. 通过 Link 头给外部图床补 preconnect
-
-// 静态资源路径前缀（Hexo 产物里这些文件名不带 content hash，不能长缓存）
-const STATIC_PREFIXES = [
-  '/css/',
-  '/js/',
-  '/fonts/',
-  '/fontawesome/',
-  '/images/',
-];
-
-function isStaticAsset(pathname) {
-  return STATIC_PREFIXES.some((p) => pathname.startsWith(p));
-}
+// 职责边界（T8 之后）：
+//   ✅ 注入安全响应头
+//   ✅ 通过 Link 头给外部图床补 preconnect
+//   ❌ 不再写 Cache-Control
+//
+// 为什么把缓存交出去：
+//   边缘中间件里 response.headers.set('Cache-Control', ...) 会覆盖 edgeone.json，
+//   两边打架的结果很难排查。现在统一由 edgeone.json 声明：
+//     HTML            → max-age=0, must-revalidate
+//     /static/<id>/*  → max-age=31536000, immutable（文件名带构建指纹）
+//     /images/*       → 7 天 + stale-while-revalidate
 
 function isHtml(pathname) {
   // 带扩展名的通常不是 HTML（.css/.js/.jpg...）；其余视为 HTML 路由
@@ -41,20 +34,7 @@ export async function middleware(context) {
     'camera=(), microphone=(), geolocation=(), browsing-topics=()'
   );
 
-  // ---- 2. 缓存策略修正 ----
-  if (isStaticAsset(pathname)) {
-    // 静态资源：浏览器短缓存 5 分钟，CDN 边缘缓存 1 小时
-    // 权衡：文件名不带 hash，不能用 immutable；但现状边缘 43h 太长，发版后用户半天看不到新版
-    response.headers.set(
-      'Cache-Control',
-      'public, max-age=300, s-maxage=3600'
-    );
-  } else if (isHtml(pathname)) {
-    // HTML：不缓存，保证新文章/新改动立刻可见
-    response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate');
-  }
-
-  // ---- 3. 外部图床 preconnect（通过 Link 头，不修改 HTML）----
+  // ---- 2. 外部图床 preconnect（通过 Link 头，不修改 HTML）----
   // 仅对 HTML 响应注入，避免对静态资源响应重复加
   if (isHtml(pathname)) {
     const existing = response.headers.get('Link') || '';

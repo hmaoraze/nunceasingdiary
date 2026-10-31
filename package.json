@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "npm run build:js && npm run build:images && npm run build:fonts && hexo generate && npm run build:icons",
+    "build": "npm run build:js && npm run build:images && npm run build:fonts && hexo generate && npm run build:icons && npm run build:static",
     "build:js": "node tools/build-js.mjs",
     "build:images": "node tools/build-images.mjs",
     "build:icons": "node tools/subset-icons.mjs",
@@ -13,7 +13,8 @@
     "server": "hexo server",
     "perf:audit": "node tools/perf-audit.mjs",
     "perf:probe": "node tools/probe.mjs",
-    "perf:smoke": "node tools/smoke.mjs"
+    "perf:smoke": "node tools/smoke.mjs",
+    "build:static": "node tools/version-assets.mjs"
   },
   "hexo": {
     "version": "7.3.0"
