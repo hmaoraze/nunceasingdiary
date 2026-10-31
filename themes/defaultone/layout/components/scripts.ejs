@@ -43,7 +43,9 @@
     <%- renderJS('libs/pangu.min.js') %>
 <% } %>
 
-<%# 应用入口放最后，确保上面这些全局变量在它求值前就已存在 %>
-<%- renderJS('main.js', {
+<%# 应用入口放最后，确保上面这些全局变量在它求值前就已存在。
+    生产环境用 esbuild 打好的单文件 bundle（29 个模块 → 1 个请求），
+    开发者模式（theme.developer.enable）仍走未打包的 ESM 源码，方便调试。 %>
+<%- renderJS((theme.developer && theme.developer.enable) ? 'main.js' : 'main.bundle.js', {
     module: true
 }) %>

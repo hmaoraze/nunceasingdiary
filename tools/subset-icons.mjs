@@ -24,6 +24,8 @@ import subsetFont from 'subset-font';
 
 const PUBLIC_DIR = path.resolve('public');
 const THEME_SOURCE = path.resolve('themes/defaultone/source');
+const THEME_LAYOUT = path.resolve('themes/defaultone/layout');
+const POSTS_DIR = path.resolve('source/_posts');
 const FA_DIR = path.join(THEME_SOURCE, 'fontawesome');
 const WEBFONTS = path.join(THEME_SOURCE, 'webfonts');
 
@@ -34,15 +36,36 @@ const STYLES = [
   { key: 'brands', selectors: '.fa-brands,.fab', cssFile: 'brands.min.css', font: 'fa-brands-400.woff2', family: 'Font Awesome 6 Brands', weight: 400 },
 ];
 
-/** 递归收集 HTML 文件 */
-async function walk(dir, out = []) {
-  const entries = await fsp.readdir(dir, { withFileTypes: true });
+/** 递归收集指定后缀的文件 */
+async function walk(dir, exts, out = []) {
+  let entries;
+  try {
+    entries = await fsp.readdir(dir, { withFileTypes: true });
+  } catch {
+    return out;
+  }
   for (const e of entries) {
     const p = path.join(dir, e.name);
-    if (e.isDirectory()) await walk(p, out);
-    else if (e.name.endsWith('.html')) out.push(p);
+    if (e.isDirectory()) await walk(p, exts, out);
+    else if (exts.some((x) => e.name.endsWith(x))) out.push(p);
   }
   return out;
+}
+
+/**
+ * 图标来源同时看三处：
+ *   - 主题模板（ejs）：绝大多数图标在这里
+ *   - 文章正文（md）：正文里手写的 <i class="fa-...">
+ *   - 已有的 public（若存在）：兜住 JS 动态生成的、只出现在产物里的图标
+ * 这样本脚本既能在 hexo generate 之前跑，也能在之后复核。
+ */
+async function collectFiles() {
+  const files = [
+    ...(await walk(THEME_LAYOUT, ['.ejs'])),
+    ...(await walk(POSTS_DIR, ['.md'])),
+    ...(await walk(PUBLIC_DIR, ['.html'])),
+  ];
+  return files;
 }
 
 /**
@@ -72,9 +95,8 @@ function basePrefix(css) {
 }
 
 async function main() {
-  const htmlFiles = await walk(PUBLIC_DIR);
-  console.log(`扫描 ${htmlFiles.length} 个 HTML 文件…`);
-
+  const htmlFiles = await collectFiles();
+  console.log(`扫描 ${htmlFiles.length} 个文件（模板 / 文章 / 已有产物）…`);
   // 收集每个样式用到的图标名
   const used = { solid: new Set(), regular: new Set(), brands: new Set() };
   const classRe = /class="([^"]*)"/g;
@@ -96,8 +118,13 @@ async function main() {
       btnCount[style] += 1;
 
       // 取该标签上第一个 fa- 开头的图标名（排除样式前缀与工具类）
+      // 模板注释里的示例占位（如 fa-xxx），不是真实图标
+      const PLACEHOLDER = /^(xxx|foo|bar)$/;
       const UTIL = /^(solid|regular|brands|classic|sharp|thin|light|duotone|sharp-solid|fw|spin|spin-pulse|spin-reverse|pulse|beat|beat-fade|fade|bounce|shake|flip|flip-horizontal|flip-vertical|flip-both|border|inverse|stack|stack-1x|stack-2x|layers|layers-text|pull-left|pull-right|ul|li|rotate-\d+|xs|sm|lg|xl|2xs|2xl|[1-9]x|[1-9]0x|sr-only)$/;
-      const icon = classes.find((c) => c.startsWith('fa-') && !UTIL.test(c.slice(3)));
+      // 模板里会有 fa-xxx / <%= %> 这类占位串，只接受合法的图标名
+      const icon = classes.find(
+        (c) => c.startsWith('fa-') && /^[a-z0-9-]+$/.test(c.slice(3)) && !PLACEHOLDER.test(c.slice(3)) && !UTIL.test(c.slice(3)),
+      );
       if (icon) used[style].add(icon.slice(3));
     }
   }
@@ -162,6 +189,23 @@ async function main() {
 
   console.log(`\n✓ 子集 CSS: fontawesome-subset.css  ${(outCss.length / 1024).toFixed(1)} KB`);
   console.log(`✓ 子集字体: ${STYLES.map((s) => `fa-subset-${s.key}.woff2`).join(', ')}`);
+
+  // 本脚本在 hexo generate 之后运行（要扫产物里的动态图标），
+  // 所以顺手把结果同步进 public/，省掉第二次 generate
+  const pCss = path.join(PUBLIC_DIR, 'fontawesome/fontawesome-subset.css');
+  try {
+    await fsp.mkdir(path.dirname(pCss), { recursive: true });
+    await fsp.copyFile(path.join(FA_DIR, 'fontawesome-subset.css'), pCss);
+    for (const s of STYLES) {
+      await fsp.copyFile(
+        path.join(WEBFONTS, `fa-subset-${s.key}.woff2`),
+        path.join(PUBLIC_DIR, 'webfonts', `fa-subset-${s.key}.woff2`),
+      );
+    }
+    console.log('✓ 已同步到 public/');
+  } catch (e) {
+    console.warn(`  ⚠ 同步 public/ 失败（首次构建时正常）：${e.message}`);
+  }
 }
 
 main().catch((e) => {
