@@ -21,8 +21,10 @@
     .home-article-sticky-label {
         backdrop-filter: none !important;
     }
+    /* 全屏 fixed 图上的大半径模糊要按视口面积重采样，代价随屏幕线性上升；
+       12px 与 15px 在观感上几乎无差，但栅格化开销明显更低 */
     .home-banner-background {
-        filter: blur(15px);
+        filter: blur(12px);
     }
 </style>
 

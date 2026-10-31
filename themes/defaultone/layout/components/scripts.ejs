@@ -38,7 +38,16 @@
     <%- renderJS('libs/minimasonry.min.js', { swupReload: true }) %>
 <% } %>
 
-<%- renderJS('libs/moment-with-locales.min.js', { swupReload: true }) %>
+<%#
+  moment-with-locales 有 366KB（gzip 75KB），全站只有 /moments/（说说页）用它格式化
+  .essay-date，之前却在每一页同步加载。这里改成按需引入。
+%>
+<% const needMoment = /essay-date/.test(page.content || "")
+     || (pageData && /shuoshuo/.test(pageData.partial || "")); %>
+<% if (needMoment) { %>
+    <%- renderJS('libs/moment-with-locales.min.js', { swupReload: true }) %>
+<% } %>
+
 <% if (theme.articles.pangu_js) { %>
     <%- renderJS('libs/pangu.min.js') %>
 <% } %>

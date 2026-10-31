@@ -160,7 +160,8 @@ live2d:
     width: 150                       # 看板娘宽度
     height: 300                      # 看板娘高度
   mobile:
-    show: true                       # 移动端是否显示
+    show: false                      # 移动端是否显示（改成 false：手机上既卡又挡内容，
+                                     # 桌面端仍由 themes/defaultone/scripts/filters/live2d-lazy.js 延迟加载）
   react:
     opacity: 0.6                     # 看板娘透明度（0-1）
 
