@@ -1,0 +1,40 @@
+<%#
+  首页横幅背景图（响应式）
+  ------------------------------------------------------------------
+  参数：
+    heroVisibility  亮/暗两套的显示类，例如 'dark:hidden' / 'hidden dark:block'
+    heroVariant     light | dark
+
+  为什么要 loading="lazy"：
+    暗色与亮色是两张完全不同的画。原实现用 .dark:hidden / .dark:block 切换，
+    但 display:none 不会阻止下载，于是每个访客都要下两张 1920×1280 的 JPEG。
+    lazy 图在 display:none、拿不到布局盒时不会发起请求，切到另一套主题时才加载
+    —— 两种模式都只下载一张，且视觉与改造前完全一致。
+
+  为什么不给 hero 加 preload：
+    主题的明暗由 localStorage + <html class> 决定，不是媒体查询，preload 无法
+    准确命中；猜错就是一次完整的白下载。图片标签本身在 body 第一屏，交给浏览器
+    自己发现更划算。
+%>
+<%
+  var heroVisibility = typeof heroVisibility !== 'undefined' ? heroVisibility : '';
+  var heroVariant = typeof heroVariant !== 'undefined' ? heroVariant : 'light';
+  var heroPrefix = heroVariant === 'dark' ? 'hero-dark' : 'hero';
+  var heroSrcset = function (ext) {
+    return ['640', '1280', '1536']
+      .map(function (w) { return url_for('/images/hero/' + heroPrefix + '-' + w + '.' + ext) + ' ' + w + 'w'; })
+      .join(', ');
+  };
+%>
+<picture class="block w-full h-full <%= heroVisibility %>">
+    <source type="image/avif" srcset="<%- heroSrcset('avif') %>" sizes="100vw">
+    <source type="image/webp" srcset="<%- heroSrcset('webp') %>" sizes="100vw">
+    <img src="<%- url_for('/images/hero/' + heroPrefix + '-1280.jpg') %>"
+         srcset="<%- heroSrcset('jpg') %>"
+         sizes="100vw"
+         width="1536" height="1024"
+         alt=""
+         loading="lazy"
+         decoding="async"
+         class="w-full h-full object-cover">
+</picture>

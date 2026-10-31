@@ -22,29 +22,61 @@ const targets = pages.length ? pages : DEFAULT_PAGES;
 
 const gzipSize = (buf) => zlib.gzipSync(buf, { level: 9 }).length;
 
+/** 取 srcset 里最大的一档（宽度描述符最大，或默认最后一项） */
+function largestFromSrcset(srcset) {
+  let best = null;
+  let bestW = -1;
+  for (const part of srcset.split(',')) {
+    const [u, d] = part.trim().split(/\s+/);
+    if (!u) continue;
+    const w = d && /(\d+)w/.test(d) ? Number(RegExp.$1) : 0;
+    if (w > bestW) {
+      bestW = w;
+      best = u;
+    }
+  }
+  return best;
+}
+
 /** 从 HTML 里抠出所有需要下载的资源引用 */
 function extractRefs(html) {
   const refs = new Set();
 
-  // <script src="...">
-  for (const m of html.matchAll(/<script\b[^>]*\bsrc="([^"]+)"/g)) refs.add(m[1]);
-  // <link rel="stylesheet" href="...">
-  for (const m of html.matchAll(/<link\b[^>]*rel="stylesheet"[^>]*href="([^"]+)"/g)) {
-    refs.add(m[1]);
-  }
-  // <link rel="preload" ... href="...">
-  for (const m of html.matchAll(/<link\b[^>]*rel="preload"[^>]*href="([^"]+)"/g)) {
-    refs.add(m[1]);
-  }
-  // <img src="..."> 与 srcset
-  for (const m of html.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/g)) refs.add(m[1]);
-  for (const m of html.matchAll(/\bsrcset="([^"]+)"/g)) {
-    for (const part of m[1].split(',')) {
-      const u = part.trim().split(/\s+/)[0];
-      if (u) refs.add(u);
+  // <picture> 作为一个整体：一个 picture 只会真正加载一张图
+  // 现代浏览器优先 AVIF，所以取 avif 源的最大档作为"最可能被下载的那张"
+  const pictureBlocks = [...html.matchAll(/<picture\b[\s\S]*?<\/picture>/gi)].map((m) => m[0]);
+  for (const block of pictureBlocks) {
+    const avif = block.match(/<source[^>]*type="image\/avif"[^>]*srcset="([^"]+)"/i);
+    if (avif) {
+      refs.add(largestFromSrcset(avif[1]));
+      continue;
+    }
+    const img = block.match(/<img\b[^>]*>/i);
+    if (img) {
+      const ss = img[0].match(/\bsrcset="([^"]+)"/i);
+      if (ss) {
+        refs.add(largestFromSrcset(ss[1]));
+        continue;
+      }
+      const src = img[0].match(/\bsrc="([^"]+)"/i);
+      if (src) refs.add(src[1]);
     }
   }
-  // <source srcset="..."> 已被上面的 srcset 覆盖
+
+  // 去掉 picture 块后再扫一遍，避免图片被重复计数
+  const rest = pictureBlocks.reduce((acc, b) => acc.replace(b, ''), html);
+
+  // <script src="...">
+  for (const m of rest.matchAll(/<script\b[^>]*\bsrc="([^"]+)"/g)) refs.add(m[1]);
+  // <link rel="stylesheet" href="..."> / preload
+  for (const m of rest.matchAll(/<link\b[^>]*rel="stylesheet"[^>]*href="([^"]+)"/g)) {
+    refs.add(m[1]);
+  }
+  for (const m of rest.matchAll(/<link\b[^>]*rel="preload"[^>]*href="([^"]+)"/g)) {
+    refs.add(m[1]);
+  }
+  // 其余普通 <img>
+  for (const m of rest.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/g)) refs.add(m[1]);
 
   return [...refs].filter(
     (u) => u && !u.startsWith('data:') && !u.startsWith('http://') && !u.startsWith('https://'),
