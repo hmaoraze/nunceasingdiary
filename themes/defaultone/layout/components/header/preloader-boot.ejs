@@ -15,7 +15,7 @@
      */
     (function () {
         var STORAGE_KEY = 'redefine:preloaded';
-        var MAX_MS = 1200; // 约 900 ms 动画 + 兜底余量，上限 1400
+        var MAX_MS = 1100; // 约 900 ms 动画 + 200 ms 余量（下限），上限 1400
         var done = false;
 
         var hidePreloader = function () {
