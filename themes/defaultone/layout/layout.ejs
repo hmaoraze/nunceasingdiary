@@ -4,6 +4,36 @@
 
 <body>
 	<%- body %>
+	<%# 纪念日全站灰度（自动灰白，次日自动恢复）
+	    放在这里而不是 <head>：内联脚本会被样式表阻塞，卡住解析器就会连带推迟
+	    开屏遮罩的计时。此时代码仍在遮罩期内执行，用户看不到灰度切换的过程。 %>
+	<% if (theme.memorial && theme.memorial.enable && theme.memorial.dates && theme.memorial.dates.length > 0) { %>
+	<script>
+	(function () {
+	  var memorialDates = <%- JSON.stringify(theme.memorial.dates.map(function (d) {
+	    var m = String(d).match(/\d+/g) || [];
+	    return [parseInt(m[0], 10), parseInt(m[1], 10)];
+	  })) %>;
+	  if (!memorialDates || memorialDates.length === 0) return;
+	  // 按北京时间（Asia/Shanghai）判断当天日期，确保国内外访客看到的纪念日一致
+	  var now = new Date();
+	  var china = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Shanghai', month: 'numeric', day: 'numeric' }).format(now).split('/');
+	  var month = parseInt(china[0], 10);
+	  var day = parseInt(china[1], 10);
+	  var isMemorial = memorialDates.some(function (d) {
+	    return d[0] === month && d[1] === day;
+	  });
+	  if (isMemorial) {
+	    var style = document.createElement('style');
+	    style.textContent = 'html{filter:grayscale(100%)!important;-webkit-filter:grayscale(100%)!important;-moz-filter:grayscale(100%)!important;-ms-filter:grayscale(100%)!important;}';
+	    document.head.appendChild(style);
+	  }
+	})();
+	</script>
+	<% } %>
+	<%# 全局 theme / config 挂到最后：早先放在 <head> 里会被前面的样式表阻塞，
+	    把解析流程连同开屏遮罩一起拖住。这里仍在所有 defer/module 脚本执行之前。 %>
+	<%- export_config() %>
 	<%# 粒子库挪出 <head>：它只影响首屏背景，没必要占住解析关键路径 %>
 	<% if (theme.effects && theme.effects.particles) { %>
 	<%- renderJS('libs/particles.js') %>

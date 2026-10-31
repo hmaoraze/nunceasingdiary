@@ -11,6 +11,12 @@
     <% }%>
     <meta name="author" content="<%= theme.info.author || config.author || 'Redefine Team' %>">
 
+    <%# 开屏遮罩的计时与跳过判定必须排在第一个样式表之前，否则内联脚本要等
+        样式表下载完才执行，兜底计时会被推迟到弱网下的 1.8s 之后 %>
+    <% if (theme.global.preloader === true || theme.global.preloader.enable === true) { %>
+        <%- partial('components/header/preloader-boot') %>
+    <% } %>
+
     <%# particles.js 与 cursor-effects 挪到 </body> 前引入：
         任何 <script src> 都不该出现在第一个 <link rel="stylesheet"> 之前 %>
 
@@ -289,8 +295,8 @@
         <%- renderJS('libs/anime.min.js', { defer: true })%>
     <% } %>
 
-    <%- export_config() %>
-    
+    <%# export_config() 挪到 </body> 前：它是内联脚本，会等待前面 11 个样式表
+        下载完才执行，从而卡住整个解析流程，连带把开屏遮罩的兜底计时推迟到 4s 之后 %>
     <!--- Fontawesome Part-->
     <%- renderCSS('fontawesome/fontawesome.min.css') %>
     <%- renderCSS('fontawesome/brands.min.css') %>
@@ -308,31 +314,8 @@
     <% if (theme.fontawesome.sharp_solid == true) { %>
         <%- renderCSS('fontawesome/sharp-solid.min.css') %>
     <% } %>
-<% if (theme.memorial && theme.memorial.enable && theme.memorial.dates && theme.memorial.dates.length > 0) { %>
-<!-- 纪念日全站灰度（自动灰白，次日自动恢复） -->
-<script>
-(function () {
-  var memorialDates = <%- JSON.stringify(theme.memorial.dates.map(function (d) {
-    var m = String(d).match(/\d+/g) || [];
-    return [parseInt(m[0], 10), parseInt(m[1], 10)];
-  })) %>;
-  if (!memorialDates || memorialDates.length === 0) return;
-  // 按北京时间（Asia/Shanghai）判断当天日期，确保国内外访客看到的纪念日一致
-  var now = new Date();
-  var china = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Shanghai', month: 'numeric', day: 'numeric' }).format(now).split('/');
-  var month = parseInt(china[0], 10);
-  var day = parseInt(china[1], 10);
-  var isMemorial = memorialDates.some(function (d) {
-    return d[0] === month && d[1] === day;
-  });
-  if (isMemorial) {
-    var style = document.createElement('style');
-    style.textContent = 'html{filter:grayscale(100%)!important;-webkit-filter:grayscale(100%)!important;-moz-filter:grayscale(100%)!important;-ms-filter:grayscale(100%)!important;}';
-    document.head.appendChild(style);
-  }
-})();
-</script>
-<% } %>
+<%# 纪念日灰度脚本挪到 </body> 前：它是内联脚本，会被前面的样式表阻塞，
+    从而卡住解析器、连带推迟开屏遮罩的开始计时。开屏期间看不到页面，不影响观感。 %>
 <% if (config.live2d && config.live2d.enable) { %>
 <!-- 看板娘(live2d)让出右下角主题工具区，避免遮挡齿轮/工具列表 -->
 <style>

@@ -70,65 +70,7 @@
     }
 </style>
 
-<script>
-    /*
-     * 开屏动画的「判定 + 兜底」层。必须放在遮罩 div 之前、脚本一执行就开始计时：
-     *   1. 兜底定时器不依赖 anime，也不依赖 window.load（本页 load 会被大资源拖到十几秒后）
-     *   2. 命中跳过规则时直接给 <html> 打标记，遮罩不会参与首帧渲染
-     *   3. 动画本体在 DOMContentLoaded 后启动，anime 以 defer 方式先行执行
-     */
-    (function () {
-        var STORAGE_KEY = 'redefine:preloaded';
-        var MAX_MS = 1200; // 约 900 ms 动画 + 兜底余量，上限 1400
-        var done = false;
 
-        var hidePreloader = function () {
-            if (done) return;
-            done = true;
-            var el = document.querySelector('.preloader');
-            if (!el) return;
-            el.style.opacity = '0';
-            el.style.pointerEvents = 'none';
-            setTimeout(function () {
-                if (el.parentNode) el.remove();
-            }, 200);
-        };
-
-        window.__redefinePreloader = {
-            hide: hidePreloader,
-            isDone: function () {
-                return done;
-            },
-        };
-
-        // ---- 跳过规则 ----
-        var shouldSkip = false;
-        try {
-            shouldSkip = sessionStorage.getItem(STORAGE_KEY) === '1';
-        } catch (e) {
-            // 隐私模式下 sessionStorage 可能抛错，按"不跳过"处理
-        }
-        if (!shouldSkip && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            shouldSkip = true;
-        }
-        if (!shouldSkip && document.visibilityState === 'hidden') {
-            shouldSkip = true;
-        }
-
-        if (shouldSkip) {
-            document.documentElement.setAttribute('data-preloader-skip', '1');
-            hidePreloader();
-            return;
-        }
-
-        try {
-            sessionStorage.setItem(STORAGE_KEY, '1');
-        } catch (e) {}
-
-        // ---- 兜底：第一件事就绑上 ----
-        setTimeout(hidePreloader, MAX_MS);
-    })();
-</script>
 
 <div class="preloader">
     <h2 class="ml13">

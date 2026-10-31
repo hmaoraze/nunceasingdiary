@@ -1,0 +1,67 @@
+<script>
+    /*
+     * 开屏遮罩的「判定 + 兜底」层。
+     *
+     * 为什么放在 <head> 最前面、而且独立成一个 partial：
+     *   内联脚本要等它之前的所有样式表下载完才会执行。原先这段代码跟着遮罩 div
+     *   放在 body 里，等于把 1200ms 的兜底计时起点推迟到样式表就绪之后（弱网下
+     *   约 1.8s），遮罩自然就退得晚。这里排在第一个 <link rel="stylesheet"> 之前，
+     *   脚本一开始执行就开始计时。
+     *
+     * 它只做三件事，都不依赖 DOM 里已有遮罩：
+     *   1. 立刻绑上兜底定时器（不依赖 anime，也不依赖 window.load）
+     *   2. 命中跳过规则时给 <html> 打标记，遮罩不参与首帧渲染
+     *   3. 暴露 window.__redefinePreloader.hide() 给动画与用户操作调用
+     */
+    (function () {
+        var STORAGE_KEY = 'redefine:preloaded';
+        var MAX_MS = 1200; // 约 900 ms 动画 + 兜底余量，上限 1400
+        var done = false;
+
+        var hidePreloader = function () {
+            if (done) return;
+            done = true;
+            var el = document.querySelector('.preloader');
+            if (!el) return;
+            el.style.opacity = '0';
+            el.style.pointerEvents = 'none';
+            setTimeout(function () {
+                if (el.parentNode) el.remove();
+            }, 200);
+        };
+
+        window.__redefinePreloader = {
+            hide: hidePreloader,
+            isDone: function () {
+                return done;
+            },
+        };
+
+        // ---- 跳过规则 ----
+        var shouldSkip = false;
+        try {
+            shouldSkip = sessionStorage.getItem(STORAGE_KEY) === '1';
+        } catch (e) {
+            // 隐私模式下 sessionStorage 可能抛错，按"不跳过"处理
+        }
+        if (!shouldSkip && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            shouldSkip = true;
+        }
+        if (!shouldSkip && document.visibilityState === 'hidden') {
+            shouldSkip = true;
+        }
+
+        if (shouldSkip) {
+            document.documentElement.setAttribute('data-preloader-skip', '1');
+            hidePreloader();
+            return;
+        }
+
+        try {
+            sessionStorage.setItem(STORAGE_KEY, '1');
+        } catch (e) {}
+
+        // ---- 兜底：第一件事就绑上 ----
+        setTimeout(hidePreloader, MAX_MS);
+    })();
+</script>
