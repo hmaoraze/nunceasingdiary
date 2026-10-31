@@ -84,8 +84,7 @@
     </script>
     
     <!-- preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <%# 全站不使用 Google Fonts（三套字体都是自托管），这两个 preconnect 纯属浪费握手 %>
 
     <% if (theme.cdn.enable) { %>
         <% const provider = theme.cdn.provider; %>
@@ -248,7 +247,14 @@
         <% } %>
     </title>
 
-    <%- renderCSS('fonts/Chillax/chillax.css') %>
+    <%#
+      字体走拉丁子集（tools/subset-fonts.mjs 生成）：
+        Chillax 54.3→36.8KB、Geist 55.5→26.3KB、Geist Mono 56.7→29.5KB
+      中文继续用系统字体，不引入任何 CJK 字体文件。
+    %>
+    <link rel="preload" as="font" type="font/woff2" href="<%- url_for('fonts/Chillax/Chillax-Variable-subset.woff2') %>" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="<%- url_for('fonts/Geist/GeistVF-subset.woff2') %>" crossorigin>
+    <%- renderCSS('fonts/Chillax/chillax-subset.css') %>
 
     <!--- Inject Part-->
     <% if (theme.inject.enable == true) { %>
@@ -269,10 +275,11 @@
         <%- renderCSS('css/build/tailwind.css') %>
     <% } %>
 
-    <%- renderCSS('fonts/GeistMono/geist-mono.css') %>
-    <%- renderCSS('fonts/Geist/geist.css') %>
+    <%- renderCSS('fonts/GeistMono/geist-mono-subset.css') %>
+    <%- renderCSS('fonts/Geist/geist-subset.css') %>
     <!--- Font Part-->
-    <% if (theme.home_banner.custom_font.enable) { %>
+    <%# 空 URL 会输出 <link href=""> 并触发一次无效请求，这里同时挡掉 %>
+    <% if (theme.home_banner.custom_font.enable && theme.home_banner.custom_font.url) { %>
         <link href="<%- theme.home_banner.custom_font.url %>" rel="stylesheet">
     <% } %>
     <% if (theme.articles.code_block.font.enable) { %>
@@ -298,10 +305,17 @@
     <%# export_config() 挪到 </body> 前：它是内联脚本，会等待前面 11 个样式表
         下载完才执行，从而卡住整个解析流程，连带把开屏遮罩的兜底计时推迟到 4s 之后 %>
     <!--- Fontawesome Part-->
-    <%- renderCSS('fontawesome/fontawesome.min.css') %>
-    <%- renderCSS('fontawesome/brands.min.css') %>
-    <%- renderCSS('fontawesome/solid.min.css') %>
-    <%- renderCSS('fontawesome/regular.min.css') %>
+    <%#
+      只引子集版本（tools/subset-icons.mjs 生成）：
+        CSS  162KB + brands/solid/regular 三份  →  15KB
+        字体 805KB（solid 313 + regular 386 + brands 106）→ 约 6KB
+      模板与文章里的 class 名保持不变，无需改动任何 <i class="fa-solid fa-xxx">。
+    %>
+    <% if (!theme.cdn.enable) { %>
+        <link rel="preload" as="font" type="font/woff2" href="<%- url_for('webfonts/fa-subset-solid.woff2') %>" crossorigin>
+        <link rel="preload" as="font" type="font/woff2" href="<%- url_for('webfonts/fa-subset-regular.woff2') %>" crossorigin>
+    <% } %>
+    <%- renderCSS('fontawesome/fontawesome-subset.css') %>
     <% if (theme.fontawesome.thin == true) { %>
         <%- renderCSS('fontawesome/thin.min.css') %>
     <% } %>

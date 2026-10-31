@@ -1,0 +1,13 @@
+/*
+ * Geist Variable —— 拉丁子集版本
+ * 由 tools/subset-fonts.mjs 生成，请勿手改。
+ * 中文由系统字体承担，这里只保留拉丁字形。
+ */
+@font-face {
+    font-family: 'Geist Variable';
+    src: url('GeistVF-subset.woff2') format('woff2');
+    font-weight: 200 700;
+    font-display: swap;
+    font-style: normal;
+    unicode-range: U+0-FF,U+131,U+152-153,U+2C6,U+2DA,U+2DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}

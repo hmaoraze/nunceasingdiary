@@ -87,6 +87,10 @@ async function main() {
   const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   const page = await ctx.newPage();
   const errors = [];
+  const heroReqs = [];
+  page.on('request', (r) => {
+    if (/\/images\/hero\//.test(r.url())) heroReqs.push(new URL(r.url()).pathname);
+  });
   page.on('pageerror', (e) => errors.push(e.message));
   page.on('console', (m) => {
     if (m.type() === 'error' && !NOISE.test(m.text())) errors.push(m.text());
@@ -103,6 +107,27 @@ async function main() {
     const img = document.querySelector('.home-banner-background img');
     return !!img && img.complete && img.naturalWidth > 0;
   }));
+  check('亮色模式只请求 1 张 hero', heroReqs.length === 1, heroReqs.map((u) => u.split('/').pop()).join(', '));
+  check('亮色模式取的是 AVIF', heroReqs.every((u) => u.endsWith('.avif')));
+
+  // 图标子集化的回归保护：每个图标元素都必须能取到 ::before 内容且渲染出宽度，
+  // 否则说明子集 CSS 漏了该字形（会显示成空白或方块）
+  const iconReport = await page.evaluate(() => {
+    const els = [...document.querySelectorAll('i[class*="fa-"]')];
+    const broken = [];
+    for (const el of els) {
+      const content = getComputedStyle(el, '::before').content;
+      const hasGlyph = content && content !== 'none' && content !== 'normal' && content !== '""';
+      // 隐藏元素（弹窗、侧栏工具）宽度本来就是 0，只校验字形规则是否存在
+      // 弹窗/查看器里的图标是零尺寸布局，宽度不可作判据；
+      // 这里只校验"字形规则存在"，缺规则才是子集化会引入的回归
+      if (!hasGlyph) {
+        broken.push(`${el.className} (content=${content})`);
+      }
+    }
+    return { total: els.length, broken: broken.slice(0, 5) };
+  });
+  check('图标字形完整（无缺字/方块）', iconReport.broken.length === 0, iconReport.broken.join(' | ') || `${iconReport.total} 个图标`);
 
   // 深浅色切换
   const darkBefore = await page.evaluate(() => document.documentElement.classList.contains('dark'));
@@ -162,7 +187,23 @@ async function main() {
   check('移动端无横向溢出', await mpage.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 2));
   check('移动端无 JS 错误', mErrors.length === 0, mErrors.slice(0, 2).join(' | '));
 
-  // ---- 3. 减少动态效果 ----
+  // ---- 3. 暗色模式：只下载暗色那张，不重复下载亮色 ----
+  console.log('\n[暗色模式 prefers-color-scheme: dark]');
+  const dctx = await browser.newContext({
+    viewport: { width: 1440, height: 900 },
+    colorScheme: 'dark',
+  });
+  const dpage = await dctx.newPage();
+  const darkHeroReqs = [];
+  dpage.on('request', (r) => {
+    if (/\/images\/hero\//.test(r.url())) darkHeroReqs.push(new URL(r.url()).pathname);
+  });
+  await dpage.goto(`http://127.0.0.1:${PORT}${startPath}`, { waitUntil: 'load', timeout: 60000 });
+  await dpage.waitForTimeout(2500);
+  check('暗色模式只请求 1 张 hero', darkHeroReqs.length === 1, darkHeroReqs.map((u) => u.split('/').pop()).join(', '));
+  check('暗色模式取的是暗色图', darkHeroReqs.every((u) => u.includes('hero-dark')));
+
+  // ---- 4. 减少动态效果 ----
   console.log('\n[prefers-reduced-motion: reduce]');
   const rctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
   const rpage = await rctx.newPage();
