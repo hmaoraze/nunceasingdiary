@@ -113,6 +113,14 @@ preconnect:
   - https://image.hsmao.cn
   - https://cdn.timens.cn
 
+# 评论：沿用原站自建的 twikoo 服务
+comments:
+  provider: twikoo
+  title: 评论
+  twikoo:
+    js: https://gcore.jsdelivr.net/npm/twikoo@1.7.22/dist/twikoo.all.min.js
+    envId: https://twikoo.imce.cn/
+
 # 文章页
 article:
   show_reading_time: true
