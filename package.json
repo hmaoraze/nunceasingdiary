@@ -14,6 +14,7 @@
   "dependencies": {
     "cursor-effects": "^1.0.17",
     "hexo": "^7.3.0",
+    "hexo-all-minifier": "^0.5.7",
     "hexo-cli": "^4.3.2",
     "hexo-filter-mermaid-diagrams": "^1.0.5",
     "hexo-generator-archive": "^2.0.0",

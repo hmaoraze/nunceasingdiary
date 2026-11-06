@@ -181,3 +181,44 @@ livephoto:
   keep_observing: false              # 触发后是否继续观察元素
   hover_delay: 300                   # 悬停播放延迟（毫秒）
   weixin_disable_autoplay: true      # 微信环境禁用自动播放
+
+# All Minifier | 静态资源压缩插件（HTML / CSS / JS / 图片）
+## Docs: https://github.com/chenzhutian/hexo-all-minifier
+## 生效条件：NODE_ENV 不为 development。hexo server 默认 development，故本地预览不压缩，hexo generate 时压缩
+all_minifier: true
+
+html_minifier:
+  enable: true
+  ignore_error: true                 # 个别页面压缩失败时跳过，不中断整站构建
+  removeComments: true               # 移除 HTML 注释（保留 <!-- more --> 标记）
+  removeCommentsFromCDATA: true      # 移除 CDATA 内注释
+  collapseWhitespace: true           # 折叠多余空白与换行
+  collapseBooleanAttributes: true    # checked="checked" 简写为 checked
+  removeEmptyAttributes: true        # 移除值为空的属性
+  minifyCSS: true                    # 一并压缩页面内联 <style>
+  minifyJS: true                     # 一并压缩页面内联 <script>
+  silent: false                      # 输出压缩比例日志
+
+css_minifier:
+  enable: true
+  exclude:
+    - '*.min.css'                    # 已压缩的第三方库跳过
+  silent: false
+
+js_minifier:
+  enable: true
+  mangle: true                       # 变量名混淆
+  compress: {}                       # 使用 uglify-js 默认压缩规则
+  output: {}
+  exclude:
+    - '*.min.js'                     # 已压缩的第三方库跳过
+  silent: false
+
+image_minifier:
+  enable: true
+  interlaced: false                  # gif 不改交错模式，避免影响动图
+  multipass: false                   # svg 单次优化
+  optimizationLevel: 3               # png 无损压缩最高等级
+  pngquant: false                    # 开启为有损压缩（会掉色），保持关闭
+  progressive: false                 # jpg 不转渐进式，避免首屏加载体验变化
+  silent: false
